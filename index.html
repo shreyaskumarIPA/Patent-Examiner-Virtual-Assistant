@@ -84,7 +84,7 @@ tr.g3Row td{background:rgba(29,37,44,0.06)}
 tr.g4Row td{background:rgba(46,125,50,0.06)}
 tr.g5Row td{background:rgba(142,108,47,0.06)}
 tr.g6Row td{background:rgba(21,101,192,0.06)}
-.exam-tip{margin-top:10px;padding:12px 14px;border-radius:8px;background:rgba(29,37,44,0.06);border:1px solid rgba(29,37,44,.14);font-size:14px;line-height:1.35}
+.exam-tip{margin-top:5px;padding:5px 5px;border-radius:8px;background:rgba(29,37,44,0.06);border:1px solid rgba(29,37,44,.14);font-size:12px;line-height:1.35}
 .exam-tip strong{color:var(--ipa-charcoal)}
 
 
@@ -176,6 +176,25 @@ tr.g6Row td{background:rgba(21,101,192,0.06)}
 .claims-anomaly-inlinebar .claims-anomaly-cta.fail{background:rgba(198,64,64,.12);border-color:rgba(198,64,64,.26);color:#7a2727}
 .claims-debug-wrap{margin-top:10px}.claims-debug-body{padding:10px;background:#fff;max-height:220px;overflow:auto}.claims-debug-note{font-size:12px;color:#5f6c76;margin-bottom:8px}.claims-debug-list{display:grid;gap:8px}.claims-debug-item{border:1px solid var(--border);border-radius:8px;background:#fbfcfd;padding:8px 10px}.claims-debug-reason{display:inline-flex;align-items:center;padding:3px 8px;border-radius:999px;background:#f3fbfd;border:1px solid #9fd1de;color:var(--ipa-web-teal);font-size:11.5px;font-weight:800;margin-bottom:6px}.claims-debug-line{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:12px;white-space:pre-wrap;word-break:break-word;color:#26343d}.claims-debug-empty{font-size:12px;color:#6a7680}
 
+
+/* v28.2.6 claim diagnostics */
+.claims-parse-badge{display:inline-flex;align-items:center;justify-content:center;min-width:148px;padding:6px 10px;border-radius:999px;border:1px solid rgba(29,37,44,.14);background:#f4f7f9;color:#42505a;font-size:12px;font-weight:800;white-space:nowrap}
+.claims-parse-badge.good{background:rgba(64,158,96,.12);border-color:rgba(64,158,96,.26);color:#225f37}
+.claims-parse-badge.fair{background:rgba(245,172,66,.14);border-color:rgba(245,172,66,.30);color:#805112}
+.claims-parse-badge.poor{background:rgba(198,64,64,.12);border-color:rgba(198,64,64,.26);color:#7a2727}
+.claims-diagnostics-wrap{margin-top:10px}
+.claims-diagnostics-body{padding:10px;background:#fff;max-height:260px;overflow:auto}
+.claims-diagnostics-note{font-size:12px;color:#5f6c76;margin-bottom:8px}
+.claims-diagnostics-list{display:grid;gap:8px}
+.claims-diagnostics-item{border:1px solid var(--border);border-radius:8px;background:#fbfcfd;padding:8px 10px}
+.claims-diagnostics-chip{display:inline-flex;align-items:center;padding:3px 8px;border-radius:999px;background:#f3fbfd;border:1px solid #9fd1de;color:var(--ipa-web-teal);font-size:11.5px;font-weight:800;margin-bottom:6px}
+.claims-diagnostics-line{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:12px;white-space:pre-wrap;word-break:break-word;color:#26343d}
+.claims-diagnostics-empty{font-size:12px;color:#6a7680}
+
+
+/* v28.3.4 download build patch */
+#claimsDiagnosticsWrap,[data-debug-panel="noise-filter"],#noiseFilterDebugWrap{display:none !important}
+
 </style>
 </head>
 <body>
@@ -225,7 +244,7 @@ tr.g6Row td{background:rgba(21,101,192,0.06)}
     <div class="sidebar-footer"><button id="navCollapseBtn" type="button" class="nav-collapse-btn" aria-expanded="true"><span class="collapse-icon">«</span><span class="collapse-text">Collapse navigation</span></button></div>
   </aside>
   <main id="mainArea" class="main-area">
-    <div class="workspace-head"><div class="workspace-title" id="workspaceTitle">Main Workspace</div><div class="workspace-tools"><span class="workspace-chip">final - Version 28.2.0</span><button type="button" class="refresh-btn" onclick="refreshMainWorkspace()">↻ Reset</button></div></div>
+    <div class="workspace-head"><div class="workspace-title" id="workspaceTitle">Main Workspace</div><div class="workspace-tools"><span class="workspace-chip">final - Version 28.3.4</span><button type="button" class="refresh-btn" onclick="refreshMainWorkspace()">↻ Reset</button></div></div>
 
     <section id="tab-home" class="tab-panel active">
       <div class="board-card">
@@ -243,7 +262,7 @@ tr.g6Row td{background:rgba(21,101,192,0.06)}
               <div class="actions"><button id="btn" onclick="runAll()">Analyse & Predict CPC</button><span id="status" class="status"><span id="spinner" class="spinner"></span><span id="statusText"></span></span></div>
             </div>
 			
-            <div id="filterBox" class="filter-card open"><div class="filter-head"><div class="filter-title">Filters</div><button id="filterToggleBtn" type="button" class="toggle-btn" onclick="toggleFilters()">Close</button></div><div class="filters-body"><div class="small-inputs"><label>Top phrases <input id="kwCount" type="number" min="5" max="40" value="12" /></label><label>Tracked phrases <input id="termCount" type="number" min="1" max="25" value="12" /></label><label>Results per phrase <input id="limitPerTerm" type="number" min="1" max="12" value="6" /></label><label>Invention results <input id="invCount" type="number" min="1" max="15" value="6" /></label><label>Additional results <input id="addCount" type="number" min="1" max="30" value="4" /></label><label>Extraction mode <select id="extractMode"><option value="hybrid" selected>Hybrid CPC-aware</option><option value="legacy">Legacy TF-IDF</option></select></label><label>Concepts to Query <input id="queryCount" type="number" min="2" max="12" value="3" /></label><label>Auto synonyms <input id="autoSyn" type="checkbox" checked /></label></div></div></div>
+            <div id="filterBox" class="filter-card open"><div class="filter-head"><div class="filter-title">Filters</div><button id="filterToggleBtn" type="button" class="toggle-btn" onclick="toggleFilters()">Close</button></div><div class="filters-body"><div class="small-inputs"><label>Top phrases <input id="kwCount" type="number" min="5" max="40" value="12" /></label><label>Tracked phrases <input id="termCount" type="number" min="1" max="25" value="12" /></label><label>Results per phrase <input id="limitPerTerm" type="number" min="1" max="12" value="6" /></label><label>Invention results <input id="invCount" type="number" min="1" max="15" value="6" /></label><label>Additional results <input id="addCount" type="number" min="1" max="30" value="4" /></label><label>Extraction mode <select id="extractMode"><option value="hybrid" selected>Hybrid CPC-aware</option><option value="legacy">Legacy TF-IDF</option></select></label><label>Concepts to Query <input id="queryCount" type="number" min="2" max="12" value="4" /></label><label>Auto synonyms <input id="autoSyn" type="checkbox" checked /></label></div></div></div>
           </div>
           <div class="compliance-banner"><strong>Compliance Notice</strong><br>This tool uses a rules based CPC definition reasoning layer from local scheme and definition files. It remains a decision support utility and outputs <u> must be reviewed and validated by the user</u> before use.</div>
           <div class="exam-tip"><strong>Examiner workflow:</strong> When you upload/input claims, the assistant populates the integrated examiner tabs for virtual exam analysis, unity assessment, claim mapping, and the claims tree, using the same input text. The CPC analysis tabs will be populated when you select the <strong>Analyse & Predict CPC</strong> button.</div>
@@ -270,7 +289,7 @@ tr.g6Row td{background:rgba(21,101,192,0.06)}
 
   
 
-<section id="tab-figure" class="tab-panel"><div class="board-card"><div class="board-head"><div class="board-title">Figure Labeller</div><div class="board-meta">Final figure labelling workflow</div></div><div class="board-body"><div class="exam-tip"><strong>Prompt:</strong> Upload both PDFs. Rotate the drawing image 90° clockwise as needed, reposition labels on the rotated image, and every download captures the labels exactly as currently positioned on the rotated page.</div><div class="figure-upload-grid"><div class="figure-upload-card"><div class="figure-upload-title">1. Description PDF</div><div class="figure-upload-help">Used to identify labels from the first useful occurrence in the description.</div><label for="figureDescPdfInput" class="claims-pdf-label">Upload description PDF</label><input id="figureDescPdfInput" type="file" accept="application/pdf,.pdf" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" /><div id="figureDescFileName" class="figure-file-name">No description PDF selected</div><div class="figure-quality-row"><span id="figureDescQuality" class="figure-quality-pill">Description OCR quality: not checked</span></div></div><div class="figure-upload-card"><div class="figure-upload-title">2. Drawings / Figures PDF</div><div class="figure-upload-help">Drawing text is extracted twice for stronger coverage. If text quality is poor, add labels manually.</div><label for="figureDrawingsPdfInput" class="claims-pdf-label">Upload drawings PDF</label><input id="figureDrawingsPdfInput" type="file" accept="application/pdf,.pdf" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" /><div id="figureDrawingsFileName" class="figure-file-name">No drawings PDF selected</div><div class="figure-quality-row"><span id="figureDrawingsQuality" class="figure-quality-pill">Drawing OCR quality: not checked</span></div></div></div><div class="figure-toolbar"><button type="button" id="figureProcessBtn">Extract and label figures</button><label class="muted">Drawing page <select id="figurePageSelect" disabled><option value="">No pages yet</option></select></label><button type="button" class="refresh-btn" id="figureRotatePageBtn">Rotate image 90° clockwise</button><button type="button" class="refresh-btn" id="figureAddLabelBtn">Add new label</button><button type="button" class="refresh-btn" id="figureSaveBtn">Save edits in session</button><button type="button" class="refresh-btn" id="figureDownloadCurrentBtn">Download current PNG</button><button type="button" class="refresh-btn" id="figureDownloadAllBtn">Download all PNGs</button><button type="button" class="refresh-btn" id="figureDownloadHtmlBtn">Download labelled HTML</button><button type="button" class="refresh-btn" id="figureResetBtn">Clear session</button><span id="figureStatus" class="figure-status-line"><span class="figure-pill">Both PDFs required</span></span></div><div id="figureLayout" class="figure-layout"><div class="figure-view-panel"><div class="figure-view-head"><div class="board-title" id="figurePageTitle">Drawing preview</div><div class="muted" id="figurePageMeta">No drawing page selected</div></div><div id="figureStageWrap" class="figure-stage-wrap"><div class="figure-placeholder">Upload both PDFs, then select <strong>Extract and label figures</strong>.</div></div><div class="figure-legend-note">Single-click selects. Double-click edits. Drag or resize labels before export if needed.</div></div><div id="figureDivider" class="figure-divider" title="Drag to resize. Double-click to reset."></div><div class="figure-right-panel"><div class="board-title">Editable labels for selected page</div><div class="figure-label-note">This table only lists item numbers, matched snippets and actions. Select <strong>Edit</strong> to open the rich-text label editor.</div><div class="figure-overlay-legend"><span class="figure-swatch"></span><span>All downloads use the current rotated-page label positions</span></div><div id="figureReferenceTableWrap" class="figure-ref-table-wrap"><table class="figure-ref-table"><thead><tr><th class="figure-num-col">Item no.</th><th class="figure-snippet-col">Matched snippet</th><th class="figure-row-action">Actions</th></tr></thead><tbody id="figureReferenceTableBody"><tr><td colspan="3" class="muted">No drawing page selected.</td></tr></tbody></table></div><div class="board-title">Session notes</div><textarea id="figureSessionNotes" class="figure-notes" placeholder="Optional notes. Saved in this browser session only."></textarea><div class="compliance-banner"><strong>Compliance Notice</strong><br>Figure labels are extracted with browser-side PDF text matching and page rendering. OCR quality indicators estimate extractable text quality only. Outputs are indicative only and must be reviewed and validated by the user before use.</div></div></div></div></div><div id="figureEditorBackdrop" class="figure-editor-backdrop" aria-hidden="true"><div class="figure-editor-modal" role="dialog" aria-modal="true" aria-labelledby="figureEditorTitle"><div class="figure-editor-head"><div id="figureEditorTitle" class="figure-editor-title">Edit label</div><button type="button" class="figure-mini-btn" id="figureEditorCloseBtn">Close</button></div><div class="figure-editor-toolbar"><button type="button" data-cmd="bold"><strong>B</strong></button><button type="button" data-cmd="italic"><em>I</em></button><button type="button" data-cmd="underline"><u>U</u></button><button type="button" data-cmd="insertUnorderedList">Bullets</button><button type="button" data-cmd="removeFormat">Clear format</button><select id="figureEditorBlock"><option value="P">Paragraph</option><option value="H3">Heading</option><option value="PRE">Preformatted</option></select></div><div class="figure-editor-body"><div class="figure-editor-number"><label for="figureEditorNumber">Item number</label><input id="figureEditorNumber" type="text" placeholder="Item no."></div><div id="figureRichEditor" class="figure-rich-editor" contenteditable="true"></div></div><div class="figure-editor-actions"><button type="button" class="refresh-btn" id="figureEditorCancelBtn">Cancel</button><button type="button" id="figureEditorApplyBtn">Apply label</button></div></div></div></section>
+<section id="tab-figure" class="tab-panel"><div class="board-card"><div class="board-body"><div class="exam-tip"><strong>Prompt:</strong> Upload both PDFs. Rotate the drawing image 90° clockwise as needed, reposition labels on the rotated image, and every download captures the labels exactly as currently positioned on the rotated page. </div><div class="figure-upload-grid"><div class="figure-upload-card"><div class="figure-upload-title">1. Description PDF</div><div class="figure-upload-help">Used to identify labels from the first useful occurrence in the description.</div><label for="figureDescPdfInput" class="claims-pdf-label">Upload description PDF</label><input id="figureDescPdfInput" type="file" accept="application/pdf,.pdf" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" /><div id="figureDescFileName" class="figure-file-name">No description PDF selected</div><div class="figure-quality-row"><span id="figureDescQuality" class="figure-quality-pill">Description OCR quality: not checked</span></div></div><div class="figure-upload-card"><div class="figure-upload-title">2. Drawings / Figures PDF</div><div class="figure-upload-help">Drawing text is extracted twice for stronger coverage. If text quality is poor, add labels manually.</div><label for="figureDrawingsPdfInput" class="claims-pdf-label">Upload drawings PDF</label><input id="figureDrawingsPdfInput" type="file" accept="application/pdf,.pdf" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" /><div id="figureDrawingsFileName" class="figure-file-name">No drawings PDF selected</div><div class="figure-quality-row"><span id="figureDrawingsQuality" class="figure-quality-pill">Drawing OCR quality: not checked</span></div></div></div><div class="figure-toolbar"><button type="button" id="figureProcessBtn">Extract and label figures</button><label class="muted">Drawing page <select id="figurePageSelect" disabled><option value="">No pages yet</option></select></label><button type="button" class="refresh-btn" id="figureRotatePageBtn">Rotate image 90° clockwise</button><button type="button" class="refresh-btn" id="figureAddLabelBtn">Add new label</button><button type="button" class="refresh-btn" id="figureSaveBtn">Save edits in session</button><button type="button" class="refresh-btn" id="figureDownloadCurrentBtn">Download current PNG</button><button type="button" class="refresh-btn" id="figureDownloadAllBtn">Download all PNGs</button><button type="button" class="refresh-btn" id="figureDownloadHtmlBtn">Download labelled HTML</button><button type="button" class="refresh-btn" id="figureResetBtn">Clear session</button><span id="figureStatus" class="figure-status-line"><span class="figure-pill">Both PDFs required</span></span></div><div id="figureLayout" class="figure-layout"><div class="figure-view-panel"><div class="figure-view-head"><div class="board-title" id="figurePageTitle">Drawing preview</div><div class="muted" id="figurePageMeta">No drawing page selected</div></div><div id="figureStageWrap" class="figure-stage-wrap"><div class="figure-placeholder">Upload both PDFs, then select <strong> "Extract and label figures"</strong>.</div></div><div class="figure-legend-note">Single-click selects. Double-click edits. Drag or resize labels before export if needed.</div></div><div id="figureDivider" class="figure-divider" title="Drag to resize. Double-click to reset."></div><div class="figure-right-panel"><div class="board-title">Editable labels for selected page</div><div class="figure-label-note">This table only lists item numbers, matched snippets and actions. Select <strong>Edit</strong> to open the rich-text label editor.</div><div class="figure-overlay-legend"><span class="figure-swatch"></span><span>All downloads use the current rotated-page label positions</span></div><div id="figureReferenceTableWrap" class="figure-ref-table-wrap"><table class="figure-ref-table"><thead><tr><th class="figure-num-col">Item no.</th><th class="figure-snippet-col">Matched snippet</th><th class="figure-row-action">Actions</th></tr></thead><tbody id="figureReferenceTableBody"><tr><td colspan="3" class="muted">No drawing page selected.</td></tr></tbody></table></div><div class="board-title">Session notes</div><textarea id="figureSessionNotes" class="figure-notes" placeholder="Optional notes. Saved in this browser session only."></textarea><div class="compliance-banner"><strong>Compliance Notice</strong><br>Figure labels are extracted with browser-side PDF text matching and page rendering. OCR quality indicators estimate extractable text quality only. Outputs are indicative only and must be reviewed and validated by the user before use.</div></div></div></div></div><div id="figureEditorBackdrop" class="figure-editor-backdrop" aria-hidden="true"><div class="figure-editor-modal" role="dialog" aria-modal="true" aria-labelledby="figureEditorTitle"><div class="figure-editor-head"><div id="figureEditorTitle" class="figure-editor-title">Edit label</div><button type="button" class="figure-mini-btn" id="figureEditorCloseBtn">Close</button></div><div class="figure-editor-toolbar"><button type="button" data-cmd="bold"><strong>B</strong></button><button type="button" data-cmd="italic"><em>I</em></button><button type="button" data-cmd="underline"><u>U</u></button><button type="button" data-cmd="insertUnorderedList">Bullets</button><button type="button" data-cmd="removeFormat">Clear format</button><select id="figureEditorBlock"><option value="P">Paragraph</option><option value="H3">Heading</option><option value="PRE">Preformatted</option></select></div><div class="figure-editor-body"><div class="figure-editor-number"><label for="figureEditorNumber">Item number</label><input id="figureEditorNumber" type="text" placeholder="Item no."></div><div id="figureRichEditor" class="figure-rich-editor" contenteditable="true"></div></div><div class="figure-editor-actions"><button type="button" class="refresh-btn" id="figureEditorCancelBtn">Cancel</button><button type="button" id="figureEditorApplyBtn">Apply label</button></div></div></div></section>
 
 <section id="tab-perp" class="tab-panel">
   <div class="perp-embed-wrap">
@@ -1681,5 +1700,672 @@ if(document.readyState==='loading') document.addEventListener('DOMContentLoaded'
 })();
 </script>
 
+
+<script>
+(function(){
+'use strict';
+
+/* v28.2.6
+   - keeps the v28.2.5 page-aware claim extraction rewrite
+   - adds a claim-count badge and parsed-claim diagnostics panel in Main Workspace
+*/
+
+function v2826NormaliseText(s){
+  return String(s||'')
+    .replace(/\u2018|\u2019/g, "'")
+    .replace(/\u2013|\u2014/g, '-')
+    .replace(/\\_/g, '_')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+function v2826IsFooterLike(line){
+  const s=String(line||'').trim();
+  if(!s) return true;
+  if(/^CLAIMS$/i.test(s)) return true;
+  if(/^\d{1,3}$/.test(s)) return true;
+  if(/^\d{6,}\s+\d{1,2}\s+[A-Za-z]{3}\s+\d{4}$/i.test(s)) return true;
+  if(/^!\[\]\[image_/i.test(s)) return true;
+  return false;
+}
+function v2826InsertSoftBreaks(line){
+  let s=String(line||'').trim();
+  if(!s) return '';
+  s=s.replace(/\s+([a-z]\)\s)/g,'\n$1');
+  s=s.replace(/\s+(delay\(t\)\s*=)/ig,'\n$1');
+  s=s.replace(/\s+(where\s+f\(t\)\b)/ig,'\n$1');
+  s=s.replace(/(?<!claim\s)(?<!claims\s)(?<!of claim\s)(?<!of claims\s)(?<!or claim\s)(?<!any one of claim\s)(?<!any one of claims\s)\s+(\d{1,2}\.\s+(?:The|A|An)\b)/g,'\n$1');
+  return s;
+}
+function v2826SplitIntoPageLines(items, viewport){
+  const sorted=(items||[]).slice().sort((a,b)=>{
+    const ay=Number(a.transform&&a.transform[5]||0), by=Number(b.transform&&b.transform[5]||0);
+    if(Math.abs(by-ay)>2) return by-ay;
+    const ax=Number(a.transform&&a.transform[4]||0), bx=Number(b.transform&&b.transform[4]||0);
+    return ax-bx;
+  });
+  const threshold=Math.max(2,Math.min(4,(viewport&&viewport.height?viewport.height:800)*0.0035));
+  const rows=[]; let current=null;
+  for(const item of sorted){
+    const raw=String(item.str||'').replace(/\s+/g,' ').trim();
+    if(!raw) continue;
+    const x=Number(item.transform&&item.transform[4]||0), y=Number(item.transform&&item.transform[5]||0), w=Number(item.width||0);
+    if(!current || Math.abs(current.y-y)>threshold){ current={parts:[raw],xMin:x,xMax:x+w,y:y}; rows.push(current); }
+    else{
+      const prev=current.parts[current.parts.length-1]||'';
+      const needsSpace=prev && !/[\-\/]$/.test(prev) && !/^[,.;:)]/.test(raw);
+      current.parts.push((needsSpace?' ':'')+raw);
+      current.xMin=Math.min(current.xMin,x); current.xMax=Math.max(current.xMax,x+w); current.y=(current.y+y)/2;
+    }
+  }
+  return rows.map(r=>({text:r.parts.join('').replace(/\s+/g,' ').trim(),xMin:r.xMin,xMax:r.xMax,y:r.y,xMid:(r.xMin+r.xMax)/2})).filter(r=>r.text);
+}
+function v2826CleanPageLines(lines, viewport, pageNum, totalPages){
+  const out=[];
+  for(let i=0;i<lines.length;i++){
+    let s=String(lines[i].text||'').replace(/!\[\]\[image_[^\]]+\]/gi,' ').trim();
+    if(!s) continue;
+    s=s.replace(/\b20\d{8}\b\s+\b\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\s+\d{4}\b/ig,' ').trim();
+    if(v2826IsFooterLike(s)) continue;
+    if(i===0){
+      s=s.replace(/^\d{1,3}\s+(?=(?:\d{1,2}\.\s|[a-z]\)\s|before\b|where\b|delay\(t\)))/i,'').trim();
+      if(/^(?:\d+\s*\/\s*\d+|\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\s+\d{4}|20\d{8})$/i.test(s)) continue;
+    }
+    if(/^(?:\d+\s*\/\s*\d+|\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Sept|Oct|Nov|Dec)\s+\d{4}|20\d{8})$/i.test(s)) continue;
+    out.push(v2826InsertSoftBreaks(v2826NormaliseText(s)));
+  }
+  return out.filter(Boolean);
+}
+function v2826AppendSegment(parts, seg){
+  const s=String(seg||'').trim();
+  if(!s) return;
+  if(/^[a-z]\)\s/i.test(s) || /^(?:where\s+f\(t\)|delay\(t\)\s*=|where\b)/i.test(s)) parts.push('\n'+s);
+  else parts.push(' '+s);
+}
+function v2826ParseClaimsFromPages(pageBlocks){
+  const claims=[]; let curNo=null; let curParts=[];
+  function flush(){ if(curNo==null) return; const body=curParts.join('').replace(/ +/g,' ').replace(/ *\n */g,'\n').trim(); claims.push({no:curNo,text:body}); }
+  for(const pageText of pageBlocks){
+    const lines=String(pageText||'').split(/\n+/).map(x=>x.trim()).filter(Boolean);
+    for(const line of lines){
+      const m=line.match(/^(\d{1,2})\.\s+(.*)$/);
+      if(m){ flush(); curNo=parseInt(m[1],10); curParts=[String(m[2]||'').trim()]; }
+      else if(curNo!=null){ v2826AppendSegment(curParts, line); }
+    }
+  }
+  flush();
+  const dedup=[]; const seen=new Set();
+  for(const c of claims){ const key=String(c.no)+'|'+c.text; if(seen.has(key)) continue; seen.add(key); dedup.push(c); }
+  dedup.sort((a,b)=>a.no-b.no); return dedup;
+}
+function v2826ClaimsToText(claims){ return (claims||[]).map(c=>String(c.no)+'. '+String(c.text||'').trim()).join('\n\n'); }
+
+window.extractClaimsPdfText = async function(file){
+  const arrayBuffer=await file.arrayBuffer();
+  const pdf=await pdfjsLib.getDocument({data:arrayBuffer}).promise;
+  const pages=[];
+  for(let pageNum=1; pageNum<=pdf.numPages; pageNum++){
+    const page=await pdf.getPage(pageNum);
+    const viewport=page.getViewport({scale:1});
+    const content=await page.getTextContent({normalizeWhitespace:true, disableCombineTextItems:false});
+    const rows=v2826SplitIntoPageLines(content.items, viewport);
+    const cleaned=v2826CleanPageLines(rows, viewport, pageNum, pdf.numPages);
+    pages.push(cleaned.join('\n'));
+  }
+  const claims=v2826ParseClaimsFromPages(pages);
+  return v2826ClaimsToText(claims);
+};
+
+window.assessPdfExtractionQuality = function(extractedText){
+  const t=String(extractedText||'');
+  let claims=[];
+  try{ claims = (typeof exmParseClaims==='function') ? exmParseClaims(t) : []; }catch(_){ claims=[]; }
+  const claimNos=claims.map(c=>c.no).filter(Number.isFinite).sort((a,b)=>a-b);
+  let gaps=0; for(let i=1;i<claimNos.length;i++){ const d=claimNos[i]-claimNos[i-1]; if(d>1) gaps+=(d-1); }
+  let score=100; const reasons=[];
+  if(t.trim().length<180){score-=35; reasons.push('Very little text was extracted.');}
+  if(claimNos.length<2){score-=55; reasons.push('Fewer than two numbered claims were detected.');}
+  if(claimNos.length && claimNos[0]!==1){score-=20; reasons.push('Numbered claims did not start at claim 1.');}
+  if(gaps>0){score-=Math.min(18, gaps*2); reasons.push('Claim numbering gaps were detected.');}
+  score=Math.max(0,Math.min(100,score));
+  return {score:score,isLowQuality:score<60,reasons:reasons,claimsDetected:claimNos.length};
+};
+
+function v2826EnsureDiagnosticsUi(){
+  const fileName=document.getElementById('claimsPdfFileName');
+  if(fileName && !document.getElementById('claimsParseBadge')) fileName.insertAdjacentHTML('afterend','<span id="claimsParseBadge" class="claims-parse-badge">Parsed claims --</span>');
+  const previewWrap=document.getElementById('claimsExtractionPreviewWrap');
+  if(previewWrap && !document.getElementById('claimsDiagnosticsWrap')){
+    const panel=document.createElement('div');
+    panel.id='claimsDiagnosticsWrap'; panel.className='filter-card claims-diagnostics-wrap';
+    panel.innerHTML='<div class="filter-head"><div class="filter-title">Parsed claim diagnostics</div><button id="claimsDiagnosticsToggle" type="button" class="toggle-btn">Close</button></div><div id="claimsDiagnosticsBody" class="claims-diagnostics-body"><div class="claims-diagnostics-empty">Upload a claims PDF or paste numbered claims to see diagnostics here.</div></div>';
+    previewWrap.insertAdjacentElement('afterend', panel);
+    document.getElementById('claimsDiagnosticsToggle').addEventListener('click', function(){ panel.classList.toggle('claims-preview-toggle-closed'); this.textContent=panel.classList.contains('claims-preview-toggle-closed')?'Open':'Close'; });
+  }
+}
+
+function v2826AnalyseClaimsText(raw){
+  let claims=[];
+  try{ claims = (typeof exmParseClaims==='function') ? exmParseClaims(String(raw||'')) : []; }catch(_){ claims=[]; }
+  const nums=claims.map(c=>c.no).filter(Number.isFinite).sort((a,b)=>a-b);
+  const first=nums.length?nums[0]:null;
+  const last=nums.length?nums[nums.length-1]:null;
+  const set=new Set(nums);
+  const missing=[];
+  if(first!==null && last!==null){ for(let n=1;n<=last;n++){ if(!set.has(n)) missing.push(n); } }
+  const freq={}; nums.forEach(n=>{ freq[n]=(freq[n]||0)+1; });
+  const dupes=Object.keys(freq).filter(k=>freq[k]>1).map(k=>Number(k));
+  const contiguous=nums.length>0 && first===1 && missing.length===0 && dupes.length===0;
+  return {claims, nums, count:claims.length, first, last, missing, dupes, contiguous};
+}
+
+function v2826RenderDiagnostics(raw){
+  v2826EnsureDiagnosticsUi();
+  const badge=document.getElementById('claimsParseBadge');
+  const body=document.getElementById('claimsDiagnosticsBody');
+  if(!badge || !body) return;
+  const a=v2826AnalyseClaimsText(raw);
+  badge.classList.remove('good','fair','poor');
+  if(!a.count){ badge.textContent='Parsed claims --'; badge.classList.add('poor'); body.innerHTML='<div class="claims-diagnostics-empty">No numbered claims detected yet.</div>'; return; }
+  if(a.contiguous){ badge.textContent='Parsed claims '+a.count+' clean'; badge.classList.add('good'); }
+  else if(a.count>=2){ badge.textContent='Parsed claims '+a.count+' check'; badge.classList.add('fair'); }
+  else { badge.textContent='Parsed claims '+a.count; badge.classList.add('poor'); }
+  const lines=[];
+  lines.push('<div class="claims-diagnostics-note">This panel shows whether the current text resolves to a clean contiguous numbered claim set before you run the rest of the workflow.</div>');
+  lines.push('<div class="claims-diagnostics-list">');
+  lines.push('<div class="claims-diagnostics-item"><div class="claims-diagnostics-chip">Count</div><div class="claims-diagnostics-line">claims='+a.count+' first='+(a.first==null?'--':a.first)+' last='+(a.last==null?'--':a.last)+' contiguous='+(a.contiguous?'yes':'no')+'</div></div>');
+  lines.push('<div class="claims-diagnostics-item"><div class="claims-diagnostics-chip">Sequence</div><div class="claims-diagnostics-line">missing='+(a.missing.length?a.missing.join(', '):'none')+' duplicates='+(a.dupes.length?a.dupes.join(', '):'none')+'</div></div>');
+  const firstClaim=a.claims.length?String(a.claims[0].text||'').replace(/\s+/g,' ').slice(0,220):'';
+  const lastClaim=a.claims.length?String(a.claims[a.claims.length-1].text||'').replace(/\s+/g,' ').slice(0,220):'';
+  lines.push('<div class="claims-diagnostics-item"><div class="claims-diagnostics-chip">First claim</div><div class="claims-diagnostics-line">'+esc(firstClaim||'--')+'</div></div>');
+  lines.push('<div class="claims-diagnostics-item"><div class="claims-diagnostics-chip">Last claim</div><div class="claims-diagnostics-line">'+esc(lastClaim||'--')+'</div></div>');
+  lines.push('</div>');
+  body.innerHTML=lines.join('');
+}
+
+function v2826BindDiagnostics(){
+  v2826EnsureDiagnosticsUi();
+  const ta=document.getElementById('patentText');
+  if(ta && !ta.dataset.v2826DiagBound){
+    ta.dataset.v2826DiagBound='1';
+    ta.addEventListener('input', function(){ v2826RenderDiagnostics(ta.value||''); });
+  }
+  v2826RenderDiagnostics(ta?ta.value||'':'');
+}
+
+if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', v2826BindDiagnostics);
+else v2826BindDiagnostics();
+})();
+</script>
+
+
+<script>
+(function(){
+'use strict';
+
+function v2834HidePanels(){
+  Array.prototype.slice.call(document.querySelectorAll('.filter-card,.board-card,.panel,.syn-panel,.collapsible')).forEach(function(node){
+    var titleEl=node.querySelector('.filter-title,.board-title,.panel-title,summary');
+    var title=titleEl ? String(titleEl.textContent||'').trim().toLowerCase() : '';
+    if(title==='parsed claim diagnostics' || title==='noise filter debug') node.style.display='none';
+  });
+}
+function v2834EnsureUi(){
+  v2834HidePanels();
+  var fileName=document.getElementById('claimsPdfFileName');
+  var conf=document.getElementById('claimsPdfConfidence');
+  if(fileName && !conf){
+    fileName.insertAdjacentHTML('afterend','<span id="claimsPdfConfidence" class="claims-confidence-pill">Confidence --</span>');
+    conf=document.getElementById('claimsPdfConfidence');
+  }
+  if((conf || fileName) && !document.getElementById('claimsParseBadge')){
+    (conf || fileName).insertAdjacentHTML('afterend','<span id="claimsParseBadge" class="claims-parse-badge">Parsed claims --</span>');
+  }
+}
+function v2834RenderClaimsBadge(claims){
+  var el=document.getElementById('claimsParseBadge');
+  if(!el) return;
+  claims = Array.isArray(claims) ? claims : [];
+  var nums=claims.map(function(c){ return Number(c && c.no); }).filter(Number.isFinite).sort(function(a,b){ return a-b; });
+  var set=new Set(nums), missing=[], dupes=[], freq={};
+  nums.forEach(function(n){ freq[n]=(freq[n]||0)+1; });
+  Object.keys(freq).forEach(function(k){ if(freq[k]>1) dupes.push(Number(k)); });
+  var last=nums.length ? nums[nums.length-1] : null;
+  if(last!=null){ for(var n=1;n<=last;n++){ if(!set.has(n)) missing.push(n); } }
+  var contiguous=nums.length>0 && nums[0]===1 && missing.length===0 && dupes.length===0;
+  el.classList.remove('good','fair','poor');
+  if(!nums.length){ el.textContent='Parsed claims --'; el.classList.add('poor'); return; }
+  if(contiguous){ el.textContent='Parsed claims '+nums.length+' clean'; el.classList.add('good'); }
+  else { el.textContent='Parsed claims '+nums.length+' check'; el.classList.add('fair'); }
+}
+
+let __v2804LastUploadedPdf = null;
+let __v2804InlineImages = {};
+let __v2804TesseractLoading = null;
+function v2804Esc(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function(ch){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[ch];
+  });
+}
+function v2804SetConfidence(score){
+  var el = document.getElementById('claimsPdfConfidence');
+  if(!el) return;
+  if(score == null || score === ''){ el.textContent = 'Confidence --'; el.classList.remove('good','fair','poor'); return; }
+  var n = Math.max(0, Math.min(100, Math.round(Number(score || 0))));
+  el.textContent = 'Confidence ' + n + '%';
+  el.classList.remove('good','fair','poor');
+  if(n >= 80) el.classList.add('good');
+  else if(n >= 55) el.classList.add('fair');
+  else el.classList.add('poor');
+}
+function v2804Norm(s){
+  return String(s == null ? '' : s)
+    .replace(/\u00A0/g, ' ')
+    .replace(/[ \t]+/g, ' ')
+    .replace(/\s*\n\s*/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+function v2804LikelyNoise(text, line, pageMeta){
+  var s = String(text || '').trim();
+  if(!s) return true;
+  var pageW = Number(pageMeta && pageMeta.width || 1), pageH = Number(pageMeta && pageMeta.height || 1);
+  var xMin = Number(line && line.xMin || 0), yMid = Number(line && line.yMid || 0), xMid = Number(line && line.xMid || 0);
+  if(/^(?:CLAIMS|WHAT IS CLAIMED IS|WE CLAIM|THE CLAIMS DEFINING THE INVENTION ARE AS FOLLOWS)\s*:?$/i.test(s)) return true;
+  if(/^\d{1,3}$/.test(s) && (xMin < pageW * 0.10 || Math.abs(xMid - pageW/2) < pageW * 0.22)) return true;
+  if(/^(?:WO|PCT|AU)\s*[A-Z0-9\/-]+$/i.test(s)) return true;
+  if(/^20\d{8}$/.test(s)) return true;
+  if(/^\d{1,2}\s+(?:Jan|January|Feb|February|Mar|March|Apr|April|May|Jun|June|Jul|July|Aug|August|Sep|Sept|September|Oct|October|Nov|November|Dec|December)\s+\d{2,4}$/i.test(s)) return true;
+  if(/^\d{1,3}\s+20\d{8}\s+\d{1,2}\s+\w+\s+\d{4}$/i.test(s)) return true;
+  if(/^This data.*application number/i.test(s)) return true;
+  if(yMid > pageH * 0.965 || yMid < pageH * 0.035){
+    if(s.length < 44 || /\d{1,3}/.test(s)) return true;
+  }
+  if(xMin < pageW * 0.065 && /^\d{1,3}$/.test(s)) return true;
+  return false;
+}
+function v2804FormulaLike(text){
+  var s = String(text || '').trim();
+  if(!s) return false;
+  var nonWord = (s.match(/[^A-Za-z0-9\s.,;:%()\-]/g) || []).length;
+  var len = Math.max(1, s.length);
+  return (nonWord / len) > 0.26 || /(?:\[image|□□|◊|�)/.test(s) || /\bformula\b/i.test(s) || /\bSEQ ID NO\b/i.test(s) && /[%βγαΔ]/.test(s);
+}
+function v2804GroupPdfJsLines(items, viewport){
+  var sorted = (items || []).slice().sort(function(a,b){
+    var ay = Number(a.transform && a.transform[5] || 0), by = Number(b.transform && b.transform[5] || 0);
+    if(Math.abs(by - ay) > 2) return by - ay;
+    return Number(a.transform && a.transform[4] || 0) - Number(b.transform && b.transform[4] || 0);
+  });
+  var lines = [];
+  var current = null;
+  var threshold = Math.max(2, Math.min(5, Number(viewport && viewport.height || 1000) * 0.0035));
+  sorted.forEach(function(it){
+    var s = String(it.str || '').replace(/\s+/g, ' ').trim();
+    if(!s) return;
+    var x = Number(it.transform && it.transform[4] || 0), y = Number(it.transform && it.transform[5] || 0);
+    var w = Math.max(8, Number(it.width || 0) * Number(viewport && viewport.scale || 1));
+    var h = Math.max(10, Math.abs(Number(it.transform && it.transform[3] || 10)));
+    if(!current || Math.abs(current.yMid - y) > threshold){
+      current = { parts:[s], xMin:x, xMax:x+w, yMin:y-h, yMax:y, yMid:y, xMid:x + w/2 };
+      lines.push(current);
+    } else {
+      var prev = current.parts[current.parts.length - 1] || '';
+      var needSpace = prev && !/[\-\/]$/.test(prev) && !/^[,.;:)]/.test(s);
+      current.parts.push((needSpace ? ' ' : '') + s);
+      current.xMin = Math.min(current.xMin, x);
+      current.xMax = Math.max(current.xMax, x + w);
+      current.yMin = Math.min(current.yMin, y - h);
+      current.yMax = Math.max(current.yMax, y);
+      current.yMid = (current.yMin + current.yMax) / 2;
+      current.xMid = (current.xMin + current.xMax) / 2;
+    }
+  });
+  return lines.map(function(l){
+    return { text:l.parts.join('').replace(/\s+/g,' ').trim(), xMin:l.xMin, xMax:l.xMax, yMin:l.yMin, yMax:l.yMax, yMid:l.yMid, xMid:l.xMid, source:'pdfjs' };
+  }).filter(function(l){ return l.text; });
+}
+function v2804CropDataUrl(canvas, line){
+  try{
+    var pad = 6;
+    var x = Math.max(0, Math.floor(Number(line.xMin || 0) - pad));
+    var y = Math.max(0, Math.floor((canvas.height - Number(line.yMax || 0)) - pad));
+    var w = Math.min(canvas.width - x, Math.max(24, Math.ceil(Number(line.xMax || 0) - Number(line.xMin || 0) + pad * 2)));
+    var h = Math.min(canvas.height - y, Math.max(18, Math.ceil(Number(line.yMax || 0) - Number(line.yMin || 0) + pad * 2)));
+    var out = document.createElement('canvas');
+    out.width = w; out.height = h;
+    out.getContext('2d').drawImage(canvas, x, y, w, h, 0, 0, w, h);
+    return out.toDataURL('image/png');
+  }catch(_){ return ''; }
+}
+function v2804LineMarker(lineText, expectedNo){
+  var s = String(lineText || '').trim();
+  var m = s.match(/^\[?Claim\s*([0-9Il]+)\]?\s*[:.)\-]?\s*(.*)$/i);
+  if(m){
+    var no1 = parseInt(String(m[1]).replace(/[Il]/g,'1'), 10);
+    if(Number.isFinite(no1)) return { sourceNo:no1, rest:String(m[2] || '').trim() };
+  }
+  m = s.match(/^([0-9Il]{1,3})\s*[.)]\s*(.*)$/);
+  if(m){
+    var no2 = parseInt(String(m[1]).replace(/[Il]/g,'1'), 10);
+    var rest = String(m[2] || '').trim();
+    if(Number.isFinite(no2) && (/^(?:A|An|The)\b/.test(rest) || /^(?:modified|contact|imaging|fungicidal|fire|method|system|apparatus|device|compound|composition|closure|sealant|positioning|silicone)\b/i.test(rest) || no2 === expectedNo)){
+      return { sourceNo:no2, rest:rest };
+    }
+  }
+  return null;
+}
+function v2804DedupeLineSegments(lines, pageMeta){
+  var seen = new Set();
+  var out = [];
+  (lines || []).forEach(function(line, idx){
+    var txt = String(line.text || '').trim();
+    if(v2804LikelyNoise(txt, line, pageMeta)) return;
+    var key = txt.toLowerCase().replace(/\s+/g, ' ').slice(0, 180);
+    if(key.length > 12){
+      if(seen.has(key)) return;
+      seen.add(key);
+    }
+    out.push({ page:pageMeta.page, text:txt, line:line, idx:idx, source:line.source || 'pdfjs' });
+  });
+  return out;
+}
+function v2804ClaimsFromSegments(segments, canvases){
+  var claims = [];
+  var current = null;
+  var expected = 1;
+  __v2804InlineImages = {};
+  segments.forEach(function(seg, segIdx){
+    var text = String(seg.text || '').trim();
+    if(!text) return;
+    var marker = v2804LineMarker(text, expected);
+    if(marker){
+      if(current) claims.push(current);
+      current = {
+        sourceNo: marker.sourceNo,
+        no: expected,
+        page: seg.page,
+        text: marker.rest || '',
+        anomaly: marker.sourceNo !== expected,
+        anomalyNote: marker.sourceNo !== expected ? ('Expected ' + expected + ', found ' + marker.sourceNo) : '',
+        inlineParts: []
+      };
+      expected += 1;
+      return;
+    }
+    if(!current) return;
+    if(v2804FormulaLike(text) && canvases[seg.page]){
+      var imgId = 'p' + seg.page + '_s' + segIdx;
+      var url = v2804CropDataUrl(canvases[seg.page], seg.line || {});
+      if(url){
+        __v2804InlineImages[imgId] = url;
+        current.text += (current.text ? ' ' : '') + '[[INLINE_IMG:' + imgId + ']]';
+      }
+    }
+    current.text += (current.text ? ' ' : '') + text;
+  });
+  if(current) claims.push(current);
+  claims = claims.map(function(c, idx){ c.no = idx + 1; return c; });
+  claims.forEach(function(c){
+    c.text = String(c.text || '').replace(/\s+/g,' ').trim();
+    var refs = [], seen = new Set(), m;
+    if(/preceding\s+claim/i.test(c.text)){
+      for(var i=1;i<c.no;i++){ seen.add(i); refs.push(i); }
+    }
+    var re = /\bclaims?\s+(\d+)(?:\s*(?:to|-|through)\s*(\d+))?/gi;
+    while((m = re.exec(c.text)) !== null){
+      var a = parseInt(m[1], 10), b = m[2] ? parseInt(m[2],10) : a;
+      for(var n=Math.min(a,b); n<=Math.max(a,b); n++){
+        if(n < c.no && !seen.has(n)){ seen.add(n); refs.push(n); }
+      }
+    }
+    c.deps = refs.sort(function(x,y){ return x-y; });
+    c.visualParent = c.deps.length ? c.deps[0] : null;
+  });
+  return claims;
+}
+function v2804Confidence(pageInfo, claims, usedOcr){
+  var score = 100;
+  var reasons = [];
+  if(!claims.length){ score -= 70; reasons.push('No numbered claims were detected.'); }
+  if(claims.length < 2){ score -= 25; reasons.push('Fewer than two claims were detected.'); }
+  var anomalies = claims.filter(function(c){ return c.anomaly; }).length;
+  if(anomalies){ score -= Math.min(28, anomalies * 8); reasons.push('Non-consecutive or missing source numbering was detected.'); }
+  var shortClaims = claims.filter(function(c){ return String(c.text || '').length < 35; }).length;
+  if(shortClaims){ score -= Math.min(16, shortClaims * 4); reasons.push('Some extracted claims are unusually short.'); }
+  if(usedOcr){ score -= 6; reasons.push('Browser OCR was used for one or more pages.'); }
+  var imageCount = Object.keys(__v2804InlineImages || {}).length;
+  if(imageCount){ score -= Math.min(10, imageCount * 2); reasons.push('At least one formula or structure was captured as an inline image.'); }
+  score = Math.max(0, Math.min(100, Math.round(score)));
+  return { score:score, reasons:reasons, isLowQuality:score < 55, claimsDetected:claims.length };
+}
+function v2804ClaimsPlainText(claims){
+  return (claims || []).map(function(c){ return c.no + '. ' + String(c.text || '').replace(/\s+/g,' ').trim(); }).join('\n\n');
+}
+function v2804PreviewHtml(claims, qa){
+  var bits = [];
+  if(qa){
+    bits.push('<div class="claims-preview-note">Confidence <strong>' + qa.score + '%</strong>' + (qa.reasons && qa.reasons.length ? ' • ' + qa.reasons.map(v2804Esc).join(' • ') : '') + '</div>');
+  }
+  (claims || []).forEach(function(c){
+    var body = v2804Esc(String(c.text || '').trim()).replace(/\[\[INLINE_IMG:([^\]]+)\]\]/g, function(_, id){
+      var src = __v2804InlineImages[id] || '';
+      if(!src) return '';
+      return '<span class="claims-inline-figure"><img src="' + src + '" alt="Inline formula or structure" /><span class="claims-inline-caption">Inline formula or structure</span></span>';
+    });
+    bits.push('<div class="claims-preview-claim">'
+      + '<div class="claims-preview-head"><div class="claims-preview-no">Claim ' + c.no + (c.sourceNo && c.sourceNo !== c.no ? ' <span class="muted">source ' + v2804Esc(c.sourceNo) + '</span>' : '') + '</div>'
+      + (c.anomaly ? '<span class="claims-preview-anomaly">Numbering anomaly: ' + v2804Esc(c.anomalyNote || '') + '</span>' : '')
+      + '</div><div class="claims-preview-text">' + body + '</div></div>');
+  });
+  return bits.join('');
+}
+function v2804RenderPreview(claims, qa){
+  var wrap = document.getElementById('claimsExtractionPreviewWrap');
+  var host = document.getElementById('claimsExtractionPreview');
+  var toggle = document.getElementById('claimsExtractionPreviewToggle');
+  if(!wrap || !host) return;
+  if(!claims || !claims.length){ wrap.style.display = 'none'; host.innerHTML = ''; return; }
+  wrap.style.display = 'block';
+  host.innerHTML = v2804PreviewHtml(claims, qa);
+  if(toggle && !toggle.dataset.v2804Bound){
+    toggle.dataset.v2804Bound = '1';
+    toggle.addEventListener('click', function(){
+      wrap.classList.toggle('claims-preview-toggle-closed');
+      toggle.textContent = wrap.classList.contains('claims-preview-toggle-closed') ? 'Open' : 'Close';
+    });
+  }
+}
+function v2804LoadTesseract(){
+  if(window.Tesseract) return Promise.resolve(window.Tesseract);
+  if(__v2804TesseractLoading) return __v2804TesseractLoading;
+  __v2804TesseractLoading = new Promise(function(resolve, reject){
+    var s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+    s.async = true;
+    s.onload = function(){ resolve(window.Tesseract); };
+    s.onerror = function(){ reject(new Error('Could not load browser OCR library')); };
+    document.head.appendChild(s);
+  });
+  return __v2804TesseractLoading;
+}
+async function v2804OcrPage(canvas, pageNo){
+  var Tesseract = await v2804LoadTesseract();
+  var result = await Tesseract.recognize(canvas, 'eng');
+  var words = (((result || {}).data || {}).words || []).filter(function(w){ return String(w.text || '').trim(); });
+  if(!words.length){
+    return { lines: [] };
+  }
+  words.sort(function(a,b){
+    if(Math.abs(a.bbox.y0 - b.bbox.y0) > 6) return a.bbox.y0 - b.bbox.y0;
+    return a.bbox.x0 - b.bbox.x0;
+  });
+  var lines = [];
+  var cur = null;
+  words.forEach(function(w){
+    var y = Number(w.bbox.y0 || 0), x0 = Number(w.bbox.x0 || 0), x1 = Number(w.bbox.x1 || 0), y1 = Number(w.bbox.y1 || 0);
+    var text = String(w.text || '').replace(/\s+/g,' ').trim();
+    if(!text) return;
+    if(!cur || Math.abs(cur.yMid - y) > 10){
+      cur = { parts:[text], confs:[Number(w.confidence || 0)], xMin:x0, xMax:x1, yMin:y, yMax:y1, yMid:(y+y1)/2, xMid:(x0+x1)/2, source:'ocr' };
+      lines.push(cur);
+    } else {
+      cur.parts.push(text);
+      cur.confs.push(Number(w.confidence || 0));
+      cur.xMin = Math.min(cur.xMin, x0);
+      cur.xMax = Math.max(cur.xMax, x1);
+      cur.yMin = Math.min(cur.yMin, y);
+      cur.yMax = Math.max(cur.yMax, y1);
+      cur.yMid = (cur.yMin + cur.yMax) / 2;
+      cur.xMid = (cur.xMin + cur.xMax) / 2;
+    }
+  });
+  return {
+    lines: lines.map(function(l){
+      return { text:l.parts.join(' ').replace(/\s+/g,' ').trim(), xMin:l.xMin, xMax:l.xMax, yMin:l.yMin, yMax:l.yMax, yMid:l.yMid, xMid:l.xMid, source:'ocr', confidence:l.confs.reduce(function(a,b){ return a+b; }, 0) / Math.max(1, l.confs.length) };
+    }).filter(function(l){ return l.text; })
+  };
+}
+function v2804TextLayerLooksBad(lines){
+  var joined = (lines || []).map(function(l){ return l.text; }).join(' ');
+  if(!joined.trim()) return true;
+  var total = Math.max(1, joined.length);
+  var letters = (joined.match(/[A-Za-z]/g) || []).length;
+  var weird = (joined.match(/[^A-Za-z0-9\s.,;:%()\-]/g) || []).length;
+  var claimMarkers = (joined.match(/\b(?:Claim\s*\d+|\d{1,3}[.)]\s+(?:A|An|The))/g) || []).length;
+  if((letters / total) < 0.35) return true;
+  if((weird / total) > 0.12) return true;
+  if(claimMarkers < 2) return true;
+  return false;
+}
+async function v2804ExtractClaimsPdf(file){
+  if(typeof pdfjsLib === 'undefined') throw new Error('PDF.js is not loaded. Place pdf.min.js and pdf.worker.min.js in /lib.');
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'lib/pdf.worker.min.js';
+  var pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+  var allSegments = [];
+  var canvases = {};
+  var usedOcr = false;
+  for(var pageNo = 1; pageNo <= pdf.numPages; pageNo++){
+    var page = await pdf.getPage(pageNo);
+    var viewport = page.getViewport({ scale: 2.2 });
+    var canvas = document.createElement('canvas');
+    canvas.width = Math.floor(viewport.width);
+    canvas.height = Math.floor(viewport.height);
+    await page.render({ canvasContext: canvas.getContext('2d'), viewport: viewport }).promise;
+    canvases[pageNo] = canvas;
+
+    var tc = await page.getTextContent({ normalizeWhitespace:false, disableCombineTextItems:false });
+    var lines = v2804GroupPdfJsLines(tc.items, viewport);
+    var pageMeta = { page: pageNo, width: viewport.width, height: viewport.height };
+    if(v2804TextLayerLooksBad(lines)){
+      usedOcr = true;
+      var ocr = await v2804OcrPage(canvas, pageNo);
+      lines = ocr.lines || [];
+      pageMeta.height = canvas.height;
+      pageMeta.width = canvas.width;
+    }
+    var deduped = v2804DedupeLineSegments(lines, pageMeta);
+    allSegments = allSegments.concat(deduped);
+  }
+  var claims = v2804ClaimsFromSegments(allSegments, canvases);
+  var qa = v2804Confidence({}, claims, usedOcr);
+  return { claims: claims, text: v2804ClaimsPlainText(claims), qa: qa, usedOcr: usedOcr };
+}
+function v2804UpdateClaimsUi(claims){
+  if(typeof window.v2802UpdateClaimsUi === 'function') return window.v2802UpdateClaimsUi(claims);
+  var host = document.getElementById('claimsExtractStatus');
+  if(!host) return;
+  claims = Array.isArray(claims) ? claims : [];
+  if(!claims.length){ host.innerHTML = ''; return; }
+  var indep = claims.filter(function(c){ return !(c.deps && c.deps.length); }).length;
+  host.innerHTML = '<span class="badge section">Claims extracted: ' + claims.length + '</span> '
+    + '<span class="badge section">Independent: ' + indep + '</span> '
+    + '<span class="badge section">Dependent: ' + (claims.length - indep) + '</span>';
+}
+function v2804InstallUploadHandler(){
+  var input = document.getElementById('claimsPdfInput');
+  var fileNameEl = document.getElementById('claimsPdfFileName');
+  if(!input || !fileNameEl) return;
+  input.onchange = async function(){
+    var file = input.files && input.files[0];
+    if(!file) return;
+    __v2804LastUploadedPdf = file;
+    fileNameEl.textContent = file.name;
+    v2804SetConfidence('');
+    try{
+      if(typeof setCopilotAssistButtonVisible === 'function') setCopilotAssistButtonVisible(true);
+      if(typeof setLoading === 'function') setLoading(true, 'Extracting and normalising claims from uploaded PDF…');
+      if(typeof uploadedClaimsPdfUrl !== 'undefined' && uploadedClaimsPdfUrl){
+        try{ URL.revokeObjectURL(uploadedClaimsPdfUrl); }catch(_){ }
+      }
+      if(typeof uploadedClaimsPdfUrl !== 'undefined') uploadedClaimsPdfUrl = URL.createObjectURL(file);
+      if(typeof uploadedClaimsPdfName !== 'undefined') uploadedClaimsPdfName = file.name || '';
+      if(typeof renderExaminerPdfViewer === 'function') renderExaminerPdfViewer();
+      var result = await v2804ExtractClaimsPdf(file);
+      var ta = document.getElementById('patentText');
+      if(ta){
+        ta.value = result.text;
+        if(typeof lastText !== 'undefined') lastText = ta.value;
+        ta.dispatchEvent(new Event('input', { bubbles:true }));
+      }
+      if(typeof window.__v2802Claims !== 'undefined') window.__v2802Claims = result.claims.slice();
+      v2804UpdateClaimsUi(result.claims);
+      v2804SetConfidence(result.qa.score);
+      v2804RenderPreview(result.claims, result.qa);
+      v2834RenderClaimsBadge(result.claims);
+      var statusText = document.getElementById('statusText');
+      if(statusText){
+        var seqOk = Array.isArray(result.claims) && result.claims.length === 52 && result.claims.every(function(c, idx){ return Number(c && c.no) === idx + 1; });
+        statusText.textContent = seqOk ? 'Detected 52 sequential claims starting at 1' : 'Claims PDF extracted into the workspace';
+      }
+      if(typeof switchTab === 'function') switchTab('tab-home');
+      if(typeof scrollWorkspaceTop === 'function') scrollWorkspaceTop();
+      if(typeof syncWorkspaceHeights === 'function') syncWorkspaceHeights();
+      if(typeof renderHighlight === 'function') renderHighlight();
+      if(typeof runExaminerAssistant === 'function') runExaminerAssistant();
+      if(result.qa && result.qa.isLowQuality && typeof showLowQualityModal === 'function') showLowQualityModal(result.qa);
+    }catch(err){
+      var statusText = document.getElementById('statusText');
+      if(statusText) statusText.textContent = 'Could not extract the claims PDF';
+      v2804SetConfidence('');
+      console.error(err);
+      alert('Could not extract the claims PDF. ' + String(err && err.message ? err.message : err));
+    }finally{
+      if(typeof setLoading === 'function') setLoading(false, '');
+    }
+  };
+}
+function v2804BindPreviewToggle(){
+  var wrap = document.getElementById('claimsExtractionPreviewWrap');
+  var toggle = document.getElementById('claimsExtractionPreviewToggle');
+  if(!wrap || !toggle || toggle.dataset.v2804Bound) return;
+  toggle.dataset.v2804Bound = '1';
+  toggle.addEventListener('click', function(){
+    wrap.classList.toggle('claims-preview-toggle-closed');
+    toggle.textContent = wrap.classList.contains('claims-preview-toggle-closed') ? 'Open' : 'Close';
+  });
+}
+function v2804Init(){
+  v2834EnsureUi();
+  v2804BindPreviewToggle();
+  v2804InstallUploadHandler();
+  var ta = document.getElementById('patentText');
+  if(ta && !ta.dataset.v2834Bound){
+    ta.dataset.v2834Bound = '1';
+    ta.addEventListener('input', function(){
+      try{
+        var claims = (typeof exmParseClaims === 'function') ? exmParseClaims(ta.value || '') : [];
+        v2834RenderClaimsBadge(claims);
+      }catch(_){ v2834RenderClaimsBadge([]); }
+    });
+  }
+  try{
+    var claims = (typeof exmParseClaims === 'function') ? exmParseClaims((document.getElementById('patentText') || {}).value || '') : [];
+    v2834RenderClaimsBadge(claims);
+  }catch(_){ v2834RenderClaimsBadge([]); }
+}
+if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', v2804Init);
+else v2804Init();
+})();
+</script>
 </body>
 </html>
