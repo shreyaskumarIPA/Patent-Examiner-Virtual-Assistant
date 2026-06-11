@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Patent Examiner Virtual Assistant - v52.0.2</title>
+<title>Patent Examiner Virtual Assistant - v54.6.0 LLM examiner</title>
 <link rel="icon" type="image/png" href="./favicon.png"/>
 <style>
 :root{
@@ -277,6 +277,10 @@ tr.g5Row td{background:rgba(142,108,47,.06)}tr.g6Row td{background:rgba(21,101,1
 #figureLabellerOverlay{position:fixed;inset:0;background:rgba(29,37,44,.32);display:none;align-items:center;justify-content:center;z-index:10001}
 #figureLabellerOverlay .overlay-card{background:#fff;border:1px solid var(--border);box-shadow:var(--shadow);border-radius:14px;padding:24px 28px;display:flex;flex-direction:column;align-items:center;gap:12px;min-width:300px}
 #figureLabellerOverlay .overlay-spinner{width:36px;height:36px;border:4px solid rgba(0,129,156,.18);border-top-color:var(--ipa-web-teal);border-radius:50%;animation:spin .8s linear infinite}
+
+/* LLM CHAT TAB v53.0.17 Markdown prompt sidecar + new Copilot session popup */
+.llm-chat-shell{display:grid;grid-template-columns:minmax(360px,1fr) 12px minmax(430px,44vw);gap:14px;align-items:stretch}.llm-chat-panel,.llm-browser-panel{border:1px solid var(--border);border-radius:12px;background:#fff;display:flex;flex-direction:column;min-height:780px;overflow:hidden;box-shadow:var(--shadow)}.llm-split-divider{position:relative;cursor:col-resize;border-radius:8px;background:linear-gradient(to right,transparent,rgba(29,37,44,.18),transparent);user-select:none;touch-action:none;min-height:780px}.llm-split-divider:hover{background:linear-gradient(to right,transparent,rgba(0,129,156,.28),transparent)}.llm-split-divider::after{content:"⋮⋮";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:14px;letter-spacing:2px;color:rgba(29,37,44,.7);pointer-events:none}.llm-split-divider.dragging{background:linear-gradient(to right,transparent,rgba(0,129,156,.42),transparent)}.llm-chat-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(0,129,156,.10),rgba(93,32,103,.08))}.llm-chat-title{font-weight:800;color:#22323d}.llm-chat-sub{font-size:12px;color:#5f6c76;margin-top:2px}.llm-status-pill{display:inline-flex;align-items:center;gap:7px;border:1px solid rgba(0,129,156,.22);background:#fff;border-radius:999px;padding:6px 9px;font-size:12px;color:#355062;font-weight:700}.llm-status-dot{width:8px;height:8px;border-radius:50%;background:#2e9d55}.llm-chat-stream{flex:1;overflow:auto;padding:14px;background:linear-gradient(180deg,#fbfcfd,#f4f7f9);display:flex;flex-direction:column;gap:12px}.llm-msg{max-width:min(980px,94%);border:1px solid var(--border);border-radius:14px;padding:11px 12px;line-height:1.45;background:#fff;color:#23313a}.llm-msg.user{align-self:flex-end;background:#e8f8fb;border-color:#9fd1de;white-space:pre-wrap}.llm-msg.assistant{align-self:flex-start;background:#fff}.llm-msg .role{display:block;font-size:11px;font-weight:800;color:var(--ipa-web-teal);margin-bottom:7px;letter-spacing:.02em;text-transform:uppercase}.llm-answer h3{margin:8px 0 6px;font-size:15px;color:#22323d}.llm-answer p{margin:6px 0}.llm-answer ul{margin:6px 0 8px 18px;padding:0}.llm-answer li{margin:3px 0}.llm-answer table{width:100%;border-collapse:separate;border-spacing:0;margin:8px 0;border:1px solid var(--border);border-radius:8px;overflow:hidden;font-size:12.5px}.llm-answer th{background:#f4f8fa;color:#355062;text-align:left;font-weight:800;border-bottom:1px solid var(--border);padding:7px}.llm-answer td{border-bottom:1px solid rgba(29,37,44,.08);padding:7px;vertical-align:top}.llm-answer pre{white-space:pre-wrap;background:#f7fafb;border:1px solid var(--border);border-radius:8px;padding:10px;line-height:1.45;max-height:420px;overflow:auto}.llm-chat-input{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:12px;border-top:1px solid var(--border);background:#fff}.llm-chat-input textarea{min-height:78px;height:78px;resize:vertical}.llm-chat-input .llm-send-col{display:flex;flex-direction:column;gap:8px}.llm-chat-small-btn{padding:7px 10px;font-size:12px;border-radius:999px;background:#fff;color:var(--ipa-charcoal);border:1px solid rgba(29,37,44,.18)}.llm-chat-examples{display:flex;flex-wrap:wrap;gap:8px;padding:10px 12px}.llm-chat-examples button{padding:6px 9px;font-size:11.5px;border-radius:999px;background:#fff;color:#1D252C;border:1px solid rgba(0,129,156,.22);text-align:left}.sidecar-dock{display:flex;flex-direction:column;flex:1;background:linear-gradient(180deg,#f8fafb,#edf2f4)}.sidecar-toolbar{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:8px;align-items:center;padding:10px 12px;border-bottom:1px solid var(--border);background:#fbfcfd}.sidecar-url{font-family:ui-monospace,Consolas,monospace;font-size:11.5px;color:#42505a;border:1px solid rgba(29,37,44,.14);border-radius:999px;padding:7px 10px;background:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.sidecar-btn{padding:7px 10px;font-size:12px;border-radius:999px;background:#fff;color:var(--ipa-charcoal);border:1px solid rgba(29,37,44,.18);cursor:pointer;font-weight:700}.sidecar-btn.primary{background:var(--ipa-web-teal);border-color:var(--ipa-web-teal);color:#fff}.sidecar-body{flex:1;display:flex;align-items:center;justify-content:center;padding:18px}.sidecar-card{width:min(660px,100%);border:1px solid var(--border);border-radius:16px;background:#fff;box-shadow:var(--shadow);padding:18px}.sidecar-card h3{margin:4px 0 8px;color:#22323d}.sidecar-card p{font-size:13px;line-height:1.45;color:#5f6c76}.sidecar-status{display:flex;align-items:center;gap:8px;font-size:12px;color:#42505a;background:#f4f8fa;border:1px solid var(--border);border-radius:10px;padding:8px 10px;margin:10px 0}.sidecar-dot{width:8px;height:8px;border-radius:50%;background:#f0ad2d}.sidecar-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.sidecar-prompt-preview{margin-top:12px;border:1px dashed rgba(0,129,156,.25);border-radius:10px;background:#fbfcfd;padding:10px;max-height:310px;overflow:auto;font-size:11.5px;white-space:pre-wrap;color:#33434d}.llm-note{font-size:12px;line-height:1.45;color:#5f6c76;border:1px dashed rgba(0,129,156,.25);border-radius:8px;padding:8px;background:#fbfcfd;margin:10px 12px}@media(max-width:1250px){.llm-chat-shell{grid-template-columns:1fr}.llm-split-divider{display:none}.llm-browser-panel{min-height:740px}}
+
 /* POC SPECIFIC */
 .claims-pdf-bar{display:flex;align-items:center;gap:10px;flex-wrap:nowrap;margin:0 0 10px}
 .claims-pdf-label{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border:1px solid #9fd1de;background:#f3fbfd;color:var(--ipa-web-teal);border-radius:6px;cursor:pointer;font-weight:600;font-size:12px}
@@ -702,7 +706,7 @@ tr.g5Row td{background:rgba(142,108,47,.06)}tr.g6Row td{background:rgba(21,101,1
   <div class="banner-inner">
     <div class="banner-title">
       <h1>Patent Examiner Virtual Assistant</h1>
-      <div class="sub">PowerOCR + claim extraction + chemical structure layer, CPC 2026.05, unity assessment, claim mapping, claims tree, figure labeller, PERP builder</div>
+      <div class="sub">PowerOCR + claim extraction + chemical structure layer, CPC 2026.05, unity assessment, claim mapping, claims tree, figure labeller, LLM chat, Copilot prompt sidecar, PERP builder</div>
     </div>
     <div style="display:flex;align-items:center;gap:14px;flex:0 0 auto">
       <div id="bannerPdfWrap" style="display:none;align-items:center">
@@ -737,6 +741,7 @@ tr.g5Row td{background:rgba(142,108,47,.06)}tr.g6Row td{background:rgba(21,101,1
         <button type="button" class="nav-link" data-tab-target="tab-mapping"><span class="nav-ico">☰</span><span class="nav-label">Claim mapping</span><span id="navCountMapping" class="nav-count" hidden></span></button>
         <button type="button" class="nav-link" data-tab-target="tab-tree"><span class="nav-ico">⎇</span><span class="nav-label">Claims tree</span><span id="navCountTree" class="nav-count" hidden></span></button>
         <button type="button" class="nav-link" data-tab-target="tab-figure"><span class="nav-ico">▧</span><span class="nav-label">Figure Labeller</span><span id="navCountFigure" class="nav-count" hidden></span></button>
+        <button type="button" class="nav-link" data-tab-target="tab-llm-chat"><span class="nav-ico">◉</span><span class="nav-label">LLM chat</span></button>
         <button type="button" class="nav-link" data-tab-target="tab-perp"><span class="nav-ico">¶</span><span class="nav-label">PERP builder</span></button>
       </div>
     </div>
@@ -747,7 +752,7 @@ tr.g5Row td{background:rgba(142,108,47,.06)}tr.g6Row td{background:rgba(21,101,1
     <div class="workspace-head">
       <div class="workspace-title" id="workspaceTitle">Main Workspace</div>
       <div class="workspace-tools">
-        <span class="workspace-chip">PowerOCR v52.0.2 ++ CPC 2026.05</span>
+        <span class="workspace-chip">PowerOCR v54.6.0 LLM examiner ++ CPC 2026.05</span>
         <button type="button" class="refresh-btn" onclick="refreshMainWorkspace()">↻ Reset</button>
       </div>
     </div>
@@ -1123,6 +1128,97 @@ tr.g5Row td{background:rgba(142,108,47,.06)}tr.g6Row td{background:rgba(21,101,1
       </div>
     </section>
 
+
+    <!-- ══════════════════════════════════════════════════════════════
+         TAB: LLM CHAT
+         ══════════════════════════════════════════════════════════════ -->
+    <section id="tab-llm-chat" class="tab-panel">
+      <div class="board-card llm-v546-card">
+        <div class="board-head">
+          <div class="board-title">Patent Examiner LLM chat</div>
+          <div class="board-meta">Patent-aware workspace assistant with claims, description, drawings, CPC reasoning and manual search support</div>
+        </div>
+        <div class="board-body llm-v546-body">
+          <div class="llm-v546-main">
+            <div class="llm-v546-head">
+              <div>
+                <div class="llm-chat-title">Patent Examiner Assistant</div>
+                <div class="llm-chat-sub">Ask about claims, invention, background, problem-solution, special technical features, unity, clarity, antecedents, CPC fit and manual guidance.</div>
+              </div>
+              <div class="llm-v546-tools">
+                <span id="llmV546Status" class="llm-v546-pill" data-mode="ready">Ready</span>
+                <button type="button" id="llmV546RefreshBtn" class="llm-v546-mini">Refresh context</button>
+              </div>
+            </div>
+            <div id="llmV546Context" class="llm-v546-context">Context will appear here.</div>
+            <div id="llmChatStream" class="llm-chat-stream llm-v546-stream">
+              <div class="llm-msg assistant llm-v546-welcome">
+                <span class="role">Assistant</span>
+                <div class="llm-answer">
+                  <h3>Ready for patent examination questions</h3>
+                  <p>Ask naturally, or use the suggested prompts. I will use claims, analysis tabs, and any uploaded description or drawings context.</p>
+                  <ul>
+                    <li>Summarise the claims, invention or background in plain words.</li>
+                    <li>Identify the problem, solution and likely special technical features.</li>
+                    <li>Check practical antecedent and clarity issues without over-listing low-value items.</li>
+                    <li>Summarise only the best CPC candidates, not the raw CPC reasoning dump.</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="llm-v546-bottom">
+              <div class="llm-v546-promptbar">
+                <button type="button" data-run-prompt="Give me a plain English summary of the claims">Claims summary</button>
+                <button type="button" data-run-prompt="Give me a plain English summary of the invention using claims, description and drawings if available">Invention summary</button>
+                <button type="button" data-run-prompt="Summarise the background of the invention from the description and drawings if available">Background of invention</button>
+                <button type="button" data-run-prompt="Identify the technical problem and claimed solution using claims, description and drawings if available">Problem and solution</button>
+                <button type="button" data-run-prompt="Identify the likely special technical features from the independent claims only">Special technical feature</button>
+                <button type="button" data-run-prompt="Check the claims for practical antecedent basis issues">Antecedent issues</button>
+                <button type="button" data-run-prompt="Check the claims for practical clarity issues only">Clarity issues</button>
+                <button type="button" data-run-prompt="Show the unity groupings and explain the separation briefly">Unity groupings</button>
+                <button type="button" data-run-prompt="Summarise the best 2 or 3 CPC candidates only with code and title">Best CPCs</button>
+                <button type="button" data-run-prompt="Search the Patent Manual for this question">Manual search</button>
+                <button type="button" data-run-prompt="Prepare a concise examiner note from the current analysis">Examiner note</button>
+              </div>
+              <div class="llm-v546-modelbar">
+                <button type="button" id="llmV546CheckContextBtn">Check context</button>
+                <button type="button" id="llmV546ManualBtn">Open manual search</button>
+                <button type="button" id="llmV546ExplainBtn">Explain engine</button>
+                <button type="button" id="llmV546OpenSidecarBtn">Open sidecar</button>
+                <span id="llmV546EngineBadge" class="llm-v546-pill" data-mode="neutral">Hybrid mode</span>
+              </div>
+              <div class="llm-chat-input llm-v546-input">
+                <textarea id="llmChatPrompt" placeholder="Ask about the current patent workspace, for example: What is the background? What are the best CPCs? Search the manual for unity guidance."></textarea>
+                <div class="llm-send-col">
+                  <button type="button" id="llmChatSendBtn">Ask local assistant</button>
+                  <button type="button" id="llmRunCopilotBtn">Run in Copilot</button>
+                  <button type="button" class="llm-chat-small-btn" id="llmCopyCopilotPromptBtn">Copy full prompt</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button type="button" id="llmV546SidecarFab" class="llm-v546-fab">Copilot sidecar</button>
+      <div id="llmV546SidecarOverlay" class="llm-v546-overlay" aria-hidden="true">
+        <div class="llm-v546-sidecar-modal" role="dialog" aria-modal="true" aria-label="Copilot prompt sidecar">
+          <div class="llm-v546-sidecar-head">
+            <div>
+              <div class="llm-chat-title">Copilot sidecar</div>
+              <div class="llm-chat-sub">Prompt package for current patent workspace</div>
+            </div>
+            <button type="button" id="llmV546CloseSidecarBtn" class="llm-v546-mini">Close</button>
+          </div>
+          <div class="llm-v546-sidecar-actions">
+            <button type="button" id="sidecarRunBtn" class="sidecar-btn primary">Open Copilot</button>
+            <button type="button" id="sidecarCopyBtn" class="sidecar-btn">Copy</button>
+            <button type="button" id="sidecarRefreshPreviewBtn" class="sidecar-btn">Refresh</button>
+          </div>
+          <div id="sidecarPromptPreview" class="sidecar-prompt-preview llm-v546-preview">Prompt preview will appear here.</div>
+          <div class="llm-note llm-v546-note"><strong>Note:</strong> Use Copilot for final drafting polish. The local assistant gives a fast workspace-based view.</div>
+        </div>
+      </div>
+    </section>
     <!-- ══════════════════════════════════════════════════════════════
          TAB: PERP BUILDER
          ══════════════════════════════════════════════════════════════ -->
@@ -3766,7 +3862,7 @@ let __dismissedCpcSymbols=loadDismissedCpcSymbols();
 let __lastCpcRenderState={merged:[],queriedBase:[],queriedExpanded:[]};
 let __cpcPanelView={invShowAll:false,addShowAll:false};
 let __lastCpcPanelData={invAll:[],addAll:[],queriedBase:[],queriedExpanded:[]};
-const TAB_SEQUENCE=['tab-home','tab-edit','tab-highlight','tab-reasoning','tab-cpc','tab-exam-analysis','tab-unity','tab-mapping','tab-tree','tab-figure','tab-perp'];
+const TAB_SEQUENCE=['tab-home','tab-edit','tab-highlight','tab-reasoning','tab-cpc','tab-exam-analysis','tab-unity','tab-mapping','tab-tree','tab-figure','tab-llm-chat','tab-perp'];
 
 function buildAutoSynonyms(){if(!$('autoSyn')||!$('autoSyn').checked)return;const selectedTerms=extracted.map(k=>k.term).filter(t=>selected.get(t)===true);for(const base of selectedTerms){const bNorm=normaliseSpace(base);const baseSyns=new Set((synonyms.get(base)||[]).map(normaliseSpace));if(!bNorm.includes(' ')&&BUILTIN_SYNONYMS[bNorm])for(const s of BUILTIN_SYNONYMS[bNorm])baseSyns.add(normaliseSpace(s));if(!bNorm.includes(' ')){if(bNorm.endsWith('s'))baseSyns.add(bNorm.slice(0,-1));else baseSyns.add(bNorm+'s');}const final=Array.from(baseSyns).filter(x=>x&&x!==bNorm);if(final.length)synonyms.set(base,final);}}
 function initialiseSelection(){selected=new Map();synonyms=new Map();userWeights=new Map();lastQueriedTerms=[];const termCount=clampInt($('termCount').value,1,25,12);extracted.forEach((k,idx)=>{selected.set(k.term,idx<termCount);userWeights.set(k.term,Number(k.score||k.count||1));});for(const k of extracted){const t=normaliseSpace(k.term);if(!t.includes(' ')&&BUILTIN_SYNONYMS[t])synonyms.set(k.term,BUILTIN_SYNONYMS[t].slice());}}
@@ -4963,7 +5059,7 @@ function switchTab(tabId){
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id===target));
   document.querySelectorAll('.nav-link[data-tab-target]').forEach(btn=>{const active=btn.getAttribute('data-tab-target')===target;btn.classList.toggle('active',active);if(active)btn.setAttribute('aria-current','page');else btn.removeAttribute('aria-current');});
   setEditConceptsGuidePulse(target==='tab-cpc');
-  const titleMap={'tab-home':'Main Workspace','tab-edit':'Edit concepts','tab-highlight':'Highlighted text','tab-reasoning':'Concept reasoning','tab-cpc':'CPC tables','tab-exam-analysis':'Virtual Exam Analysis','tab-unity':'Unity assessment','tab-mapping':'Claim mapping','tab-tree':'Claims tree','tab-figure':'Figure Labeller','tab-perp':'PERP builder'};
+  const titleMap={'tab-home':'Main Workspace','tab-edit':'Edit concepts','tab-highlight':'Highlighted text','tab-reasoning':'Concept reasoning','tab-cpc':'CPC tables','tab-exam-analysis':'Virtual Exam Analysis','tab-unity':'Unity assessment','tab-mapping':'Claim mapping','tab-tree':'Claims tree','tab-figure':'Figure Labeller','tab-llm-chat':'LLM chat','tab-perp':'PERP builder'};
   const titleEl=$('workspaceTitle');if(titleEl)titleEl.textContent=titleMap[target]||'Main Workspace';
 }
 function setNavCollapse(forceState){
@@ -9754,5 +9850,72 @@ window.v5202SendToCpcAndRun=v5202SendToCpcAndRun;
 })();
 </script>
 <!-- end v52.0.2 NON-AGGRESSIVE OCR FILTER PATCH -->
+
+<script src="./perpData.js"></script>
+<script id="llm-v546-examiner-engine-script">
+(function(){
+'use strict';
+const COPILOT_URL='https://m365.cloud.microsoft/chat/?titleId=T_4f22d263-c615-d5d1-b075-9d56fb104e17&source=embedded-builder';
+const MANUAL_HOME='https://ipagov.sharepoint.com/sites/PatentsManual/SitePages/Home.aspx';
+const MANUAL_SEARCH='https://ipagov.sharepoint.com/sites/PatentsManual/_layouts/15/search.aspx/siteall?q=';
+let lastPrompt='';let lastFileToken='';let lastQuestion='';
+const byId=id=>document.getElementById(id);
+const esc=v=>String(v==null?'':v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+const clean=v=>String(v||'').replace(/\r/g,'').replace(/\u00a0/g,' ').replace(/[ \t]+/g,' ').replace(/\n{3,}/g,'\n\n').trim();
+function read(el){if(!el)return'';return clean(('value'in el)?el.value:(el.textContent||el.innerText||''));}
+function raw(id){return read(byId(id));}
+function clip(s,n){s=clean(s).replace(/\s+/g,' ');return s.length>n?s.slice(0,n-1)+'...':s;}
+function setStatus(t,m){const s=byId('llmV546Status'),b=byId('llmV546EngineBadge');if(s){s.textContent=t;s.dataset.mode=m||'ready'}if(b){b.textContent='Hybrid mode';b.dataset.mode=m||'ready'}}
+function addUser(t){const s=byId('llmChatStream');if(!s)return;const d=document.createElement('div');d.className='llm-msg user';d.innerHTML='<span class="role">You</span>'+esc(t);s.appendChild(d);s.scrollTop=s.scrollHeight;}
+function addAssistant(h){const s=byId('llmChatStream');if(!s)return;const d=document.createElement('div');d.className='llm-msg assistant';d.innerHTML='<span class="role">Assistant</span><div class="llm-answer">'+h+'</div>';s.appendChild(d);s.scrollTop=s.scrollHeight;}
+function table(h,rows){return'<table><thead><tr>'+h.map(x=>'<th>'+esc(x)+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table>';}
+function welcomeHtml(){return '<div class="llm-msg assistant llm-v546-welcome"><span class="role">Assistant</span><div class="llm-answer"><h3>Ready for patent examination questions</h3><p>Ask naturally, or use the suggested prompts. I will use claims, analysis tabs, and any uploaded description or drawings context.</p><ul><li>Summarise claims, invention or background in plain words.</li><li>Identify problem, solution and likely special technical features.</li><li>Check practical antecedent and clarity issues without over-listing.</li><li>Summarise only the best CPC candidates, not the raw CPC reasoning dump.</li></ul></div></div>';}
+function clearChat(reason){const s=byId('llmChatStream');if(s)s.innerHTML=welcomeHtml();if(reason)addAssistant('<p>'+esc(reason)+'</p>');}
+function sourceClaims(){const cs=[raw('patentText'),raw('pocEditorContent'),raw('pocFullText'),raw('pocLeftText')];for(const t of cs){if(t&&!/No text extracted|Upload a PDF|Extract claims first|Prompt preview/i.test(t)&&/\b\d{1,3}\s*[\.)]\s+/.test(t))return t;}return cs.find(t=>t&&!/No text extracted|Upload a PDF|Extract claims first/i.test(t))||'';}
+function parseClaims(text){const src=String(text||'').replace(/\r/g,'').trim(),out=[];let m;const re=/(?:^|\n)\s*(\d{1,3})\s*[\.)]\s+([\s\S]*?)(?=\n\s*\d{1,3}\s*[\.)]\s+|$)/g;while((m=re.exec(src)))out.push({no:+m[1],text:clean(m[2])});if(!out.length){const re2=/###\s*Claim\s*(\d{1,3})\s*\n+([\s\S]*?)(?=\n###\s*Claim\s*\d+|$)/gi;while((m=re2.exec(src)))out.push({no:+m[1],text:clean(m[2])});}return out.filter(c=>c.text&&!/No text extracted|Upload a PDF/i.test(c.text));}
+function claimModel(){const claims=parseClaims(sourceClaims()),set=new Set(claims.map(c=>c.no));return claims.map(c=>{let deps=[],m;const re=/\bclaims?\s+(\d{1,3})\b/ig;while((m=re.exec(c.text))){const n=+m[1];if(n>0&&n<c.no&&set.has(n))deps.push(n)}deps=[...new Set(deps)].sort((a,b)=>a-b);return{...c,deps,independent:!deps.length}})}
+function descriptionText(){const bits=[];['figureDescFileName','figureDrawingsFileName','figurePageMeta','figureReferenceTableBody','figureSessionNotes'].forEach(id=>{const v=raw(id);if(v&&!/No description PDF selected|No drawings PDF selected|No drawing page selected|No pages yet/i.test(v))bits.push(v)});return clean(bits.join('\n'));}
+function allUnityText(){const parts=[];const u=byId('examUnity');if(u)parts.push(read(u));document.querySelectorAll('#examUnity .groupLine,#tab-unity .groupLine,#tab-unity .group-summary-line,#tab-unity .unity-split-panel').forEach(e=>parts.push(read(e)));return clean([...new Set(parts.filter(Boolean))].join('\n'));}
+function normClaims(nums,text){const m=String(text||'').match(/claims?\s+(\d{1,3})\s*(?:to|-|–)\s*(\d{1,3})/i);if(m){const a=+m[1],b=+m[2],out=[];if(a&&b&&b>=a){for(let i=a;i<=b;i++)out.push(i);return out}}return[...new Set((nums||[]).filter(n=>n>0))].sort((a,b)=>a-b)}
+function unityGroupsRaw(){const txt=allUnityText();if(!txt||/Run Analyse/i.test(txt))return[];const lines=txt.split(/\n+/).map(clean).filter(Boolean),groups=[];let cur=null;for(const line of lines){if(/compliance|notice|indicative only|validate|quick preview|merge selected|reset grouping|adjust detected|changes apply|uploaded claims|assessment summary|please validate|outputs are/i.test(line))continue;const m=line.match(/^Group\s*(\d+)\s*[:\-–]?\s*(.*)$/i);if(m){if(cur)groups.push(cur);cur={no:+m[1],text:clean(m[2]),claims:[]}}else if(cur){cur.text=clean(cur.text+' '+line)}if(cur){const nums=(line.match(/\b\d{1,3}\b/g)||[]).map(Number).filter(n=>n!==cur.no);cur.claims=[...new Set(cur.claims.concat(nums))].sort((a,b)=>a-b)}}if(cur)groups.push(cur);return groups.filter(g=>g.text).map(g=>({...g,claims:normClaims(g.claims,g.text)}))}
+function components(text){const s=clean(text);const m=s.match(/(?:comprising|comprises|including|includes|method comprising)\s*:?\s*([\s\S]{20,1000})/i);const body=clean((m?m[1]:s).split(/\.\s/)[0]);return[...new Set(body.split(/;|,| and | wherein | to form | comprising | includes | including /i).map(clean).filter(x=>x.length>3&&!/^the\s/i.test(x)).slice(0,12))]}
+function tailFeatures(text){let parts=clean(text).split(/;|\.\s+|,\s+wherein\s+|\bwherein\b/i).map(clean).filter(Boolean);let chosen=parts.slice(-3).filter(p=>p.length>20&&!/^the\s+/.test(p));if(!chosen.length)chosen=components(text).slice(-3);return chosen.map(x=>clip(x.replace(/^and\s+/i,''),260));}
+function getContext(){const claims=claimModel(),independent=claims.filter(c=>c.independent),groups=unityGroupsRaw(),desc=descriptionText(),exam=raw('examAnalysis'),cpc=raw('cpcResults');return{claims,independent,groups,desc,exam,cpc,mapping:raw('examMapping'),concept:raw('conceptPanel')}}
+function refreshContext(){const c=getContext(),el=byId('llmV546Context');if(el)el.textContent=`${c.claims.length} claims, ${c.independent.length} independent, ${c.groups.length} unity groupings, ${c.cpc&&!/Run Analyse/i.test(c.cpc)?'CPC available':'CPC not populated'}, ${c.desc?'description/drawings context available':'no description/drawings context'}.`;return c}
+function plainClaim(cl){const txt=cl.text;const kind=/\bmethod\b/i.test(txt)?'method':/\bcomposition\b/i.test(txt)?'composition':/\b(system|apparatus|device)\b/i.test(txt)?'system/apparatus':'claimed subject matter';const elems=components(txt).slice(0,7);return `Claim ${cl.no} is mainly about a ${kind} involving ${elems.length?elems.join(', '):clip(txt,260)}.`}
+function claimSummary(c){if(!c.claims.length)return'<h3>Claims summary</h3><p>No extracted claims were found. Upload or extract claims first.</p>';const ind=c.independent.length?c.independent:c.claims.slice(0,2);return'<h3>Claims summary</h3><ul><li>Total claims: '+esc(c.claims.length)+'</li><li>Independent claims: '+esc(ind.map(x=>x.no).join(', ')||'not detected')+'</li><li>Dependent claims mainly add narrower details to those independent claims.</li></ul><h3>Plain English view</h3><ul>'+ind.map(cl=>'<li>'+esc(plainClaim(cl))+'</li>').join('')+'</ul>'}
+function background(c){const ind=c.independent.length?c.independent:c.claims.slice(0,2);let lines=[];if(c.desc){lines.push('The uploaded description/drawings context is available. From the visible file names, labels and snippets, the background should be read with the claims to confirm the problem and setting.');lines.push('Visible description/drawing context: '+clip(c.desc,420));}else{lines.push('No description text or drawing label context is currently visible to the LLM tab. Upload the description/drawings and run figure extraction to expose useful snippets.')}if(ind.length)lines.push('The claims suggest the background relates to '+ind.map(plainClaim).join(' '));return'<h3>Background of the invention</h3><ul>'+lines.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'}
+function inventionSummary(c){if(!c.claims.length)return'<h3>Invention summary</h3><p>No extracted claims were found. Upload or extract claims first.</p>';const ind=c.independent.length?c.independent:c.claims.slice(0,2),bits=ind.map(plainClaim);if(c.desc)bits.push('Description/drawings context available: '+clip(c.desc,360));bits.push(c.groups.length>1?'The unity assessment separates the claims into more than one group, so the claim set may cover distinct inventions.':'The claim set appears to centre on the independent claim subject matter.');return'<h3>Invention summary</h3><ul>'+bits.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'}
+function problemSolution(c){const ind=c.independent.length?c.independent:c.claims.slice(0,2),txt=ind.map(x=>x.text).join(' '),elems=components(txt).slice(0,7);let problem=c.desc?'Use the uploaded description/drawings context to confirm the express background problem. From the claims, the problem appears tied to the recited components, structure or process steps.':'The claims do not expressly state the background problem. Confirm this from the description.';if(/strength|stabilis|stabiliz|durab|water|cement|soil|pyrolysis/i.test(txt))problem='The claims suggest a problem around achieving a desired material or processing outcome using the recited components and steps.';return'<h3>Problem and solution</h3><ul><li><strong>Problem:</strong> '+esc(problem)+'</li><li><strong>Solution:</strong> '+esc(elems.length?'The claimed solution appears to use '+elems.join('; ')+'.':'The claimed solution is mainly defined by the independent claim features.')+'</li></ul>'}
+function stf(c){const ind=c.independent;if(!ind.length)return'<h3>Special technical feature</h3><p>No independent claims were detected.</p>';return'<h3>Likely special technical features</h3><p>Focused only on the independent claims:</p><ul>'+ind.map(cl=>'<li><strong>Claim '+cl.no+':</strong><ul>'+tailFeatures(cl.text).map(f=>'<li>'+esc(f)+'</li>').join('')+'</ul></li>').join('')+'</ul>'}
+function antecedent(c){const issues=[];for(const cl of c.independent){const text=' '+cl.text;let m;const re=/\bsaid\s+([a-z][a-z0-9\- ]{2,40})/ig;while((m=re.exec(text)))issues.push({claim:cl.no,term:m[0]})}if(!issues.length)return'<h3>Antecedent basis check</h3><p>No practical high-confidence antecedent issue was detected in the independent claims. I have not listed every routine "the" reference.</p>';return'<h3>Practical antecedent basis issues</h3><ul>'+issues.slice(0,8).map(i=>'<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' may need a clear earlier introduction.</li>').join('')+'</ul>'}
+function clarity(c){const issues=[],patterns=[{re:/\babout\s+[^,;.]+/ig,label:'approximate value or range'},{re:/\bsubstantially\s+[^,;.]+/ig,label:'substantially qualifier'},{re:/\bapproximately\s+[^,;.]+/ig,label:'approximate value or range'},{re:/\beffective amount\b/ig,label:'result-defined amount'}];for(const cl of c.claims){for(const p of patterns){let m;while((m=p.re.exec(cl.text))){issues.push({claim:cl.no,term:m[0],label:p.label});if(issues.length>=10)break}if(issues.length>=10)break}}if(!issues.length)return'<h3>Clarity issues</h3><p>No practical clarity issue was detected by this quick scan.</p>';return'<h3>Clarity issues</h3><ul>'+issues.map(i=>'<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' — '+esc(i.label)+'.</li>').join('')+'</ul>'}
+function unity(c){if(!c.groups.length)return'<h3>Unity groupings</h3><p>No populated unity groupings were found. Run the unity assessment first, then click Refresh context.</p>';return'<h3>Unity groupings</h3><ul>'+c.groups.map(g=>'<li><strong>Group '+g.no+':</strong> '+esc(g.text)+'</li>').join('')+'</ul>'}
+function cpcTitle(code){try{const defs=window.CPC_DEFINITIONS||window.cpcDefinitions||window.CPC_DEFS;if(!defs)return'';const compact=code.replace(/\s+/g,'');const key=Object.keys(defs).find(k=>String(k).replace(/\s+/g,'')===compact);const v=key?defs[key]:defs[code];if(typeof v==='string')return clean(v).split(/\n/)[0];if(v&&typeof v==='object')return clean(v.title||v.text||v.description||'').split(/\n/)[0]}catch(e){}return''}
+function cpcDom(){const out=[];for(const row of [...document.querySelectorAll('#cpcResults .rank-item')]){const t=read(row);if(!t||/No results|Run the workflow/i.test(t))continue;let code=clean(row.querySelector('.cpc-code')?.textContent||'');if(!code){const m=t.match(/\b([A-HY]\d{2}[A-Z](?:\s*\d+\/\d+)?|[A-HY]\d{2}[A-Z]?\d+\/\d+)\b/);if(m)code=m[1]}if(!code||out.some(x=>x.code===code))continue;let title=clean(row.querySelector('.title')?.textContent||'')||cpcTitle(code)||clean(row.querySelector('.cpc-h-desc')?.textContent||'')||'Title not available in current CPC data';out.push({code,title:clip(title,260)});if(out.length>=3)break}return out}
+function triggerCpcIfNeeded(){const btn=byId('pocSendToCpcBtn')||byId('pocSendToCpcBtn2')||byId('pocEditorSendBtn')||byId('btn');if(btn){try{btn.click();return true}catch(e){}}return false}
+function bestCpcs(c){let dom=cpcDom();if(dom.length)return'<h3>Best CPC candidates</h3>'+table(['CPC code','Title / fit'],dom.map(x=>[esc(x.code),esc(x.title)]));const populated=c.cpc&&!/Run Analyse|CPC results appear|No results/i.test(c.cpc);if(!populated){const triggered=triggerCpcIfNeeded();return'<h3>Best CPC candidates</h3><p>'+esc(triggered?'I have triggered the CPC analysis workflow. Once the CPC tables finish populating, click Best CPCs again or Refresh context.':'CPC analysis does not appear to be populated yet, and I could not find a CPC button to trigger.')+'</p>'}const codes=[];const re=/\b([A-HY]\d{2}[A-Z](?:\s*\d+\/\d+)?|[A-HY]\d{2}[A-Z]?\d+\/\d+)\b/g;let m;while((m=re.exec(c.cpc))&&codes.length<3){const code=m[1];if(!codes.some(x=>x.code===code))codes.push({code,title:cpcTitle(code)||'Title not available in current CPC data'})}return codes.length?'<h3>Best CPC candidates</h3>'+table(['CPC code','Title / fit'],codes.map(x=>[esc(x.code),esc(x.title)])):'<h3>Best CPC candidates</h3><p>CPC analysis is present, but I could not extract clean CPC candidates. Open the CPC tables tab once, then click Refresh context.</p>'}
+const manualIndex=[['Volume 4. Searching','https://ipagov.sharepoint.com/sites/PatentsManual/SitePages/Volume-4-Searching.aspx','searching prior art'],['Volume 5. National','https://ipagov.sharepoint.com/sites/PatentsManual/SitePages/Volume-5-National.aspx','national examination clarity support unity section 40'],['Volume 6. International','https://ipagov.sharepoint.com/sites/PatentsManual/SitePages/Volume-6-International.aspx','international pct isa ipea'],['Volume 9. PERP Codes','https://ipagov.sharepoint.com/sites/PatentsManual/SitePages/Volume-9.-PERP-Codes.aspx','perp codes objections'],['Manual home',MANUAL_HOME,'home manual']];
+function manualSearch(q){let query=clean(q).replace(/^Search the Patent Manual for this question/i,'').trim();if(!query||/manual search/i.test(query))query=clean(byId('llmChatPrompt')?.value)||lastQuestion||'patent examination';const terms=query.toLowerCase().split(/\W+/).filter(x=>x.length>2);const hits=manualIndex.map(([title,url,keys])=>({title,url,score:terms.reduce((a,t)=>a+(((title+' '+keys).toLowerCase().includes(t))?1:0),0)})).filter(x=>x.score>0).sort((a,b)=>b.score-a.score).slice(0,4);const rows=(hits.length?hits:manualIndex.slice(0,4)).map(h=>['<a href="'+h.url+'" target="_blank" rel="noopener">'+esc(h.title)+'</a>',esc(h.score?'matched '+h.score+' term(s)':'manual area')]);return'<h3>Patent Manual search</h3><p>Using the last question or prompt text: <strong>'+esc(query)+'</strong></p>'+table(['Manual area','Match'],rows)+'<p><a class="sidecar-btn primary" href="'+MANUAL_SEARCH+encodeURIComponent(query)+'" target="_blank" rel="noopener">Open SharePoint manual search</a> <a class="sidecar-btn" href="'+MANUAL_HOME+'" target="_blank" rel="noopener">Open manual home</a></p>'}
+function examinerNote(c){return'<h3>Concise examiner note</h3>'+inventionSummary(c)+unity(c)+'<h3>Next checks</h3><ul><li>Confirm the special technical feature from the independent claims.</li><li>Review practical antecedent and clarity findings only if raised above.</li><li>Confirm the best CPCs against the final claim wording.</li></ul>'}
+function answer(q,c){if(/manual|mpp|patents manual|guidance|search the patent manual/i.test(q))return manualSearch(q);if(/background/i.test(q))return background(c);if(/claim.*summary|summary.*claim/i.test(q))return claimSummary(c);if(/summary|invention|inventive concept/i.test(q))return inventionSummary(c);if(/problem|solution/i.test(q))return problemSolution(c);if(/special technical feature|common inventive concept|technical feature/i.test(q))return stf(c);if(/antecedent/i.test(q))return antecedent(c);if(/clarity|clear/i.test(q))return clarity(c);if(/unity|lou|grouping|lack of unity/i.test(q))return unity(c);if(/cpc|classification/i.test(q))return bestCpcs(c);if(/examiner note|concise note/i.test(q))return examinerNote(c);return'<h3>What I can help with</h3><p>Try asking for claims summary, invention summary, background, problem and solution, special technical features, antecedent issues, clarity issues, unity groupings, best CPCs, manual guidance or an examiner note.</p>'}
+function buildPrompt(c,q){let p=`# Patent examination Copilot prompt\n\n## User request\n${q||'Analyse the current patent workspace context.'}\n\n## Instructions\n- Use Australian English.\n- Use concise bullets.\n- Do not invent missing claim details.\n- Use claims, description/drawings context and tool analysis below.\n- If asked for CPC reasoning, summarise only the best 2 or 3 CPC candidates.\n\n## Claims snapshot\nTotal claims: ${c.claims.length}\nIndependent claims: ${c.independent.map(x=>x.no).join(', ')}`;if(c.desc)p+='\n\n## Description and drawings context\n'+c.desc;if(c.groups.length)p+='\n\n## Unity groupings\n'+c.groups.map(g=>`- Group ${g.no}: ${g.text}`).join('\n');if(c.claims.length)p+='\n\n## Claims\n'+c.claims.map(cl=>`### Claim ${cl.no}${cl.independent?' (independent)':''}\n${cl.text}`).join('\n\n').slice(0,12000);if(c.cpc&&!/Run Analyse/i.test(c.cpc))p+='\n\n## CPC output\n'+c.cpc.slice(0,4000);return p}
+function updatePreview(q){const c=refreshContext();lastPrompt=buildPrompt(c,q||clean(byId('llmChatPrompt')?.value));const el=byId('sidecarPromptPreview');if(el)el.textContent=lastPrompt.slice(0,5000)+(lastPrompt.length>5000?'\n\n[Preview truncated]':'');return lastPrompt}
+async function copyText(t){try{await navigator.clipboard.writeText(t);return true}catch(e){const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.focus();ta.select();let ok=false;try{ok=document.execCommand('copy')}catch(_){}ta.remove();return ok}}
+function ask(qOverride){const input=byId('llmChatPrompt');const q=clean(qOverride||input?.value);if(!q)return;lastQuestion=q;addUser(q);if(input&&!qOverride)input.value='';setStatus('Thinking with workspace context...','loading');const c=refreshContext();addAssistant(answer(q,c));updatePreview(q);setStatus('Ready','ready')}
+async function runCopilot(){const p=updatePreview();const ok=await copyText(p);const w=window.open(COPILOT_URL,'CopilotPatentPrompt_'+Date.now(),'popup=yes,width=980,height=900,resizable=yes,scrollbars=yes');if(w)w.focus();addAssistant('<h3>Copilot prompt prepared</h3><ul><li>Prompt copy '+(ok?'succeeded':'may have been blocked')+'.</li><li>Copilot '+(w?'opened':'popup was blocked')+'.</li></ul>')}
+function checkContext(){const c=refreshContext();addAssistant('<h3>Context check</h3>'+table(['Source','Detected'],[['Claims',esc(c.claims.length)],['Independent claims',esc(c.independent.map(x=>x.no).join(', ')||'None')],['Unity groupings',esc(c.groups.length)],['CPC DOM candidates',esc(cpcDom().length)],['Description/drawings',esc(c.desc?'Available':'Not populated')],['Exam analysis',esc(c.exam&&!/Run Analyse/i.test(c.exam)?'Available':'Not populated')]]))}
+function explain(){addAssistant('<h3>Engine explanation</h3><ul><li>Background of invention is available as a prompt and uses description/drawings context when exposed by the Figure Labeller tab.</li><li>Best CPCs reads rendered CPC cards first and triggers CPC analysis if it has not been run.</li><li>Special technical features are limited to independent claims only.</li><li>Antecedent and clarity checks are more practical and avoid listing every routine item.</li><li>Manual search uses the last asked question or the current prompt text.</li></ul>')}
+function openManualSearch(){const q=clean(byId('llmChatPrompt')?.value)||lastQuestion||'patent examination';window.open(MANUAL_SEARCH+encodeURIComponent(q),'PatentManualSearch','width=1100,height=850,resizable=yes,scrollbars=yes')}
+function openSidecar(){updatePreview();const o=byId('llmV546SidecarOverlay');if(o){o.classList.add('open');o.setAttribute('aria-hidden','false')}}
+function closeSidecar(){const o=byId('llmV546SidecarOverlay');if(o){o.classList.remove('open');o.setAttribute('aria-hidden','true')}}
+function fileToken(){const f=byId('pocFileInput')?.files?.[0];return f?(f.name+'|'+f.size+'|'+f.lastModified):(raw('bannerPdfName')||raw('pocFileName'))}
+function handleNewFile(){const tok=fileToken();if(tok&&tok!==lastFileToken){lastFileToken=tok;clearChat('New claims PDF detected. LLM chat cleared for the new claim set.');updatePreview()}}
+function bind(){document.querySelectorAll('.nav-link[data-tab-target="tab-llm-chat"]').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>{handleNewFile();updatePreview()},50),true));byId('llmChatSendBtn')?.addEventListener('click',()=>ask());byId('llmChatPrompt')?.addEventListener('keydown',e=>{if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();ask()}});document.querySelectorAll('[data-run-prompt]').forEach(b=>b.addEventListener('click',()=>ask(b.getAttribute('data-run-prompt')||'')));byId('llmRunCopilotBtn')?.addEventListener('click',runCopilot);byId('llmCopyCopilotPromptBtn')?.addEventListener('click',async()=>addAssistant((await copyText(updatePreview()))?'<p>Full prompt copied.</p>':'<p>Copy blocked.</p>'));byId('llmV546RefreshBtn')?.addEventListener('click',()=>{updatePreview();addAssistant('<p>Context refreshed.</p>')});byId('llmV546CheckContextBtn')?.addEventListener('click',checkContext);byId('llmV546ManualBtn')?.addEventListener('click',openManualSearch);byId('llmV546ExplainBtn')?.addEventListener('click',explain);byId('llmV546OpenSidecarBtn')?.addEventListener('click',openSidecar);byId('llmV546SidecarFab')?.addEventListener('click',openSidecar);byId('llmV546CloseSidecarBtn')?.addEventListener('click',closeSidecar);byId('llmV546SidecarOverlay')?.addEventListener('click',e=>{if(e.target.id==='llmV546SidecarOverlay')closeSidecar()});byId('sidecarRunBtn')?.addEventListener('click',runCopilot);byId('sidecarCopyBtn')?.addEventListener('click',async()=>addAssistant((await copyText(updatePreview()))?'<p>Sidecar prompt copied.</p>':'<p>Copy blocked.</p>'));byId('sidecarRefreshPreviewBtn')?.addEventListener('click',()=>{updatePreview();addAssistant('<p>Sidecar refreshed.</p>')});document.addEventListener('change',e=>{if(e.target&&e.target.id==='pocFileInput')setTimeout(handleNewFile,50)});const observer=new MutationObserver(()=>handleNewFile());['bannerPdfName','pocFileName'].forEach(id=>{const el=byId(id);if(el)observer.observe(el,{childList:true,subtree:true,characterData:true})});lastFileToken=fileToken();updatePreview()}
+function injectStyles(){const style=document.createElement('style');style.id='llm-v546-style';style.textContent=`#tab-llm-chat .board-body{padding:8px}.llm-v546-body{padding:8px}.llm-v546-main{height:calc(100vh - var(--banner-h) - 112px);min-height:650px;border:1px solid var(--border);border-radius:12px;background:#fff;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}.llm-v546-head{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border);background:#fbfcfd;flex:0 0 auto}.llm-v546-tools{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.llm-v546-pill{display:inline-flex;padding:5px 9px;border-radius:999px;background:#e9f7ee;color:#1f6b38;border:1px solid #b9e2c5;font-size:12px;font-weight:800}.llm-v546-pill[data-mode=loading]{background:#fff8e8;color:#805112}.llm-v546-mini,.llm-v546-modelbar button{padding:7px 10px;border-radius:8px;border:1px solid rgba(0,129,156,.25);background:#fff;color:#1D252C}.llm-v546-context{padding:8px 12px;border-bottom:1px solid var(--border);font-size:12px;color:#53616b;flex:0 0 auto}.llm-v546-stream{min-height:0;flex:1 1 auto;overflow:auto}.llm-v546-bottom{position:sticky;bottom:0;z-index:5;background:#fff;border-top:1px solid var(--border);box-shadow:0 -6px 16px rgba(29,37,44,.06);flex:0 0 auto}.llm-v546-promptbar{display:flex;gap:8px;flex-wrap:wrap;padding:8px 10px;background:#fff}.llm-v546-promptbar button{padding:6px 9px;font-size:11.5px;border-radius:999px;background:#fff;color:#1D252C;border:1px solid rgba(0,129,156,.22)}.llm-v546-modelbar{display:flex;gap:8px;flex-wrap:wrap;padding:8px 10px;border-top:1px solid rgba(29,37,44,.08);background:#fbfcfd}.llm-v546-input{border-top:1px solid rgba(29,37,44,.08)}.llm-answer pre{white-space:pre-wrap}.llm-answer table{width:100%;border-collapse:collapse}.llm-answer th,.llm-answer td{border:1px solid var(--border);padding:6px;text-align:left;vertical-align:top}.llm-v546-fab{position:fixed;right:18px;top:calc(var(--banner-h) + 92px);z-index:999;background:#fff;color:#1D252C;border:1px solid rgba(0,129,156,.28);box-shadow:var(--shadow);border-radius:999px;padding:8px 12px}.llm-v546-overlay{position:fixed;inset:0;background:rgba(29,37,44,.38);display:none;align-items:center;justify-content:center;z-index:10020;padding:24px}.llm-v546-overlay.open{display:flex}.llm-v546-sidecar-modal{width:min(760px,92vw);height:min(760px,88vh);background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:0 18px 60px rgba(29,37,44,.32);display:flex;flex-direction:column;overflow:hidden}.llm-v546-sidecar-head{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border);background:#fbfcfd}.llm-v546-sidecar-actions{display:flex;gap:8px;flex-wrap:wrap;padding:10px}.llm-v546-preview{margin:0 10px 10px;flex:1;font-size:11.5px;max-height:none}.llm-v546-note{margin:0 10px 10px}@media(max-width:1100px){.llm-v546-main{height:auto;min-height:650px}.llm-v546-bottom{position:sticky;bottom:0}}`;document.head.appendChild(style)}
+function boot(){injectStyles();bind()}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
 </body>
 </html>
