@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Patent Examiner Virtual Assistant - v54.7.2 LLM examiner </title>
+<title>Patent Examiner Virtual Assistant - v55.0.5 LLM examiner </title>
 <link rel="icon" type="image/png" href="./favicon.png"/>
 <style>
 :root{
@@ -752,7 +752,7 @@ tr.g5Row td{background:rgba(142,108,47,.06)}tr.g6Row td{background:rgba(21,101,1
     <div class="workspace-head">
       <div class="workspace-title" id="workspaceTitle">Main Workspace</div>
       <div class="workspace-tools">
-        <span class="workspace-chip">PowerOCR v54.7.2 LLM examiner ++ CPC 2026.05</span>
+        <span class="workspace-chip">PowerOCR v55.0.5 LLM examiner ++ CPC 2026.05</span>
         <button type="button" class="refresh-btn" onclick="refreshMainWorkspace()">↻ Reset</button>
       </div>
     </div>
@@ -1233,7 +1233,7 @@ tr.g5Row td{background:rgba(142,108,47,.06)}tr.g6Row td{background:rgba(21,101,1
 <canvas id="pocCropCanvas" style="display:none"></canvas>
 
 <!-- External scripts -->
-<script id="v5472-preflight-guards">
+<script id="v5505-preflight-guards">
 (function(){
   window.pocSendToCpc = window.pocSendToCpc || function(){ return null; };
   window.pocBuildClaims = window.pocBuildClaims || function(){ return []; };
@@ -1247,6 +1247,13 @@ tr.g5Row td{background:rgba(142,108,47,.06)}tr.g6Row td{background:rgba(21,101,1
       }
     }catch(_){ }
   }, true);
+})();
+
+(function(){
+'use strict';
+function stripUnsafeFileFrames(){try{document.querySelectorAll('iframe').forEach(function(f){var s=f.getAttribute('src')||'';if(/^file:/i.test(s)){f.removeAttribute('src');f.setAttribute('data-file-src-blocked','true');}});}catch(_){}}
+stripUnsafeFileFrames();
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',stripUnsafeFileFrames);else setTimeout(stripUnsafeFileFrames,0);
 })();
 </script>
 <script src="lib/pdf.min.js"></script>
@@ -9038,6 +9045,40 @@ function cloneGroup(g){
     claims:Array.isArray(g&&g.claims)?g.claims.slice().sort(function(a,b){return a.no-b.no;}):[]
   };
 }
+
+function v5505MergeStorageKey(){
+  try{
+    var claims=(__mergeState&&Array.isArray(__mergeState.claims)?__mergeState.claims:[]);
+    var src=claims.map(function(c){return String(c.no||'')+':'+String(c.text||'').replace(/\s+/g,' ').slice(0,160);}).join('|');
+    if(!src)src=String(__mergeState&&__mergeState.raw||'').replace(/\s+/g,' ').slice(0,1200);
+    var h=0;for(var i=0;i<src.length;i++){h=((h<<5)-h)+src.charCodeAt(i);h|=0;}
+    return 'pea.unityMerge.v5505.'+Math.abs(h);
+  }catch(_){return 'pea.unityMerge.v5505.default';}
+}
+function v5505NormaliseSavedGroups(groups){
+  var byNo={};
+  try{(__mergeState.claims||[]).forEach(function(c){byNo[c.no]=c;});}catch(_){}
+  return (groups||[]).map(function(g,ix){
+    var x=cloneGroup(g);x.id=x.id||('m'+ix);
+    x.claims=(Array.isArray(g.claims)?g.claims:[]).map(function(c){return byNo[c.no]||c;}).filter(Boolean).sort(function(a,b){return a.no-b.no;});
+    return x;
+  }).filter(function(g){return g.claims&&g.claims.length;});
+}
+function v5505LoadMergedGroups(){try{var v=localStorage.getItem(v5505MergeStorageKey());return v?JSON.parse(v):null;}catch(_){return null;}}
+function v5505SaveMergedGroups(){try{if(__mergeState&&Array.isArray(__mergeState.adjustedGroups))localStorage.setItem(v5505MergeStorageKey(),JSON.stringify(__mergeState.adjustedGroups.map(cloneGroup)));}catch(_){}}
+function v5505ClearMergedGroups(){try{localStorage.removeItem(v5505MergeStorageKey());}catch(_){}}
+function v5505RestoreMergedGroups(){
+  try{
+    var saved=v5505LoadMergedGroups();
+    if(saved&&saved.length){
+      var groups=v5505NormaliseSavedGroups(saved);
+      if(groups.length){__mergeState.adjustedGroups=groups;__mergeState.selectedIds=new Set();return true;}
+    }
+  }catch(_){}
+  return false;
+}
+try{window.v5505RestoreMergedGroups=v5505RestoreMergedGroups;window.v5505SaveMergedGroups=v5505SaveMergedGroups;window.v5505ClearMergedGroups=v5505ClearMergedGroups;}catch(_){}
+
 function setMergeState(raw,groups,claims,idx){
   __mergeState.raw=String(raw||'');
   __mergeState.baseGroups=(groups||[]).map(function(g,ix){var x=cloneGroup(g);x.id='g'+(ix+1);return x;});
@@ -9045,6 +9086,7 @@ function setMergeState(raw,groups,claims,idx){
   __mergeState.selectedIds=new Set();
   __mergeState.claims=(claims||[]).slice();
   __mergeState.idx=idx||null;
+  v5505RestoreMergedGroups();
 }
 function getAdjustedGroups(){return(__mergeState.adjustedGroups||[]).map(cloneGroup);}
 function buildGroupClaimDisplay(g){
@@ -9084,9 +9126,11 @@ function mergeSelectedGroups(){
   });
   __mergeState.adjustedGroups=remaining;
   __mergeState.selectedIds=new Set();
+  v5505SaveMergedGroups();
   renderAdjustedExaminerViews();
 }
 function resetMergedGroups(){
+  v5505ClearMergedGroups();
   __mergeState.adjustedGroups=(__mergeState.baseGroups||[]).map(cloneGroup);
   __mergeState.selectedIds=new Set();
   renderAdjustedExaminerViews();
@@ -9200,6 +9244,7 @@ function renderAdjustedTreeColours(groups){
   });
 }
 function renderAdjustedExaminerViews(){
+  v5505RestoreMergedGroups();
   var unity=document.getElementById('examUnity');
   var mapping=document.getElementById('examMapping');
   if(!unity||!mapping)return;
@@ -9921,41 +9966,18 @@ function boot(){styles();bind();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
 </script>
-<script id="v5472-unity-merge-persistence">
+<script id="v5505-unity-merge-persistence">
 (function(){
 'use strict';
-function key(){
-  try{
-    var claims=(window.__mergeState&&window.__mergeState.claims||[]).map(function(c){return c.no;}).join(',');
-    var raw=String(window.__mergeState&&window.__mergeState.raw||'').replace(/\s+/g,' ').slice(0,240);
-    var h=0;for(var i=0;i<raw.length;i++){h=((h<<5)-h)+raw.charCodeAt(i);h|=0;}
-    return 'pea.unityMerge.v5472.'+claims+'.'+Math.abs(h);
-  }catch(_){return 'pea.unityMerge.v5472.default';}
-}
-function clone(g){return JSON.parse(JSON.stringify(g||{}));}
-function save(){try{if(window.__mergeState&&Array.isArray(window.__mergeState.adjustedGroups))localStorage.setItem(key(),JSON.stringify(window.__mergeState.adjustedGroups.map(clone)));}catch(_){}}
-function load(){try{var v=localStorage.getItem(key());return v?JSON.parse(v):null;}catch(_){return null;}}
-function clear(){try{localStorage.removeItem(key());}catch(_){}}
-function patch(){
-  if(window.__v5472UnityPatched)return; window.__v5472UnityPatched=true;
-  var oldSet=window.setMergeState;
-  if(typeof oldSet==='function'){
-    window.setMergeState=function(raw,groups,claims,idx){oldSet.apply(this,arguments);var saved=load();if(saved&&saved.length&&window.__mergeState){window.__mergeState.adjustedGroups=saved;}};
-  }
-  var oldMerge=window.mergeSelectedGroups;
-  if(typeof oldMerge==='function'){
-    window.mergeSelectedGroups=function(){var r=oldMerge.apply(this,arguments);save();return r;};
-  }
-  var oldReset=window.resetMergedGroups;
-  if(typeof oldReset==='function'){
-    window.resetMergedGroups=function(){clear();return oldReset.apply(this,arguments);};
-  }
-}
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',patch);else patch();
+function apply(){try{if(typeof window.v5505RestoreMergedGroups==='function')window.v5505RestoreMergedGroups();if(typeof window.renderAdjustedExaminerViews==='function')window.renderAdjustedExaminerViews();}catch(_){}}
+function save(){try{if(typeof window.v5505SaveMergedGroups==='function')window.v5505SaveMergedGroups();}catch(_){}}
+function clear(){try{if(typeof window.v5505ClearMergedGroups==='function')window.v5505ClearMergedGroups();}catch(_){}}
+document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)return;if(t.closest('[data-merge-groups-btn]'))setTimeout(save,0);if(t.closest('[data-reset-groups-btn]'))setTimeout(clear,0);if(t.closest('.nav-link,[data-tab-target]'))setTimeout(apply,100);},true);
+setTimeout(apply,300);
 })();
 </script>
 
-<script id="llm-v5472-runtime-patch">
+<script id="llm-v5505-runtime-patch">
 (function(){
 'use strict';
 var COPILOT_URL='https://m365.cloud.microsoft/chat/?titleId=T_4f22d263-c615-d5d1-b075-9d56fb104e17&source=embedded-builder';
@@ -9971,12 +9993,12 @@ function clip(s,n){s=clean(s).replace(/\s+/g,' ');return s.length>n?s.slice(0,n-
 function add(role,html){var s=$('llmChatStream');if(!s)return;var d=document.createElement('div');d.className='llm-msg '+(role==='user'?'user':'assistant');d.innerHTML='<span class="role">'+(role==='user'?'You':'Assistant')+'</span>'+(role==='user'?esc(html):'<div class="llm-answer">'+html+'</div>');s.appendChild(d);s.scrollTop=s.scrollHeight;}
 function table(h,rows){return '<table><thead><tr>'+h.map(function(x){return '<th>'+esc(x)+'</th>';}).join('')+'</tr></thead><tbody>'+rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table>';}
 function rebuild(){var tab=$('tab-llm-chat');if(!tab)return;tab.innerHTML=''
-+'<div class="board-card llm-v5472-card"><div class="board-head"><div class="board-title">Patent Examiner LLM chat</div><div class="board-meta">Unity-derived claims and groups, pdf.js description extraction and transformer-ready context</div></div>'
-+'<div class="board-body llm-v5472-body"><div class="llm-v5472-main"><div class="llm-v5472-head"><div><div class="llm-chat-title">Patent Examiner Assistant</div><div class="llm-chat-sub">Uses the Unity assessment summary as the source of truth for independent claims, and Unity state for all groups. Header text is removed to maximise workspace.</div></div><div class="llm-v5472-tools"><span id="llmV5472Status" class="llm-v5472-pill">Ready</span><span id="llmV5472TabAbout" class="llm-v5472-aboutpill"></span><div class="llm-v5472-actionrow"><button type="button" id="llmV5472RefreshBtn" class="llm-v5472-mini">Refresh context</button><button type="button" id="llmV5472OpenSidecarBtn" class="llm-v5472-mini">Sidecar</button></div></div></div>'
-+'<div id="llmV5472Context" class="llm-v5472-context">Context will appear here.</div><textarea id="llmV5472ContextPack" style="display:none"></textarea><div id="llmChatStream" class="llm-chat-stream llm-v5472-stream"><div class="llm-msg assistant"><span class="role">Assistant</span><div class="llm-answer"><h3>Ready for patent examination questions</h3><ul><li>Independent claims are read from the exact Unity assessment summary line.</li><li>Description text is extracted with a double pdf.js text layer.</li><li>Repeated headers, footers, application numbers, dates and page noise are removed.</li><li>Sidecar is directly under Refresh context with matching padding.</li></ul></div></div></div>'
-+'<div class="llm-v5472-bottom"><div class="llm-v5472-promptbar"><button type="button" data-run-prompt="Give me a plain English summary of the claims using the Unity assessment claim logic">Claims summary</button><button type="button" data-run-prompt="Summarise the invention as a whole using the Unity independent claims and cleaned description PDF">Summarise invention as a whole</button><button type="button" data-run-prompt="Give me a distinct background summary from the cleaned description PDF only">Background</button><button type="button" data-run-prompt="Give me a distinct problem and solution summary using cleaned description context and Unity claims">Problem/solution</button><button type="button" data-run-prompt="Identify likely special technical features from the Unity assessment independent claims only">STF</button><button type="button" data-run-prompt="Check the Unity assessment independent claims for practical antecedent basis issues">Antecedents</button><button type="button" data-run-prompt="Check the Unity assessment independent claims for practical clarity issues only">Clarity</button><button type="button" data-run-prompt="Show the unity groupings and explain the separation briefly">Unity</button><button type="button" data-run-prompt="Summarise the best 2 or 3 CPC candidates only with code and title">Best CPCs</button><button type="button" data-run-prompt="Search the Patent Manual for this question">Manual</button></div>'
-+'<div class="llm-v5472-modelbar"><button type="button" id="llmV5472CheckContextBtn">Check context</button><button type="button" id="llmV5472ExplainBtn">Explain engine</button><span class="llm-v5472-pill">Transformers context</span></div><div class="llm-chat-input llm-v5472-input"><textarea id="llmChatPrompt" placeholder="Ask about the current patent workspace."></textarea><div class="llm-send-col llm-v5472-send-col"><button type="button" id="llmChatSendBtn">Ask</button><button type="button" id="llmRunCopilotBtn">Copilot</button></div></div></div></div></div></div>'
-+'<div id="llmV5472Overlay" class="llm-v5472-overlay" aria-hidden="true"><div class="llm-v5472-sidecar-modal" role="dialog" aria-modal="true"><div class="llm-v5472-sidecar-head"><div><div class="llm-chat-title">Copilot sidecar</div><div class="llm-chat-sub">Unity-aligned prompt package</div></div><button type="button" id="llmV5472CloseSidecarBtn" class="llm-v5472-mini">Close</button></div><div class="llm-v5472-sidecar-actions"><button type="button" id="sidecarRunBtn" class="sidecar-btn primary">Open Copilot</button><button type="button" id="sidecarCopyBtn" class="sidecar-btn">Copy</button><button type="button" id="sidecarRefreshPreviewBtn" class="sidecar-btn">Refresh</button></div><div id="sidecarPromptPreview" class="sidecar-prompt-preview llm-v5472-preview">Prompt preview will appear here.</div></div></div>';}
++'<div class="board-card llm-v5505-card"><div class="board-head"><div class="board-title">Patent Examiner LLM chat</div><div class="board-meta">Unity-derived claims and groups, pdf.js description extraction and transformer-ready context</div></div>'
++'<div class="board-body llm-v5505-body"><div class="llm-v5505-main"><div class="llm-v5505-head"><div><div class="llm-chat-title">Patent Examiner Assistant</div><div class="llm-chat-sub">Uses the Unity assessment summary as the source of truth for independent claims, and Unity state for all groups. Header text is removed to maximise workspace.</div></div><div class="llm-v5505-tools"><span id="llmV5505Status" class="llm-v5505-pill">Ready</span><span id="llmV5505TabAbout" class="llm-v5505-aboutpill"></span><div class="llm-v5505-actionrow"><button type="button" id="llmV5505RefreshBtn" class="llm-v5505-mini">Refresh context</button><button type="button" id="llmV5505OpenSidecarBtn" class="llm-v5505-mini">Sidecar</button></div></div></div>'
++'<div id="llmV5505Context" class="llm-v5505-context">Context will appear here.</div><textarea id="llmV5505ContextPack" style="display:none"></textarea><div id="llmChatStream" class="llm-chat-stream llm-v5505-stream"><div class="llm-msg assistant"><span class="role">Assistant</span><div class="llm-answer"><h3>Ready for patent examination questions</h3><ul><li>Independent claims are read from the exact Unity assessment summary line.</li><li>Description text is extracted with a double pdf.js text layer.</li><li>Repeated headers, footers, application numbers, dates and page noise are removed.</li><li>Sidecar is directly under Refresh context with matching padding.</li></ul></div></div></div>'
++'<div class="llm-v5505-bottom"><div class="llm-v5505-promptbar"><button type="button" data-run-prompt="Give me a plain English summary of the claims using the Unity assessment claim logic">Claims summary</button><button type="button" data-run-prompt="Summarise the invention as a whole using the Unity independent claims and cleaned description PDF">Summarise invention as a whole</button><button type="button" data-run-prompt="Give me a distinct background summary from the cleaned description PDF only">Background</button><button type="button" data-run-prompt="Give me a distinct problem and solution summary using cleaned description context and Unity claims">Problem/solution</button><button type="button" data-run-prompt="Identify likely special technical features from the Unity assessment independent claims only">STF</button><button type="button" data-run-prompt="Check the Unity assessment independent claims for practical antecedent basis issues">Antecedents</button><button type="button" data-run-prompt="Check the Unity assessment independent claims for practical clarity issues only">Clarity</button><button type="button" data-run-prompt="Show the unity groupings and explain the separation briefly">Unity</button><button type="button" data-run-prompt="Summarise the best 2 or 3 CPC candidates only with code and title">Best CPCs</button><button type="button" data-run-prompt="Search the Patent Manual for this question">Manual</button></div>'
++'<div class="llm-v5505-modelbar"><button type="button" id="llmV5505CheckContextBtn">Check context</button><button type="button" id="llmV5505ExplainBtn">Explain engine</button><span class="llm-v5505-pill">Transformers context</span></div><div class="llm-chat-input llm-v5505-input"><textarea id="llmChatPrompt" placeholder="Ask about the current patent workspace."></textarea><div class="llm-send-col llm-v5505-send-col"><button type="button" id="llmChatSendBtn">Ask</button><button type="button" id="llmRunCopilotBtn">Copilot</button></div></div></div></div></div></div>'
++'<div id="llmV5505Overlay" class="llm-v5505-overlay" aria-hidden="true"><div class="llm-v5505-sidecar-modal" role="dialog" aria-modal="true"><div class="llm-v5505-sidecar-head"><div><div class="llm-chat-title">Copilot sidecar</div><div class="llm-chat-sub">Unity-aligned prompt package</div></div><button type="button" id="llmV5505CloseSidecarBtn" class="llm-v5505-mini">Close</button></div><div class="llm-v5505-sidecar-actions"><button type="button" id="sidecarRunBtn" class="sidecar-btn primary">Open Copilot</button><button type="button" id="sidecarCopyBtn" class="sidecar-btn">Copy</button><button type="button" id="sidecarRefreshPreviewBtn" class="sidecar-btn">Refresh</button></div><div id="sidecarPromptPreview" class="sidecar-prompt-preview llm-v5505-preview">Prompt preview will appear here.</div></div></div>';}
 function parseNums(s){var m=String(s||'').match(/\b\d{1,3}\b/g)||[];return Array.from(new Set(m.map(Number))).sort(function(a,b){return a-b;});}
 function parseRange(s){var m=String(s||'').match(/(\d{1,3})\s*(?:to|-|–)\s*(\d{1,3})/);if(m){var a=+m[1],b=+m[2],out=[];if(a&&b&&b>=a){for(var i=a;i<=b;i++)out.push(i);return out;}}return parseNums(s);}
 function unityText(){
@@ -10105,7 +10127,51 @@ async function ensureDesc(){if(descStatus==='done'||descStatus==='loading')retur
 function sentenceList(raw){return clean(raw).replace(/\s+/g,' ').split(/(?<=[.!?])\s+/).map(clean).filter(function(x){return x.length>35&&!junk.test(x)&&!headerFooter.test(x);});}
 function plainEnglishDescription(background,problem,features){var bits=[];if(background)bits.push('The description sets the invention in this field: '+clip(background,360));if(problem)bits.push('The practical issue appears to be: '+clip(problem,360));if(features&&features.length)bits.push('The described approach relies on: '+features.slice(0,3).join(' '));return bits.join(' ');}
 function descModel(){var raw=clean(descText);if(!raw)return{raw:'',background:'',problem:'',features:[],summary:''};var sent=sentenceList(raw),bg=/background|field|known|existing|conventional|prior|problem|need|desir|object|aim|relates to/i,pr=/problem|drawback|disadvantage|need|improv|ameliorat|erosion|stability|strength|accuracy|efficiency|palisade|soil|post|therefore|however/i,ft=/compris|include|formed|configured|arranged|embedded|multiplicity|plurality|spaced|mounted|connected|lower end|line|particulate|mixing|curing|composition/i,pick=function(rx,n){return sent.filter(function(x){return rx.test(x);}).slice(0,n);};var background=pick(bg,5).join(' ')||sent.slice(0,4).join(' '),problem=pick(pr,4).join(' '),features=pick(ft,8).map(function(x){return clip(x,240);});return{raw:raw.slice(0,90000),background:clip(background,1400),problem:clip(problem,1000),features:features,summary:clip(plainEnglishDescription(background,problem,features),1800)};}
-function context(){var unity=unityModel(),claims=claimModel(),independent=claims.filter(function(c){return c.independent;}),desc=descModel(),cpc=raw('cpcResults'),ctx={unity:unity,claims:claims,independent:independent,groups:unity.groups,desc:desc,cpc:cpc};window.__llmTransformerContext=ctx;window.__llmDescriptionText=desc.raw;var ta=$('llmV5472ContextPack');if(ta)ta.value=JSON.stringify(ctx,null,2);var summary=(unity.total||claims.length)+' claims, independent '+(unity.independent.join(', ')||independent.map(function(x){return x.no;}).join(', ')||'not detected')+', '+unity.groups.length+' unity grouping(s)';var about=$('llmV5472TabAbout');if(about)about.textContent=summary;var el=$('llmV5472Context');if(el)el.textContent=summary+', '+(cpc&&!/Run Analyse/i.test(cpc)?'CPC available':'CPC not populated')+', '+(desc.raw?'cleaned pdf.js description context available':'no pdf.js description context')+'.';return ctx;}
+
+function examinerNoiseCleanText(v){
+  var s=String(v||'');
+  s=s.replace(/\bINVENTION\s+TITLE\b/ig,' ')
+     .replace(/\bDETAILS\s+OF\s+ASSOCIATED\s+PROVISIONAL\s+APPLICATION\b[\s\S]{0,420}?\bCOMPLETE\s+SPECIFICATION\s+LODGED\b/ig,' ')
+     .replace(/\bAustralian\s+Provisional\s+Patent\s+Application\s+Number\b[\s\S]{0,260}/ig,' ')
+     .replace(/\bACTUAL\s+INVENTORS?\b[\s\S]{0,240}/ig,' ')
+     .replace(/\bNAME\s+OF\s+APPLICANT\b[\s\S]{0,220}/ig,' ')
+     .replace(/\bCOMPLETE\s+SPECIFICATION\s+LODGED\b/ig,' ')
+     .replace(/\b\d{1,4}\s*\|\s*/g,' ');
+  return sentenceList(s).filter(function(x){return x.length>35&&!junk.test(x)&&!headerFooter.test(x);}).join(' ');
+}
+function conciseText(v,n){
+  var s=clean(v);n=n||1800;if(s.length<=n)return s;
+  var cut=s.slice(0,n),last=Math.max(cut.lastIndexOf('. '),cut.lastIndexOf('; '),cut.lastIndexOf(', '));
+  return clean(cut.slice(0,last>Math.floor(n*0.65)?last+1:n));
+}
+function rankedDescriptionSentences(c,mode){
+  var raw=examinerNoiseCleanText((c.desc&&c.desc.raw)||''),sent=sentenceList(raw),rx;
+  if(mode==='background')rx=/background|field|relates to|known|existing|conventional|prior|typically|commonly|used|industry|object|aim/i;
+  else if(mode==='problem')rx=/problem|drawback|disadvantage|need|however|therefore|difficult|heavy|expensive|maintenance|risk|safety|inefficient|improve|desirable|not conducive/i;
+  else rx=/invention|compris|include|configured|arranged|provides|method|system|apparatus|frame|portion|support|connected|mounted|claim/i;
+  var primary=sent.filter(function(s){return rx.test(s);});
+  var fallback=sent.slice(0,10);
+  return Array.from(new Set(primary.concat(fallback))).slice(0,12);
+}
+function independentPlainText(c){return independentClaims(c).map(function(cl){return 'Claim '+cl.no+': '+clean(cl.text);}).join(' ');}
+async function transformerPlainEnglish(kind,c){
+  var promptText=conciseText([independentPlainText(c),rankedDescriptionSentences(c,kind).join(' ')].filter(Boolean).join(' '),5000);
+  try{
+    var fn=window.__peaTransformerSummariser||window.__peaLocalSummariser||null;
+    if(typeof fn==='function'){
+      var r=await fn(promptText,{task:kind,maxLength:300,minLength:80});
+      if(Array.isArray(r))r=r[0]&&(r[0].summary_text||r[0].generated_text||r[0].text);
+      if(r&&typeof r==='object')r=r.summary_text||r.generated_text||r.text;
+      if(clean(r))return conciseText(examinerNoiseCleanText(r),2200);
+    }
+  }catch(_){}
+  var s=rankedDescriptionSentences(c,kind).join(' '),claims=comps(independentPlainText(c)).slice(0,10).join('; ');
+  if(kind==='background')return conciseText(s||'No clear background section was detected in the cleaned description.',2200);
+  if(kind==='problem')return conciseText(s||'No clear problem cue was detected in the cleaned description.',3600);
+  return conciseText('The invention is directed to '+(claims||'the subject matter of the Unity independent claims')+'. '+s,2200);
+}
+
+function context(){var unity=unityModel(),claims=claimModel(),independent=claims.filter(function(c){return c.independent;}),desc=descModel(),cpc=raw('cpcResults'),ctx={unity:unity,claims:claims,independent:independent,groups:unity.groups,desc:desc,cpc:cpc};window.__llmTransformerContext=ctx;window.__llmDescriptionText=desc.raw;var ta=$('llmV5505ContextPack');if(ta)ta.value=JSON.stringify(ctx,null,2);var summary=(unity.total||claims.length)+' claims, independent '+(unity.independent.join(', ')||independent.map(function(x){return x.no;}).join(', ')||'not detected')+', '+unity.groups.length+' unity grouping(s)';var about=$('llmV5505TabAbout');if(about)about.textContent=summary;var el=$('llmV5505Context');if(el)el.textContent=summary+', '+(cpc&&!/Run Analyse/i.test(cpc)?'CPC available':'CPC not populated')+', '+(desc.raw?'cleaned pdf.js description context available':'no pdf.js description context')+'.';return ctx;}
 function independentClaims(c){var nums=c.unity.independent.length?c.unity.independent:c.independent.map(function(x){return x.no;});return nums.map(function(n){return c.claims.find(function(x){return x.no===n;});}).filter(Boolean);}
 function comps(t){var m=clean(t).match(/(?:comprising|comprises|including|includes)\s*:?\s*([\s\S]{20,1000})/i),body=clean((m?m[1]:t).split(/\.\s/)[0]);return Array.from(new Set(body.split(/;|,| and | wherein | to form | comprising | includes | including /i).map(clean).filter(function(x){return x.length>3;}).slice(0,12)));}
 function plainClaim(cl){var kind=/\bmethod\b/i.test(cl.text)?'method':/\bcomposition\b/i.test(cl.text)?'composition':/\b(system|apparatus|device)\b/i.test(cl.text)?'system/apparatus':'claimed subject matter',e=comps(cl.text).slice(0,7);return 'Claim '+cl.no+' is mainly about a '+kind+' involving '+(e.length?e.join(', '):clip(cl.text,260))+'.';}
@@ -10156,29 +10222,17 @@ function dependencyTableMarkdown(c){
 function claimSummary(c){
   var nums=(c.unity.independent||[]).join(', ')||c.independent.map(function(x){return x.no;}).join(', ')||'not detected';
   var tree=claimTreeMarkdown(c)||'No claims tree available. Run the claims analysis first.';
-  var deps=dependencyTableMarkdown(c);
-  return '<h3>Claims summary</h3><ul><li><strong>Total claims:</strong> '+esc(c.unity.total||c.claims.length)+'</li><li><strong>Independent claims from Unity assessment:</strong> '+esc(nums)+'</li><li><strong>Dependent claims:</strong> '+esc(c.unity.dependentCount==null?'not detected':c.unity.dependentCount)+'</li></ul><h3>Claims tree with dependency mapping</h3><pre>'+esc(tree)+'</pre><h3>Depend on mapping from Claims tree</h3><pre>'+esc(deps)+'</pre>';}
-function invention(c){
-  var ind=independentClaims(c);
-  var nums=(c.unity.independent||[]).join(', ')||ind.map(function(x){return x.no;}).join(', ');
-  var independentText=ind.map(function(cl){return cl.text;}).join(' ');
-  var features=[];
-  ind.forEach(function(cl){features=features.concat(comps(cl.text).slice(0,6));});
-  features=Array.from(new Set(features.map(clean).filter(Boolean)));
-  var descSentences=sentenceList(c.desc.raw||'');
-  var field=descSentences.find(function(s){return /field|relates to|technical/i.test(s);})||'';
-  var problemSentence=descSentences.find(function(s){return /problem|need|improv|however|therefore|drawback/i.test(s);})||'';
-  var featureSentence=descSentences.find(function(s){return /compris|include|configured|arranged|system|method/i.test(s);})||'';
-  var parts=[];
-  parts.push('The invention as a whole is directed to '+(features.length?features.join('; '):clean(independentText))+'.');
-  if(field)parts.push(field);
-  if(problemSentence)parts.push(problemSentence);
-  if(featureSentence)parts.push(featureSentence);
-  var summary=parts.join(' ');
-  return '<h3>Summary of the invention as a whole</h3><ul><li><strong>Unity independent claims used:</strong> '+esc(nums||'not detected')+'</li><li><strong>Plain English summary:</strong> '+esc(summary)+'</li><li><strong>Scope note:</strong> this summary uses the independent claims and cleaned description context and does not use the claims tree structure.</li></ul>';}
-function background(c){if(!c.desc.raw)return descriptionMissingHtml();var points=plainBackground(c);return '<h3>Background of the invention</h3><ul>'+points.map(function(p){return '<li>'+esc(p)+'</li>';}).join('')+'</ul>';}
-
-function problem(c){var ind=independentClaims(c),solution=comps(ind.map(function(x){return x.text;}).join(' ')).slice(0,7).join('; ');return '<h3>Problem and solution</h3><ul><li><strong>Problem indicated by the description:</strong> '+esc(clip(c.desc.problem||c.desc.background||'No clear problem cue was detected in the cleaned description.',520))+'</li><li><strong>Claimed solution:</strong> '+esc(solution?'The Unity independent claims appear to address this using '+solution+'.':'The solution is mainly defined by the Unity assessment independent claims.')+'</li><li><strong>Practical framing:</strong> use this for problem-solution reasoning, separate from the invention summary.</li></ul>';}
+  return '<h3>Claims summary</h3><ul><li><strong>Total claims:</strong> '+esc(c.unity.total||c.claims.length)+'</li><li><strong>Independent claims from Unity assessment:</strong> '+esc(nums)+'</li><li><strong>Dependent claims:</strong> '+esc(c.unity.dependentCount==null?'not detected':c.unity.dependentCount)+'</li></ul><h3>Claims tree with dependency mapping</h3><pre>'+esc(tree)+'</pre>';}
+async function invention(c){
+  var ind=independentClaims(c),nums=(c.unity.independent||[]).join(', ')||ind.map(function(x){return x.no;}).join(', '),summary=await transformerPlainEnglish('invention',c);
+  return '<h3>Summary of the invention as a whole</h3><ul><li><strong>Unity independent claims used:</strong> '+esc(nums||'not detected')+'</li><li><strong>Plain English summary:</strong> '+esc(summary)+'</li><li><strong>Scope note:</strong> this uses the cleaned description and Unity independent claims. OCR noise, headers, footers, provisional metadata and repeated page artefacts are filtered before summary generation.</li></ul>';}
+async function background(c){
+  if(!c.desc.raw)return descriptionMissingHtml();
+  var summary=await transformerPlainEnglish('background',c);
+  return '<h3>Background of the invention</h3><ul><li>'+esc(summary)+'</li><li><strong>Source:</strong> cleaned Description PDF text only.</li></ul>';}
+async function problem(c){
+  var ind=independentClaims(c),solution=comps(ind.map(function(x){return x.text;}).join(' ')).slice(0,10).join('; '),prob=await transformerPlainEnglish('problem',c);
+  return '<h3>Problem and solution</h3><ul><li><strong>Problem indicated by the description:</strong> '+esc(prob)+'</li><li><strong>Claimed solution:</strong> '+esc(solution?'The Unity independent claims appear to address this using '+solution+'.':'The solution is mainly defined by the Unity assessment independent claims.')+'</li><li><strong>Practical framing:</strong> use this for problem-solution reasoning, separate from the invention summary.</li></ul>';}
 function stf(c){var ind=independentClaims(c);function tail(t){var p=clean(t).split(/;|\.\s+|,\s+wherein\s+|\bwherein\b/i).map(clean).filter(Boolean),out=p.slice(-3).filter(function(x){return x.length>20;});if(!out.length)out=comps(t).slice(-3);return out.map(function(x){return clip(x,260);});}return '<h3>Likely special technical features</h3><p>Focused only on Unity assessment independent claims:</p><ul>'+ind.map(function(cl){return '<li><strong>Claim '+cl.no+':</strong><ul>'+tail(cl.text).map(function(f){return '<li>'+esc(f)+'</li>';}).join('')+'</ul></li>';}).join('')+'</ul>';}
 function antecedent(c){var issues=[];independentClaims(c).forEach(function(cl){var m,re=/\bsaid\s+([a-z][a-z0-9\- ]{2,40})/ig;while((m=re.exec(' '+cl.text)))issues.push({claim:cl.no,term:m[0]});});return issues.length?'<h3>Practical antecedent basis issues</h3><ul>'+issues.slice(0,8).map(function(i){return '<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' may need a clear earlier introduction.</li>';}).join('')+'</ul>':'<h3>Antecedent basis check</h3><p>No practical high-confidence antecedent issue was detected in the Unity assessment independent claims.</p>';}
 function clarity(c){var issues=[],pats=[[/\babout\s+[^,;.]+/ig,'approximate value or range'],[/\bsubstantially\s+[^,;.]+/ig,'substantially qualifier'],[/\bapproximately\s+[^,;.]+/ig,'approximate value or range'],[/\beffective amount\b/ig,'result-defined amount']];independentClaims(c).forEach(function(cl){pats.forEach(function(pair){var re=pair[0],label=pair[1],m;while((m=re.exec(cl.text)))issues.push({claim:cl.no,term:m[0],label:label});});});return issues.length?'<h3>Clarity issues</h3><ul>'+issues.slice(0,10).map(function(i){return '<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' — '+esc(i.label)+'.</li>';}).join('')+'</ul>':'<h3>Clarity issues</h3><p>No practical clarity issue was detected in the Unity assessment independent claims.</p>';}
@@ -10186,24 +10240,38 @@ function unityPlainText(c){return (c.groups||[]).map(function(g){return 'Group '
 function unity(c){if(!c.groups.length)return '<h3>Unity groupings</h3><p>No populated unity groupings were found. Run the unity assessment first.</p>';window.__lastUnityGroupingsText=unityPlainText(c);return '<h3>Unity groupings</h3><p><button type="button" class="sidecar-btn" data-copy-unity-groupings="1">Copy groupings</button></p><ul>'+c.groups.map(function(g){return '<li><strong>Group '+g.no+':</strong> '+esc(g.text)+'</li>';}).join('')+'</ul>'; }
 function cpcs(){var rows=[];Array.from(document.querySelectorAll('#cpcResults .rank-item')).forEach(function(row){var t=read(row);if(!t||/No results|Run the workflow/i.test(t))return;var code=clean((row.querySelector('.cpc-code')||{}).textContent||'')||((t.match(/\b([A-HY]\d{2}[A-Z](?:\s*\d+\/\d+)?|[A-HY]\d{2}[A-Z]?\d+\/\d+)\b/)||[])[1]);if(!code||rows.some(function(x){return x[0]===code;}))return;rows.push([code,clip(read(row.querySelector('.title'))||read(row.querySelector('.cpc-h-desc'))||'Title not available in current CPC data',260)]);});rows=rows.slice(0,3);return rows.length?'<h3>Best CPC candidates</h3>'+table(['CPC code','Title / fit'],rows):'<h3>Best CPC candidates</h3><p>CPC cards were not available. Open the CPC tables tab once, then return here and select Refresh context.</p>';}
 function manual(){var q=clean(($('llmChatPrompt')||{}).value)||lastQuestion||'patent examination';return '<h3>Patent Manual search</h3><p>Using: <strong>'+esc(q)+'</strong></p><p><a class="sidecar-btn primary" target="_blank" rel="noopener" href="https://ipagov.sharepoint.com/sites/PatentsManual/_layouts/15/search.aspx/siteall?q='+encodeURIComponent(q)+'">Open SharePoint manual search</a></p>';}
-function answer(q,c){if(/manual|patents manual|guidance/i.test(q))return manual();if(/background/i.test(q))return background(c);if(/problem|solution/i.test(q))return problem(c);if(/claim.*summary|summary.*claim/i.test(q))return claimSummary(c);if(/summary|invention|inventive concept/i.test(q))return invention(c);if(/special technical feature|common inventive concept|technical feature|\bstf\b/i.test(q))return stf(c);if(/antecedent/i.test(q))return antecedent(c);if(/clarity|clear/i.test(q))return clarity(c);if(/unity|lou|grouping/i.test(q))return unity(c);if(/cpc|classification/i.test(q))return cpcs();return '<h3>What I can help with</h3><p>Try claims summary, invention summary, background, problem and solution, special technical features, antecedents, clarity, unity, Best CPCs or manual search.</p>';}
+function isProblemRequest(q){return /problem\s*\/\s*solution|problem\s+and\s+solution|technical\s+problem|claimed\s+solution|\bsolution\b/i.test(q);}
+function isClaimsSummaryRequest(q){return /claims?\s+summary|summary\s+of\s+the\s+claims|plain\s+English\s+summary\s+of\s+the\s+claims|claim\s+tree|dependency\s+mapping/i.test(q);}
+async function answer(q,c){
+  if(/manual|patents manual|guidance/i.test(q))return manual();
+  if(isProblemRequest(q))return await problem(c);
+  if(/background/i.test(q))return await background(c);
+  if(/summary|invention|inventive concept/i.test(q)&&!/claims?\b/i.test(q))return await invention(c);
+  if(isClaimsSummaryRequest(q))return claimSummary(c);
+  if(/summary|invention|inventive concept/i.test(q))return await invention(c);
+  if(/special technical feature|common inventive concept|technical feature|\bstf\b/i.test(q))return stf(c);
+  if(/antecedent/i.test(q))return antecedent(c);
+  if(/clarity|clear/i.test(q))return clarity(c);
+  if(/unity|lou|grouping/i.test(q))return unity(c);
+  if(/cpc|classification/i.test(q))return cpcs();
+  return '<h3>What I can help with</h3><p>Try claims summary, invention summary, background, problem/solution, STF, antecedents, clarity, unity, Best CPCs or manual search.</p>';}
 function pack(c,q){return{request:q||'',unity:c.unity,claims:c.claims.map(function(x){return{no:x.no,independent:x.independent,text:x.text};}),description:c.desc,cpc:c.cpc};}
-function buildPrompt(c,q){var p=pack(c,q);window.__llmTransformerContext=p;var ta=$('llmV5472ContextPack');if(ta)ta.value=JSON.stringify(p,null,2);return '# Patent examination Copilot prompt\n\n## User request\n'+(q||'Analyse the current patent workspace context.')+'\n\n## Instructions\n- Use Australian English.\n- Use concise bullets.\n- Use Unity assessment as authoritative for independent claims and groupings.\n- Use cleaned pdf.js double-layer description context.\n- Do not use ONNX.\n\n```json\n'+JSON.stringify(p,null,2).slice(0,16000)+'\n```';}
+function buildPrompt(c,q){var p=pack(c,q);window.__llmTransformerContext=p;var ta=$('llmV5505ContextPack');if(ta)ta.value=JSON.stringify(p,null,2);return '# Patent examination Copilot prompt\n\n## User request\n'+(q||'Analyse the current patent workspace context.')+'\n\n## Instructions\n- Use Australian English.\n- Use concise bullets.\n- Use Unity assessment as authoritative for independent claims and groupings.\n- Use cleaned pdf.js double-layer description context.\n- Do not use ONNX.\n\n```json\n'+JSON.stringify(p,null,2).slice(0,16000)+'\n```';}
 function preview(q){var c=context();lastPrompt=buildPrompt(c,q||clean(($('llmChatPrompt')||{}).value));var el=$('sidecarPromptPreview');if(el)el.textContent=lastPrompt.slice(0,5000)+(lastPrompt.length>5000?'\n\n[Preview truncated]':'');return lastPrompt;}
-async function ask(q0){var input=$('llmChatPrompt'),q=clean(q0||(input&&input.value));if(!q)return;lastQuestion=q;add('user',q);if(input&&!q0)input.value='';$('llmV5472Status').textContent='Extracting context...';if(/description|background|invention|problem|solution|summary|technical/i.test(q))await ensureDesc();var c=context();add('assistant',answer(q,c));preview(q);$('llmV5472Status').textContent='Ready';}
+async function ask(q0){var input=$('llmChatPrompt'),q=clean(q0||(input&&input.value));if(!q)return;lastQuestion=q;add('user',q);if(input&&!q0)input.value='';$('llmV5505Status').textContent='Extracting context...';if(/description|background|invention|problem|solution|summary|technical/i.test(q))await ensureDesc();var c=context();add('assistant',await answer(q,c));preview(q);$('llmV5505Status').textContent='Ready';}
 async function copyText(t){try{await navigator.clipboard.writeText(t);return true;}catch(e){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();var ok=document.execCommand('copy');ta.remove();return ok;}}
 async function runCopilot(){var p=preview();await copyText(p);var w=window.open(COPILOT_URL,'CopilotPatentPrompt_'+Date.now(),'popup=yes,width=980,height=900,resizable=yes,scrollbars=yes');if(w)w.focus();add('assistant','<p>Prompt copied and Copilot opened.</p>');}
 function check(){var c=context();add('assistant','<h3>Context check</h3>'+table(['Source','Detected'],[['Unity independent claims',esc(c.unity.independent.join(', ')||'not detected')],['Parsed claims',esc(c.claims.length)],['Cleaned pdf.js description text',esc(c.desc.raw?'Available':'Not extracted')],['Description features',esc((c.desc.features||[]).length)],['CPC candidates',esc(document.querySelectorAll('#cpcResults .rank-item').length)],['ONNX in LLM chat','No']]))}
-function explain(){add('assistant','<h3>Engine explanation</h3><ul><li>The sidecar control is stacked under Refresh context.</li><li>Independent claims are read from the exact Unity summary line, so wrapped or hidden group text cannot contaminate the claim list.</li><li>Claims summary and Invention summary now use separate output logic.</li><li>The Description PDF is extracted using two pdf.js text passes: normal text content and row-position reconstruction.</li><li>Repeated headers, footers, application numbers, dates, page numbers and line noise are removed before summary generation.</li><li>Unity merge changes are persisted and only cleared by Reset grouping.</li></ul>');}
-function openSidecar(){preview();var o=$('llmV5472Overlay');if(o)o.classList.add('open');}
-function closeSidecar(){var o=$('llmV5472Overlay');if(o)o.classList.remove('open');}
-function bind(){document.addEventListener('click',function(e){var t=e.target;if(t&&t.getAttribute&&t.getAttribute('data-copy-unity-groupings')){copyText(window.__lastUnityGroupingsText||'');add('assistant','<p>Unity groupings copied.</p>');}if(t&&t.getAttribute&&t.getAttribute('data-go-figure-labeller')){var b=document.querySelector('.nav-link[data-tab-target="tab-figure-labeller"],.nav-link[data-tab-target="tab-figures"],button[data-tab-target="tab-figure-labeller"]');if(b)b.click();else location.hash='tab-figure-labeller';}});document.querySelectorAll('[data-run-prompt]').forEach(function(b){b.addEventListener('click',function(){ask(b.getAttribute('data-run-prompt'));});});$('llmChatSendBtn')&&$('llmChatSendBtn').addEventListener('click',function(){ask();});$('llmChatPrompt')&&$('llmChatPrompt').addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();ask();}});$('llmRunCopilotBtn')&&$('llmRunCopilotBtn').addEventListener('click',runCopilot);$('llmV5472RefreshBtn')&&$('llmV5472RefreshBtn').addEventListener('click',function(){ensureDesc().then(function(){preview();add('assistant','<p>Context refreshed.</p>');});});$('llmV5472CheckContextBtn')&&$('llmV5472CheckContextBtn').addEventListener('click',check);$('llmV5472ExplainBtn')&&$('llmV5472ExplainBtn').addEventListener('click',explain);$('llmV5472OpenSidecarBtn')&&$('llmV5472OpenSidecarBtn').addEventListener('click',openSidecar);$('llmV5472CloseSidecarBtn')&&$('llmV5472CloseSidecarBtn').addEventListener('click',closeSidecar);$('llmV5472Overlay')&&$('llmV5472Overlay').addEventListener('click',function(e){if(e.target.id==='llmV5472Overlay')closeSidecar();});$('sidecarRunBtn')&&$('sidecarRunBtn').addEventListener('click',runCopilot);$('sidecarCopyBtn')&&$('sidecarCopyBtn').addEventListener('click',function(){copyText(preview()).then(function(){add('assistant','<p>Sidecar prompt copied.</p>');});});$('sidecarRefreshPreviewBtn')&&$('sidecarRefreshPreviewBtn').addEventListener('click',function(){preview();add('assistant','<p>Sidecar refreshed.</p>');});document.addEventListener('change',function(e){if(e.target&&e.target.type==='file'&&/desc|description|specification/i.test((e.target.id||'')+' '+(e.target.name||''))){descStatus='idle';descText='';ensureDesc().then(preview);}});ensureDesc().then(preview);preview();}
-function styles(){var st=document.createElement('style');st.id='llm-v5472-style';st.textContent='#tab-llm-chat .board-head{display:none!important}#tab-llm-chat .llm-chat-sub{display:none!important}#tab-llm-chat .llm-v5472-head>div:first-child{display:none!important}#tab-llm-chat .board-body{padding:3px}.llm-v5472-body{padding:3px}.llm-v5472-main{height:calc(100vh - var(--banner-h) - 88px);min-height:670px;border:1px solid var(--border);border-radius:12px;background:#fff;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}.llm-v5472-head{display:flex;justify-content:flex-end;gap:6px;padding:3px 8px;border-bottom:1px solid var(--border);background:#fbfcfd}.llm-v5472-tools{display:flex;flex-direction:row;gap:6px;align-items:center;justify-content:flex-end;flex-wrap:wrap}.llm-v5472-actionstack{display:flex;gap:6px}.llm-v5472-actionrow{display:flex;flex-direction:row;gap:6px;align-items:center}.llm-v5472-modelbar{display:none!important}.llm-v5472-context{display:none!important}.llm-v5472-aboutpill{display:inline-flex;align-items:center;padding:5px 9px;min-height:28px;border-radius:999px;background:#f3f6f8;color:#53616b;border:1px solid var(--border);font-size:11px;font-weight:700;line-height:1.2;white-space:nowrap}.llm-v5472-stream{min-height:0;flex:1 1 auto;overflow:auto}.llm-v5472-bottom{position:sticky;bottom:0;z-index:5;background:#fff;border-top:1px solid var(--border);box-shadow:0 -6px 16px rgba(29,37,44,.06)}.llm-v5472-promptbar,.llm-v5472-modelbar{display:flex;gap:5px;flex-wrap:wrap;padding:5px 8px;background:#fff}.llm-v5472-promptbar button,.llm-v5472-modelbar button,.llm-v5472-mini{padding:5px 9px;font-size:11px;line-height:1.2;border-radius:999px;background:#fff;color:#1D252C;border:1px solid rgba(0,129,156,.22);min-height:28px}.llm-v5472-pill{display:inline-flex;align-items:center;padding:5px 9px;min-height:28px;border-radius:999px;background:#e9f7ee;color:#1f6b38;border:1px solid #b9e2c5;font-size:11px;font-weight:800;line-height:1.2}.llm-v5472-input{display:flex!important;gap:7px!important;padding:7px 9px!important;border-top:1px solid rgba(29,37,44,.08)}.llm-v5472-input textarea{min-height:48px!important;max-height:56px!important;flex:1 1 auto!important;font-size:12px!important;padding:8px 10px!important}.llm-v5472-send-col{width:82px!important;min-width:82px!important;gap:5px!important}.llm-v5472-send-col button{width:82px!important;min-width:82px!important;padding:7px 6px!important;font-size:10.8px!important}.llm-answer table{width:100%;border-collapse:collapse}.llm-answer th,.llm-answer td{border:1px solid var(--border);padding:6px;text-align:left}.llm-v5472-overlay{position:fixed;inset:0;background:rgba(29,37,44,.38);display:none;align-items:center;justify-content:center;z-index:10020;padding:24px}.llm-v5472-overlay.open{display:flex}.llm-v5472-sidecar-modal{width:min(760px,92vw);height:min(760px,88vh);background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:0 18px 60px rgba(29,37,44,.32);display:flex;flex-direction:column;overflow:hidden}.llm-v5472-sidecar-head{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border);background:#fbfcfd}.llm-v5472-sidecar-actions{display:flex;gap:8px;padding:10px}.llm-v5472-preview{margin:0 10px 10px;flex:1;font-size:11.5px}';document.head.appendChild(st);}
+function explain(){add('assistant','<h3>Engine explanation</h3><ul><li>The sidecar control is stacked under Refresh context.</li><li>Independent claims are read from the exact Unity summary line, so wrapped or hidden group text cannot contaminate the claim list.</li><li>Claims summary and Invention summary now use separate output logic.</li><li>The Description PDF is extracted using two pdf.js text passes: normal text content and row-position reconstruction.</li><li>Repeated headers, footers, application numbers, dates, page numbers and line noise are removed before summary generation.</li><li>Unity merge changes are persisted and only cleared by Reset grouping. Context refresh is also triggered automatically after workspace edits, file uploads, merge/reset and tab navigation.</li></ul>');}
+function openSidecar(){preview();var o=$('llmV5505Overlay');if(o)o.classList.add('open');}
+function closeSidecar(){var o=$('llmV5505Overlay');if(o)o.classList.remove('open');}
+function bind(){document.addEventListener('click',function(e){var t=e.target;if(t&&t.getAttribute&&t.getAttribute('data-copy-unity-groupings')){copyText(window.__lastUnityGroupingsText||'');add('assistant','<p>Unity groupings copied.</p>');}if(t&&t.getAttribute&&t.getAttribute('data-go-figure-labeller')){var b=document.querySelector('.nav-link[data-tab-target="tab-figure-labeller"],.nav-link[data-tab-target="tab-figures"],button[data-tab-target="tab-figure-labeller"]');if(b)b.click();else location.hash='tab-figure-labeller';}});document.querySelectorAll('[data-run-prompt]').forEach(function(b){b.addEventListener('click',function(){ask(b.getAttribute('data-run-prompt'));});});$('llmChatSendBtn')&&$('llmChatSendBtn').addEventListener('click',function(){ask();});$('llmChatPrompt')&&$('llmChatPrompt').addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();ask();}});$('llmRunCopilotBtn')&&$('llmRunCopilotBtn').addEventListener('click',runCopilot);$('llmV5505RefreshBtn')&&$('llmV5505RefreshBtn').addEventListener('click',function(){ensureDesc().then(function(){preview();add('assistant','<p>Context refreshed.</p>');});});$('llmV5505CheckContextBtn')&&$('llmV5505CheckContextBtn').addEventListener('click',check);$('llmV5505ExplainBtn')&&$('llmV5505ExplainBtn').addEventListener('click',explain);$('llmV5505OpenSidecarBtn')&&$('llmV5505OpenSidecarBtn').addEventListener('click',openSidecar);$('llmV5505CloseSidecarBtn')&&$('llmV5505CloseSidecarBtn').addEventListener('click',closeSidecar);$('llmV5505Overlay')&&$('llmV5505Overlay').addEventListener('click',function(e){if(e.target.id==='llmV5505Overlay')closeSidecar();});$('sidecarRunBtn')&&$('sidecarRunBtn').addEventListener('click',runCopilot);$('sidecarCopyBtn')&&$('sidecarCopyBtn').addEventListener('click',function(){copyText(preview()).then(function(){add('assistant','<p>Sidecar prompt copied.</p>');});});$('sidecarRefreshPreviewBtn')&&$('sidecarRefreshPreviewBtn').addEventListener('click',function(){preview();add('assistant','<p>Sidecar refreshed.</p>');});var autoRefreshTimer=null;function autoRefreshContext(reason){clearTimeout(autoRefreshTimer);autoRefreshTimer=setTimeout(function(){try{if($('llmV5505Status'))$('llmV5505Status').textContent='Refreshing context...';ensureDesc().then(function(){context();preview(lastQuestion||clean(($('llmChatPrompt')||{}).value));if($('llmV5505Status'))$('llmV5505Status').textContent='Ready';});}catch(_){if($('llmV5505Status'))$('llmV5505Status').textContent='Ready';}},300);}document.addEventListener('input',function(e){var t=e.target;if(!t)return;if(t.id==='llmChatPrompt')return;if(t.matches&&t.matches('textarea,input,[contenteditable="true"]'))autoRefreshContext('input');},true);document.addEventListener('change',function(e){var t=e.target;if(t&&t.type==='file'&&/desc|description|specification/i.test((t.id||'')+' '+(t.name||''))){descStatus='idle';descText='';ensureDesc().then(function(){context();preview(lastQuestion);});return;}autoRefreshContext('change');},true);document.addEventListener('click',function(e){var t=e.target;if(t&&t.closest&&t.closest('[data-merge-groups-btn],[data-reset-groups-btn],[data-merge-group-id],.nav-link,[data-tab-target]'))autoRefreshContext('click');},true);ensureDesc().then(preview);preview();}
+function styles(){var st=document.createElement('style');st.id='llm-v5505-style';st.textContent='#tab-llm-chat .board-head{display:none!important}#tab-llm-chat .llm-chat-sub{display:none!important}#tab-llm-chat .llm-v5505-head>div:first-child{display:none!important}#tab-llm-chat .board-body{padding:3px}.llm-v5505-body{padding:3px}.llm-v5505-main{height:calc(100vh - var(--banner-h) - 88px);min-height:670px;border:1px solid var(--border);border-radius:12px;background:#fff;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}.llm-v5505-head{display:flex;justify-content:flex-end;gap:6px;padding:3px 8px;border-bottom:1px solid var(--border);background:#fbfcfd}.llm-v5505-tools{display:flex;flex-direction:row;gap:6px;align-items:center;justify-content:flex-end;flex-wrap:wrap}.llm-v5505-actionstack{display:flex;gap:6px}.llm-v5505-actionrow{display:flex;flex-direction:row;gap:6px;align-items:center}.llm-v5505-modelbar{display:none!important}.llm-v5505-context{display:none!important}.llm-v5505-aboutpill{display:inline-flex;align-items:center;padding:5px 9px;min-height:28px;border-radius:999px;background:#f3f6f8;color:#53616b;border:1px solid var(--border);font-size:11px;font-weight:700;line-height:1.2;white-space:nowrap}.llm-v5505-stream{min-height:0;flex:1 1 auto;overflow:auto}.llm-v5505-bottom{position:sticky;bottom:0;z-index:5;background:#fff;border-top:1px solid var(--border);box-shadow:0 -6px 16px rgba(29,37,44,.06)}.llm-v5505-promptbar,.llm-v5505-modelbar{display:flex;gap:5px;flex-wrap:wrap;padding:5px 8px;background:#fff}.llm-v5505-promptbar button,.llm-v5505-modelbar button,.llm-v5505-mini{padding:5px 9px;font-size:11px;line-height:1.2;border-radius:999px;background:#fff;color:#1D252C;border:1px solid rgba(0,129,156,.22);min-height:28px}.llm-v5505-pill{display:inline-flex;align-items:center;padding:5px 9px;min-height:28px;border-radius:999px;background:#e9f7ee;color:#1f6b38;border:1px solid #b9e2c5;font-size:11px;font-weight:800;line-height:1.2}.llm-v5505-input{display:flex!important;gap:7px!important;padding:7px 9px!important;border-top:1px solid rgba(29,37,44,.08)}.llm-v5505-input textarea{min-height:48px!important;max-height:56px!important;flex:1 1 auto!important;font-size:12px!important;padding:8px 10px!important}.llm-v5505-send-col{width:82px!important;min-width:82px!important;gap:5px!important}.llm-v5505-send-col button{width:82px!important;min-width:82px!important;padding:7px 6px!important;font-size:10.8px!important}.llm-answer table{width:100%;border-collapse:collapse}.llm-answer th,.llm-answer td{border:1px solid var(--border);padding:6px;text-align:left}.llm-v5505-overlay{position:fixed;inset:0;background:rgba(29,37,44,.38);display:none;align-items:center;justify-content:center;z-index:10020;padding:24px}.llm-v5505-overlay.open{display:flex}.llm-v5505-sidecar-modal{width:min(760px,92vw);height:min(760px,88vh);background:#fff;border:1px solid var(--border);border-radius:16px;box-shadow:0 18px 60px rgba(29,37,44,.32);display:flex;flex-direction:column;overflow:hidden}.llm-v5505-sidecar-head{display:flex;justify-content:space-between;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border);background:#fbfcfd}.llm-v5505-sidecar-actions{display:flex;gap:8px;padding:10px}.llm-v5505-preview{margin:0 10px 10px;flex:1;font-size:11.5px}';document.head.appendChild(st);}
 function boot(){rebuild();styles();bind();}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
 </script>
-<script id="v5472-ui-enhancements">
+<script id="v5505-ui-enhancements">
 (function(){
 'use strict';
 var $=function(id){return document.getElementById(id);};
@@ -10212,15 +10280,15 @@ var labelMap={'Main Workspace':'Main workspace','Edit concepts':'Edit concepts',
 function botSvg(){return '<svg viewBox="0 0 24 24" aria-hidden="true" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v3"/><circle cx="12" cy="3" r="1.4" fill="currentColor" stroke="none"/><rect x="5" y="8" width="14" height="10" rx="3.2"/><path d="M5 12H3.6v3H5M19 12h1.4v3H19"/><circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/><path d="M9.5 15c1.2.8 3.8.8 5 0"/></svg>';}
 function renameNav(){document.querySelectorAll('.nav-link').forEach(function(link){var current=txt(link);Object.keys(labelMap).forEach(function(k){if(current.indexOf(k)>=0){Array.from(link.childNodes).forEach(function(n){if(n.nodeType===3&&String(n.nodeValue).trim()){n.nodeValue=' '+labelMap[k]+' ';}});var span=Array.from(link.querySelectorAll('span')).find(function(s){return String(s.textContent||'').indexOf(k)>=0;});if(span)span.textContent=labelMap[k];}});if(txt(link).indexOf('LLM chat')>=0){var ico=link.querySelector('.nav-ico');if(ico){ico.innerHTML=botSvg();ico.style.color='';ico.style.display='flex';ico.style.alignItems='center';ico.style.justifyContent='flex-end';}}});}
 function fileLoaded(id){var el=$(id);return !!(el&&el.files&&el.files[0]);}
-function makePill(t){var s=document.createElement('span');s.className='nav-count v5472-nav-pill';s.textContent=t;return s;}
+function makePill(t){var s=document.createElement('span');s.className='nav-count v5505-nav-pill';s.textContent=t;return s;}
 function findNav(label){return Array.from(document.querySelectorAll('.nav-link')).find(function(a){return txt(a).toLowerCase().indexOf(label.toLowerCase())>=0;});}
-function updateNavPills(){document.querySelectorAll('.v5472-nav-pill').forEach(function(p){p.remove();});var main=findNav('Main workspace');if(main&&fileLoaded('pocFileInput'))main.appendChild(makePill('C'));var fig=findNav('Figure labeller');var bits=[];if(fileLoaded('figureDescPdfInput'))bits.push('D');if(fileLoaded('figureDrawingsPdfInput'))bits.push('F');if(fig&&bits.length)fig.appendChild(makePill(bits.join(', ')));}
+function updateNavPills(){document.querySelectorAll('.v5505-nav-pill').forEach(function(p){p.remove();});var main=findNav('Main workspace');if(main&&fileLoaded('pocFileInput'))main.appendChild(makePill('C'));var fig=findNav('Figure labeller');var bits=[];if(fileLoaded('figureDescPdfInput'))bits.push('D');if(fileLoaded('figureDrawingsPdfInput'))bits.push('F');if(fig&&bits.length)fig.appendChild(makePill(bits.join(', ')));}
 var urls={desc:null,draw:null};
 function ensureUrl(kind,input){try{if(urls[kind])URL.revokeObjectURL(urls[kind]);urls[kind]=input&&input.files&&input.files[0]?URL.createObjectURL(input.files[0]):null;}catch(_){}}
 function openFile(kind){var url=urls[kind];if(url)window.open(url,'_blank','noopener');}
-function ensureStack(){var wrap=$('bannerPdfWrap');if(!wrap)return null;var stack=$('v5472DocStack');if(!stack){stack=document.createElement('div');stack.id='v5472DocStack';stack.className='v5472-doc-stack';wrap.parentNode.insertBefore(stack,wrap);stack.appendChild(wrap);var row=document.createElement('div');row.id='v5472FigDocButtons';row.className='v5472-fig-doc-buttons';stack.appendChild(row);}return $('v5472FigDocButtons');}
-function updateTopBannerButtons(){var desc=$('figureDescPdfInput'),draw=$('figureDrawingsPdfInput');ensureUrl('desc',desc);ensureUrl('draw',draw);var row=ensureStack();if(!row)return;row.innerHTML='';if(urls.desc){var b=document.createElement('button');b.type='button';b.className='banner-pdf-link v5472-doc-btn';b.innerHTML='<span class="pdf-ico">📄</span><span class="banner-pdf-name">Description</span>';b.onclick=function(){openFile('desc');};row.appendChild(b);}if(urls.draw){var c=document.createElement('button');c.type='button';c.className='banner-pdf-link v5472-doc-btn';c.innerHTML='<span class="pdf-ico">📄</span><span class="banner-pdf-name">Drawings</span>';c.onclick=function(){openFile('draw');};row.appendChild(c);}row.style.display=row.children.length?'flex':'none';}
-function injectStyle(){if($('v5472-ui-style'))return;var st=document.createElement('style');st.id='v5472-ui-style';st.textContent='.v5472-nav-pill.nav-count{margin-left:auto}.shell.nav-collapsed .v5472-nav-pill.nav-count{display:inline-flex!important;position:absolute;right:7px;top:14px}.nav-link{position:relative}.v5472-doc-stack{display:flex;flex-direction:column;gap:2px;align-items:flex-start;min-width:0}.v5472-fig-doc-buttons{display:none;flex-direction:row;gap:3px;align-items:center;max-width:260px}.v5472-doc-btn.banner-pdf-link{height:18px;max-width:126px;padding:1px 6px;font-size:10px;line-height:1;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);color:#fff}.v5472-doc-btn .pdf-ico{font-size:10px}.v5472-doc-btn .banner-pdf-name{max-width:92px}.llm-v5472-modelbar{display:none!important}';document.head.appendChild(st);}
+function ensureStack(){var wrap=$('bannerPdfWrap');if(!wrap)return null;var stack=$('v5505DocStack');if(!stack){stack=document.createElement('div');stack.id='v5505DocStack';stack.className='v5505-doc-stack';wrap.parentNode.insertBefore(stack,wrap);stack.appendChild(wrap);var row=document.createElement('div');row.id='v5505FigDocButtons';row.className='v5505-fig-doc-buttons';stack.appendChild(row);}return $('v5505FigDocButtons');}
+function updateTopBannerButtons(){var desc=$('figureDescPdfInput'),draw=$('figureDrawingsPdfInput');ensureUrl('desc',desc);ensureUrl('draw',draw);var row=ensureStack();if(!row)return;row.innerHTML='';if(urls.desc){var b=document.createElement('button');b.type='button';b.className='banner-pdf-link v5505-doc-btn';b.innerHTML='<span class="pdf-ico">📄</span><span class="banner-pdf-name">Description</span>';b.onclick=function(){openFile('desc');};row.appendChild(b);}if(urls.draw){var c=document.createElement('button');c.type='button';c.className='banner-pdf-link v5505-doc-btn';c.innerHTML='<span class="pdf-ico">📄</span><span class="banner-pdf-name">Drawings</span>';c.onclick=function(){openFile('draw');};row.appendChild(c);}row.style.display=row.children.length?'flex':'none';}
+function injectStyle(){if($('v5505-ui-style'))return;var st=document.createElement('style');st.id='v5505-ui-style';st.textContent='.v5505-nav-pill.nav-count{margin-left:auto}.shell.nav-collapsed .v5505-nav-pill.nav-count{display:inline-flex!important;position:absolute;right:7px;top:14px}.nav-link{position:relative}.v5505-doc-stack{display:flex;flex-direction:column;gap:2px;align-items:flex-start;min-width:0}.v5505-fig-doc-buttons{display:none;flex-direction:row;gap:3px;align-items:center;max-width:260px}.v5505-doc-btn.banner-pdf-link{height:18px;max-width:126px;padding:1px 6px;font-size:10px;line-height:1;background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.28);color:#fff}.v5505-doc-btn .pdf-ico{font-size:10px}.v5505-doc-btn .banner-pdf-name{max-width:92px}.llm-v5505-modelbar{display:none!important}';document.head.appendChild(st);}
 function boot(){injectStyle();renameNav();updateNavPills();updateTopBannerButtons();document.addEventListener('change',function(e){if(e.target&&e.target.type==='file'){updateNavPills();updateTopBannerButtons();}});setInterval(function(){renameNav();updateNavPills();},1500);}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
