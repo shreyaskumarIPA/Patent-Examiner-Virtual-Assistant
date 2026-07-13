@@ -10718,5 +10718,639 @@ function patch(){
 function bind(){var f=document.getElementById('perpFrame');if(f&&!f.dataset.v5910Bound){f.dataset.v5910Bound='1';f.addEventListener('load',function(){patch();setTimeout(patch,140);});}patch();}
 document.addEventListener('click',function(e){if(e.target&&e.target.closest&&e.target.closest('.nav-link[data-tab-target="tab-perp"]')){setTimeout(bind,0);setTimeout(patch,160);}},true);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();window.addEventListener('load',function(){bind();setTimeout(patch,240);});
-})();</script></body>
+})();</script>
+<script id="v5911-context-aware-llm">
+/*
+ * v59.1.1
+ * Context-aware LLM chat patch.
+ *
+ * Adds direct answers using the claims currently loaded in the browser:
+ * - independent claims
+ * - dependent claims
+ * - claim counts
+ * - individual claim wording
+ * - claim dependencies
+ * - claims that reference another claim
+ * - claim-text keyword searches
+ *
+ * Existing specialised handlers for Unity, background, invention summary,
+ * clarity, antecedents, CPC and the Patent Manual remain unchanged.
+ */
+(function () {
+    'use strict';
+
+    if (window.__V5911_CONTEXT_CHAT__) {
+        return;
+    }
+
+    window.__V5911_CONTEXT_CHAT__ = true;
+
+    function clean(value) {
+        return String(value || '')
+            .replace(/\r/g, '')
+            .replace(/\u00a0/g, ' ')
+            .replace(/[ \t]+/g, ' ')
+            .replace(/\n{3,}/g, '\n\n')
+            .trim();
+    }
+
+    function escapeHtml(value) {
+        return String(value == null ? '' : value)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    function readElement(id) {
+        var element = document.getElementById(id);
+
+        if (!element) {
+            return '';
+        }
+
+        return clean(
+            'value' in element
+                ? element.value
+                : element.innerText || element.textContent || ''
+        );
+    }
+
+    function getCurrentClaimsText() {
+        /*
+         * pocState is declared with const in the main application and may not
+         * be exposed as window.pocState. The visible application fields are
+         * therefore checked as well.
+         */
+        try {
+            if (
+                typeof pocState !== 'undefined' &&
+                Array.isArray(pocState.claims) &&
+                pocState.claims.length
+            ) {
+                return pocState.claims
+                    .map(function (claim) {
+                        return claim.no + '. ' + claim.text;
+                    })
+                    .join('\n\n');
+            }
+        } catch (_) {
+            // Continue to the visible-field fallbacks.
+        }
+
+        var candidates = [
+            readElement('patentText'),
+            readElement('pocEditorContent'),
+            readElement('pocFullText'),
+            readElement('pocLeftText')
+        ];
+
+        for (var i = 0; i < candidates.length; i += 1) {
+            if (
+                candidates[i] &&
+                /(?:^|\n)\s*\d{1,3}\s*[.)]\s+/.test(candidates[i])
+            ) {
+                return candidates[i];
+            }
+        }
+
+        return '';
+    }
+
+    function parseClaims(text) {
+        var output = [];
+        var match;
+
+        var claimPattern =
+            /(?:^|\n)\s*(\d{1,3})\s*[.)]\s+([\s\S]*?)(?=\n\s*\d{1,3}\s*[.)]\s+|$)/g;
+
+        var source = String(text || '').replace(/\r/g, '');
+
+        while ((match = claimPattern.exec(source)) !== null) {
+            output.push({
+                no: Number(match[1]),
+                text: clean(match[2]),
+                deps: [],
+                visualParent: null
+            });
+        }
+
+        /*
+         * Use the same dependency normaliser as the Claims Tree where it is
+         * available. This keeps chat answers aligned with the current browser
+         * analysis.
+         */
+        try {
+            if (typeof window.exmNormaliseVisualParents === 'function') {
+                window.exmNormaliseVisualParents(output);
+            } else if (typeof window.exmDetectDependencies === 'function') {
+                window.exmDetectDependencies(output);
+            }
+        } catch (_) {
+            // The conservative text-based dependency fallback below is used.
+        }
+
+        output.forEach(function (claim) {
+            if (!Array.isArray(claim.deps) || !claim.deps.length) {
+                var dependencies = [];
+                var dependencyMatch;
+
+                var dependencyPattern =
+                    /\bclaims?\s+(\d{1,3})(?:\s*(?:to|-|–)\s*(\d{1,3}))?/gi;
+
+                while (
+                    (dependencyMatch =
+                        dependencyPattern.exec(claim.text)) !== null
+                ) {
+                    var start = Number(dependencyMatch[1]);
+                    var end = Number(dependencyMatch[2] || start);
+                    var lower = Math.min(start, end);
+                    var upper = Math.max(start, end);
+
+                    for (var number = lower; number <= upper; number += 1) {
+                        if (
+                            number < claim.no &&
+                            dependencies.indexOf(number) < 0
+                        ) {
+                            dependencies.push(number);
+                        }
+                    }
+                }
+
+                claim.deps = dependencies.sort(function (a, b) {
+                    return a - b;
+                });
+            }
+
+            claim.independent = !claim.deps.length;
+        });
+
+        return output;
+    }
+
+    function getSessionModel() {
+        var claims = parseClaims(getCurrentClaimsText());
+
+        return {
+            claims: claims,
+
+            independent: claims.filter(function (claim) {
+                return claim.independent;
+            }),
+
+            dependent: claims.filter(function (claim) {
+                return !claim.independent;
+            })
+        };
+    }
+
+    function getChatStream() {
+        return document.getElementById('llmChatStream');
+    }
+
+    function addUserMessage(text) {
+        var stream = getChatStream();
+
+        if (!stream) {
+            return;
+        }
+
+        var message = document.createElement('div');
+        message.className = 'llm-msg user';
+
+        message.innerHTML =
+            '<span class="role">You</span>' +
+            escapeHtml(text);
+
+        stream.appendChild(message);
+        stream.scrollTop = stream.scrollHeight;
+    }
+
+    function addAssistantMessage(html) {
+        var stream = getChatStream();
+
+        if (!stream) {
+            return;
+        }
+
+        var message = document.createElement('div');
+        message.className = 'llm-msg assistant';
+
+        message.innerHTML =
+            '<span class="role">Assistant</span>' +
+            '<div class="llm-answer">' +
+            html +
+            '</div>';
+
+        stream.appendChild(message);
+        stream.scrollTop = stream.scrollHeight;
+    }
+
+    function setChatReady() {
+        [
+            'llmV5505Status',
+            'llmV5464Status'
+        ].forEach(function (id) {
+            var status = document.getElementById(id);
+
+            if (status) {
+                status.textContent = 'Ready';
+            }
+        });
+    }
+
+    function getExactClaimAnswer(question, session) {
+        var match = question.match(
+            /\bclaim\s*(?:number\s*)?(\d{1,3})\b/i
+        );
+
+        if (!match) {
+            return null;
+        }
+
+        var claimNumber = Number(match[1]);
+
+        var claim = session.claims.find(function (item) {
+            return item.no === claimNumber;
+        });
+
+        if (!claim) {
+            return (
+                '<h3>Claim ' +
+                claimNumber +
+                '</h3>' +
+                '<p>Claim ' +
+                claimNumber +
+                ' was not found in the current browser session.</p>'
+            );
+        }
+
+        var dependentClaims = session.claims
+            .filter(function (item) {
+                return (
+                    Array.isArray(item.deps) &&
+                    item.deps.indexOf(claimNumber) >= 0
+                );
+            })
+            .map(function (item) {
+                return item.no;
+            });
+
+        return (
+            '<h3>Claim ' +
+            claimNumber +
+            '</h3>' +
+            '<p>' +
+            escapeHtml(claim.text) +
+            '</p>' +
+            '<ul>' +
+            '<li><strong>Type:</strong> ' +
+            (claim.independent ? 'Independent' : 'Dependent') +
+            '</li>' +
+            '<li><strong>Depends on:</strong> ' +
+            escapeHtml(
+                claim.deps.length
+                    ? claim.deps.join(', ')
+                    : 'None'
+            ) +
+            '</li>' +
+            '<li><strong>Directly referenced by:</strong> ' +
+            escapeHtml(
+                dependentClaims.length
+                    ? dependentClaims.join(', ')
+                    : 'None detected'
+            ) +
+            '</li>' +
+            '</ul>' +
+            '<div class="llm-unity-source-note">' +
+            'Source: current claim text and dependency analysis in this browser session.' +
+            '</div>'
+        );
+    }
+
+    var ignoredSearchWords = new Set([
+        'what',
+        'which',
+        'where',
+        'when',
+        'does',
+        'with',
+        'from',
+        'that',
+        'this',
+        'have',
+        'about',
+        'current',
+        'claim',
+        'claims',
+        'please',
+        'show',
+        'tell',
+        'give',
+        'into',
+        'your',
+        'their',
+        'there',
+        'using',
+        'used',
+        'relate',
+        'related',
+        'find'
+    ]);
+
+    function getRelevantClaimsAnswer(question, session) {
+        var terms =
+            clean(question)
+                .toLowerCase()
+                .match(/[a-z][a-z0-9-]{2,}/g) || [];
+
+        terms = Array.from(new Set(
+            terms.filter(function (term) {
+                return !ignoredSearchWords.has(term);
+            })
+        ));
+
+        if (!terms.length) {
+            return null;
+        }
+
+        var scoredClaims = session.claims
+            .map(function (claim) {
+                var claimText = claim.text.toLowerCase();
+
+                var matches = terms.filter(function (term) {
+                    return claimText.indexOf(term) >= 0;
+                });
+
+                return {
+                    claim: claim,
+                    matches: matches,
+                    score: matches.length
+                };
+            })
+            .filter(function (result) {
+                return result.score > 0;
+            })
+            .sort(function (a, b) {
+                if (b.score !== a.score) {
+                    return b.score - a.score;
+                }
+
+                return a.claim.no - b.claim.no;
+            })
+            .slice(0, 5);
+
+        if (!scoredClaims.length) {
+            return null;
+        }
+
+        return (
+            '<h3>Relevant current-session claims</h3>' +
+            '<p>These claims contain wording relevant to your question.</p>' +
+            '<ul>' +
+            scoredClaims
+                .map(function (result) {
+                    var dependencyText = result.claim.independent
+                        ? 'Independent'
+                        : 'Depends on ' +
+                          (
+                              result.claim.deps.length
+                                  ? result.claim.deps.join(', ')
+                                  : 'a claim not detected'
+                          );
+
+                    return (
+                        '<li>' +
+                        '<strong>Claim ' +
+                        result.claim.no +
+                        ':</strong> ' +
+                        escapeHtml(result.claim.text) +
+                        '<br>' +
+                        '<small>' +
+                        'Relationship: ' +
+                        escapeHtml(dependencyText) +
+                        '. Matched terms: ' +
+                        escapeHtml(result.matches.join(', ')) +
+                        '</small>' +
+                        '</li>'
+                    );
+                })
+                .join('') +
+            '</ul>' +
+            '<div class="llm-unity-source-note">' +
+            'Source: claim text currently loaded in this browser session.' +
+            '</div>'
+        );
+    }
+
+    function getContextualAnswer(question) {
+        var session = getSessionModel();
+
+        if (!session.claims.length) {
+            /*
+             * Return null for recognised built-in prompts. This allows the
+             * existing background, Unity, CPC and summary handlers to run.
+             */
+            if (
+                /background|invention|problem|solution|unity|grouping|cpc|classification|antecedent|clarity|manual|summary|special technical feature|\bstf\b/i
+                    .test(question)
+            ) {
+                return null;
+            }
+
+            return (
+                '<h3>No claims available</h3>' +
+                '<p>Upload, paste or extract a numbered claim set in the current browser session first.</p>'
+            );
+        }
+
+        var exactClaim = getExactClaimAnswer(question, session);
+
+        if (exactClaim) {
+            return exactClaim;
+        }
+
+        if (
+            /\bindependent\s+claims?\b|which\s+claims?\s+are\s+independent/i
+                .test(question)
+        ) {
+            return (
+                '<h3>Independent claims</h3>' +
+                '<p>' +
+                escapeHtml(
+                    session.independent.length
+                        ? session.independent
+                              .map(function (claim) {
+                                  return claim.no;
+                              })
+                              .join(', ')
+                        : 'None detected'
+                ) +
+                '</p>' +
+                '<div class="llm-unity-source-note">' +
+                'Source: current claim text and dependency analysis in this browser session.' +
+                '</div>'
+            );
+        }
+
+        if (
+            /\bdependent\s+claims?\b|which\s+claims?\s+are\s+dependent/i
+                .test(question)
+        ) {
+            return (
+                '<h3>Dependent claims</h3>' +
+                '<p>' +
+                escapeHtml(
+                    session.dependent.length
+                        ? session.dependent
+                              .map(function (claim) {
+                                  return claim.no;
+                              })
+                              .join(', ')
+                        : 'None detected'
+                ) +
+                '</p>' +
+                '<div class="llm-unity-source-note">' +
+                'Source: current claim text and dependency analysis in this browser session.' +
+                '</div>'
+            );
+        }
+
+        if (
+            /how\s+many\s+claims|total\s+claims|claim\s+count/i
+                .test(question)
+        ) {
+            return (
+                '<h3>Claim count</h3>' +
+                '<ul>' +
+                '<li><strong>Total:</strong> ' +
+                session.claims.length +
+                '</li>' +
+                '<li><strong>Independent:</strong> ' +
+                session.independent.length +
+                '</li>' +
+                '<li><strong>Dependent:</strong> ' +
+                session.dependent.length +
+                '</li>' +
+                '</ul>' +
+                '<div class="llm-unity-source-note">' +
+                'Source: current claim text in this browser session.' +
+                '</div>'
+            );
+        }
+
+        /*
+         * Do not override the existing specialised responses.
+         */
+        if (
+            /background|invention|inventive concept|problem|solution|unity|lou|grouping|cpc|classification|antecedent|clarity|manual|patents manual|guidance|claims?\s+summary|special technical feature|\bstf\b/i
+                .test(question)
+        ) {
+            return null;
+        }
+
+        return getRelevantClaimsAnswer(question, session);
+    }
+
+    function getQuestion() {
+        var input = document.getElementById('llmChatPrompt');
+
+        return clean(input && input.value);
+    }
+
+    function processContextualQuestion(question) {
+        var answer = getContextualAnswer(question);
+
+        if (!answer) {
+            return false;
+        }
+
+        addUserMessage(question);
+
+        var input = document.getElementById('llmChatPrompt');
+
+        if (input) {
+            input.value = '';
+        }
+
+        addAssistantMessage(answer);
+        setChatReady();
+
+        return true;
+    }
+
+    /*
+     * Capture phase is intentional. The existing LLM chat has more than one
+     * runtime handler. Capturing the contextual query first prevents the
+     * generic fallback from also adding a second response.
+     */
+    document.addEventListener(
+        'click',
+        function (event) {
+            var askButton =
+                event.target &&
+                event.target.closest &&
+                event.target.closest('#llmChatSendBtn');
+
+            if (!askButton) {
+                return;
+            }
+
+            var question = getQuestion();
+
+            if (!question) {
+                return;
+            }
+
+            if (processContextualQuestion(question)) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        },
+        true
+    );
+
+    document.addEventListener(
+        'keydown',
+        function (event) {
+            var input = document.getElementById('llmChatPrompt');
+
+            if (
+                event.target !== input ||
+                event.key !== 'Enter' ||
+                event.shiftKey
+            ) {
+                return;
+            }
+
+            var question = getQuestion();
+
+            if (!question) {
+                return;
+            }
+
+            var answer = getContextualAnswer(question);
+
+            if (!answer) {
+                /*
+                 * Preserve the existing Ctrl+Enter or Command+Enter behaviour
+                 * for specialised prompts.
+                 */
+                return;
+            }
+
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            addUserMessage(question);
+            input.value = '';
+            addAssistantMessage(answer);
+            setChatReady();
+        },
+        true
+    );
+})();
+</script>
+</body>
 </html>
