@@ -1,9 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Patent Examiner Virtual Assistant - v55.0.5 LLM examiner </title>
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<html lang="en-AU">
+<head><link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&amp;display=swap" rel="stylesheet"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Patent Examiner Virtual Assistant - v59.1.0 branding</title>
 <link rel="icon" type="image/png" href="./favicon.png"/>
 <style>
 :root{
@@ -567,77 +587,158 @@ tr.g5Row td{background:rgba(142,108,47,.06)}tr.g6Row td{background:rgba(21,101,1
 .poc-noise-tag{display:inline-flex;border:1px solid rgba(142,108,47,.25);background:rgba(142,108,47,.08);border-radius:999px;padding:1px 6px;margin-right:5px;font-weight:800;color:#7c5c1e}
 .poc-chem-badge[data-link-pill]{white-space:nowrap}
 
-</style>
-</head>
-<body>
 
+/* v56 style and accessibility additions based on index - Copy.html */
+:root{--focus-ring:#005FCC;--font-stack:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+body,button,input,select,textarea{font-family:var(--font-stack)}
+.v56-skip{position:fixed;top:-80px;left:12px;z-index:20000;background:#fff;color:#1D252C;padding:10px 14px;border:3px solid var(--focus-ring);border-radius:6px;font-weight:800}.v56-skip:focus{top:10px}
+:where(a,button,input,select,textarea,[contenteditable="true"],[tabindex]):focus-visible{outline:3px solid var(--focus-ring)!important;outline-offset:3px!important}
+.subtab-btn,.nav-link,.refresh-btn,.claims-pdf-label{min-height:44px}
+.v56-paste-wrap{display:grid;gap:12px}.v56-paste-help{max-width:80ch;color:#4A5568;font-size:14px;line-height:1.5}.v56-paste-text{min-height:460px;font-size:14px;line-height:1.5;white-space:pre-wrap}.v56-paste-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.v56-status{font-size:12.5px;color:#4A5568}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+</style>
+<style id="v59-branding-overrides">
+/* v59.0.0 branding: presentation-only overrides based on Branding.html */
+:root{
+  --ipa-charcoal:#1D252C;--ipa-charcoal-light:#373F46;--ipa-purple:#5D2067;
+  --ipa-web-teal:#006F86;--ipa-patents-blue:#87CFDE;--ipa-light-grey:#E5E8EC;
+  --bg:#F5F6F8;--panel:#FFFFFF;--panel-soft:#FAFBFC;--border:#D6DAE0;
+  --border-strong:#B8BFC7;--shadow:0 1px 3px rgba(0,0,0,.06);
+  --radius:8px;--nav-bg:#FFFFFF;--banner-h:60px;
+  --font-stack:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+html{font-size:16px}
+body,button,input,select,textarea{font-family:var(--font-stack)}
+body{font-size:14px;line-height:1.5;color:#1D252C;background:#F5F6F8;padding-top:var(--banner-h)}
+/* Header */
+.top-banner{height:var(--banner-h);display:flex;align-items:center;background:#373F46;color:#fff;padding:0 clamp(20px,4vw,80px);border-bottom:0;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.banner-inner{width:100%;min-height:60px;gap:16px}.banner-title{display:flex;align-items:center;flex:1;min-width:240px}
+.header-tool-badge{display:flex;align-items:center;gap:10px}.header-picon{width:32px;height:32px;display:flex;align-items:center;justify-content:center;flex:0 0 32px}
+.header-tool-text{display:flex;flex-direction:column;gap:0;line-height:1.2}.header-tool-text .tool-line1{font-size:14px;font-weight:700;color:#87CFDE;letter-spacing:.01em}.header-tool-text .tool-line2{font-size:14px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.top-banner .sub{display:none!important}.banner-right{width:180px}.banner-right img{width:180px}.banner-pdf-link{border-radius:999px;font-size:13px}
+/* Type hierarchy and surfaces */
+.main-area{padding:20px 24px 24px}.workspace-title{font-size:20px;font-weight:700;color:#1D252C;letter-spacing:-.2px}
+.board-title,.filter-title,.figure-upload-title,.figure-editor-title,.group-merge-title{color:#1D252C;font-size:15px;font-weight:700}
+.board-card,.filter-card,.syn-panel,.panel,.collapsible,.llm-chat-panel,.llm-browser-panel{border-color:#D6DAE0;border-radius:8px;box-shadow:var(--shadow)}
+.board-head,.filter-head,.syn-header,.panel-header,.collapsible summary{background:#fff}.board-meta,.status,.legend,.muted{color:#6B7280}
+/* Navigation */
+.nav-link{min-height:44px;font-size:14px;padding:11px 10px;border-left-width:5px;color:#1D252C}.nav-link:hover{background:#F5F6F8}.nav-link.active{background:#EDF7F9;border-left-color:#F0C846;color:#1D252C}.sidebar-footer{background:#F5F6F8}
+.nav-collapse-btn{min-height:42px;border:1.5px solid #B8BFC7;background:#fff;color:#1D252C;border-radius:999px;animation:none}.nav-collapse-btn:hover{background:#F5F6F8}
+/* Primary and secondary controls */
+button{border-radius:999px;font-size:14px;font-weight:600;letter-spacing:0}.actions>button,.refresh-btn,.claims-pdf-label,.poc-pbtn,.struct-modal-close{min-height:40px;padding:8px 16px;border-radius:999px;background:#1D252C;color:#fff;border:1.5px solid #1D252C}
+.actions>button:hover,.refresh-btn:hover,.claims-pdf-label:hover,.poc-pbtn:hover,.struct-modal-close:hover{background:#373F46;border-color:#373F46}
+button.secondary{background:#fff;color:#1D252C;border:1.5px solid #B8BFC7;animation:none}button.secondary:hover{background:#F5F6F8}
+.toggle-btn,.cpc-toggle-btn,.figure-mini-btn,.sidecar-btn,.llm-chat-small-btn,.poc-cbtn,.poc-img-btn,.poc-chem-action-btn{background:#fff;color:#1D252C;border:1.5px solid #B8BFC7;border-radius:999px}
+.sidecar-btn.primary{background:#1D252C;border-color:#1D252C;color:#fff}
+/* Forms and tabs */
+textarea,input,select,[contenteditable="true"]{font-size:14px;line-height:1.5;color:#1D252C}textarea{border:1.5px solid #D6DAE0;border-radius:8px}
+textarea:focus,input:focus,select:focus,[contenteditable="true"]:focus{border-color:#1D252C;box-shadow:0 0 0 3px rgba(29,37,44,.08)}
+.subtab-btn{font-size:14px;font-weight:600;min-height:44px;color:#4A5568}.subtab-btn:hover,.subtab-btn.active{color:#1D252C;background:#F5F6F8}.subtab-btn.active{border-bottom-color:#1D252C}
+.compliance-banner,.poc-note{background:#FFF8DD;border-color:#F0C846;color:#5B4A0A}.exam-mapping-table th{background:#1D252C}
+@media(max-width:900px){:root{--banner-h:60px}.top-banner{height:60px;padding:0 20px}.main-area{padding:16px}.header-tool-text .tool-line1,.header-tool-text .tool-line2{font-size:13px}.banner-right{width:120px}.banner-right img{width:120px}}
+</style><style id="v5910-header-unity-style">
+/* v59.0.2: align branding divider with the left navigation split */
+.top-banner{padding:0!important}
+.banner-inner{position:relative;width:100%;min-height:var(--banner-h);padding:0 clamp(20px,2vw,32px) 0 0!important;gap:0!important}
+.banner-title{display:block!important;flex:0 0 auto!important;width:auto!important;min-width:0!important}
+.header-tool-badge{display:grid!important;grid-template-columns:var(--nav-width) 2px auto auto;align-items:center;column-gap:10px;height:var(--banner-h)}
+.header-ipa-brand{width:var(--nav-width);height:var(--banner-h);display:flex;align-items:center;justify-content:center;padding:0 22px;overflow:hidden}
+.header-ipa-logo{display:block;width:min(180px,calc(var(--nav-width) - 44px));max-height:46px;object-fit:contain}
+.header-divider{width:2px!important;height:32px!important;background:#87CFDE!important;margin:0!important;justify-self:center}
+.header-picon{margin-left:8px}.header-tool-text{margin-right:16px}
+.top-banner .banner-inner>div:last-child{margin-left:auto!important;padding-left:16px}
+.shell.nav-collapsed~*{} 
+.llm-copy-groupings{margin-top:10px;background:#fff!important;color:#1D252C!important;border:1.5px solid #B8BFC7!important;border-radius:999px!important;padding:7px 14px!important;font-size:12px!important}
+.llm-copy-groupings:hover{background:#F5F6F8!important}.llm-unity-source-note{font-size:12px;color:#6B7280;margin-top:8px}
+@media(max-width:900px){.top-banner{padding:0!important}.banner-inner{padding-right:14px!important}.header-tool-badge{grid-template-columns:120px 2px auto auto}.header-ipa-brand{width:120px;padding:0 10px}.header-ipa-logo{width:100px}.header-divider{height:28px!important}.header-picon{margin-left:3px}}
+@media(max-width:640px){.header-tool-badge{grid-template-columns:2px auto auto}.header-ipa-brand{display:none}.header-divider{display:block}.top-banner .banner-inner>div:last-child{padding-left:8px}}
+</style><style id="v5910-perp-header-fix">
+/* v59.0.8: PERP host and exact header/navigation boundary alignment */
+.top-banner{padding:0!important}
+.banner-inner{padding:0 clamp(20px,2vw,32px) 0 0!important;gap:0!important}
+.banner-title{display:block!important;flex:0 0 auto!important;min-width:0!important}
+.header-tool-badge{display:grid!important;grid-template-columns:var(--nav-width) 2px auto auto!important;column-gap:0!important;align-items:center;height:var(--banner-h)}
+.header-ipa-brand{box-sizing:border-box;width:var(--nav-width)!important;height:var(--banner-h);display:flex!important;align-items:center;justify-content:center;padding:0 22px}
+.header-divider{box-sizing:border-box;width:2px!important;height:32px!important;margin:0!important;background:#87CFDE!important;justify-self:stretch!important}
+.header-picon{margin-left:18px!important}.header-tool-text{margin-left:10px;margin-right:16px}
+#tab-perp.active{display:block!important;height:calc(100vh - var(--banner-h));min-height:620px;padding:0!important;overflow:hidden}
+#tab-perp .perp-embed-wrap,#tab-perp .perp-embed-card{height:100%;min-height:620px;width:100%;padding:0!important;margin:0!important;border:0!important;background:#fff}
+#tab-perp .perp-embed-frame{display:block!important;width:100%!important;height:100%!important;min-height:620px;border:0!important;background:#fff}
+@media(max-width:900px){.header-tool-badge{grid-template-columns:var(--nav-width) 2px auto auto!important}.header-ipa-brand{width:var(--nav-width)!important;padding:0 10px}.header-picon{margin-left:10px!important}}
+</style><style id="v5910-nav-perp-compact-style">
+/* v59.0.9: consistent larger nav icons and compact PERP viewport */
+.left-nav{padding-left:0!important;padding-right:0!important}
+.nav-list{padding-left:0!important;padding-right:0!important}
+.nav-link{padding-left:5px!important;padding-right:10px!important;gap:8px!important}
+.nav-ico{width:36px!important;min-width:36px!important;flex:0 0 36px!important;height:28px!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;font-size:21px!important;line-height:1!important;margin-left:-5px!important;padding:0!important}
+.nav-ico svg{width:21px!important;height:21px!important;display:block!important}
+#tab-perp.active{height:calc(100vh - var(--banner-h) - 48px)!important;min-height:520px!important;margin-top:-4px!important}
+#tab-perp .perp-embed-wrap,#tab-perp .perp-embed-card,#tab-perp .perp-embed-frame{height:100%!important;min-height:520px!important}
+</style><style id="v5910-button-perp-style">
+/* v59.1.0: consistent controls and full-height PERP work area */
+button,.refresh-btn,.claims-pdf-label,.poc-pbtn,.struct-modal-close,.toggle-btn,.cpc-toggle-btn,.figure-mini-btn,.sidecar-btn,.llm-chat-small-btn,.poc-cbtn,.poc-img-btn,.poc-chem-action-btn,.nav-collapse-btn,.banner-pdf-link,input[type="button"],input[type="submit"],input[type="reset"]{font-family:var(--font-stack)!important;font-size:14px!important;font-weight:600!important;line-height:1.2!important;border-radius:10px!important;letter-spacing:0!important}
+.workspace:has(#tab-perp.active)>.workspace-head{display:none!important}
+.workspace:has(#tab-perp.active){padding-top:0!important}
+#tab-perp.active{height:calc(100vh - var(--banner-h))!important;min-height:560px!important;margin-top:0!important;padding:0!important}
+#tab-perp .perp-embed-wrap,#tab-perp .perp-embed-card,#tab-perp .perp-embed-frame{height:100%!important;min-height:560px!important;border-radius:0!important}
+</style></head>
+<body>
+<a class="v56-skip" href="#mainArea">Skip to main content</a>
 <!-- ── MODALS ── -->
-<div id="lowQualityModal" class="overlay" style="display:none">
-  <div class="lowq-card" role="dialog" aria-modal="true">
-    <div class="lowq-title">Low quality PDF text detected</div>
-    <div class="lowq-sub">This PDF may be a scanned document. Extraction quality may be reduced. The text has been extracted as-is — review and edit in the Claims Editor tab.</div>
-    <div id="lowqReasonWrap" class="lowq-reason-wrap"><div class="lowq-mini"><strong>Detected signals:</strong></div><ul id="lowqReasons" class="lowq-reasons"></ul></div>
-    <div class="lowq-actions"><button type="button" id="lowqCloseBtn">Continue with extracted text</button></div>
-  </div>
+<div class="overlay" id="lowQualityModal" style="display:none">
+<div aria-modal="true" class="lowq-card" role="dialog">
+<div class="lowq-title">Low quality PDF text detected</div>
+<div class="lowq-sub">This PDF may be a scanned document. Extraction quality may be reduced. The text has been extracted as-is — review and edit in the Claims Editor tab.</div>
+<div class="lowq-reason-wrap" id="lowqReasonWrap"><div class="lowq-mini"><strong>Detected signals:</strong></div><ul class="lowq-reasons" id="lowqReasons"></ul></div>
+<div class="lowq-actions"><button id="lowqCloseBtn" type="button">Continue with extracted text</button></div>
 </div>
-<div id="loadingOverlay" class="overlay" aria-live="polite">
-  <div class="overlay-card"><div class="overlay-spinner"></div><div id="overlayText" class="overlay-text">Processing…</div></div>
 </div>
-<div id="figureLabellerOverlay" class="overlay" aria-live="polite">
-  <div class="overlay-card"><div class="overlay-spinner"></div><div id="figureLabellerOverlayText" class="overlay-text">Extracting and labelling figures…</div></div>
+<div aria-live="polite" class="overlay" id="loadingOverlay">
+<div class="overlay-card"><div class="overlay-spinner"></div><div class="overlay-text" id="overlayText">Processing…</div></div>
+</div>
+<div aria-live="polite" class="overlay" id="figureLabellerOverlay">
+<div class="overlay-card"><div class="overlay-spinner"></div><div class="overlay-text" id="figureLabellerOverlayText">Extracting and labelling figures…</div></div>
 </div>
 <div class="struct-modal" id="structModal">
-  <div class="struct-modal-inner" style="padding:0;max-width:min(980px,96vw);width:100%;display:flex;flex-direction:column;max-height:92vh">
-
-    <!-- ── Scrollable body ── -->
-    <div id="structModalBody" style="flex:1;overflow-y:auto;padding:16px 20px 8px;min-height:0">
-
+<div class="struct-modal-inner" style="padding:0;max-width:min(980px,96vw);width:100%;display:flex;flex-direction:column;max-height:92vh">
+<!-- ── Scrollable body ── -->
+<div id="structModalBody" style="flex:1;overflow-y:auto;padding:16px 20px 8px;min-height:0">
 <!-- Caption bar -->
 <div id="structModalCaption" style="font-size:12px;color:#5d6b74;margin-bottom:8px;text-align:center;min-height:18px"></div>
-
 <!-- Current saved structure at top -->
-<div id="structThumbRow" class="struct-current-row">
-  <div class="struct-current-label">Current saved structure</div>
-  <img id="structModalThumb" src="" alt="Current saved structure">
+<div class="struct-current-row" id="structThumbRow">
+<div class="struct-current-label">Current saved structure</div>
+<img alt="Current saved structure" id="structModalThumb" src=""/>
 </div>
-
 <!-- Full page preview, small in modal, large on hover -->
-<div id="structPagePreviewWrap" class="struct-page-preview-wrap">
-  <div class="struct-page-preview-label">Full page preview, hover to enlarge</div>
-  <img id="structModalImg" class="struct-page-small" src="" alt="Full page preview">
-  <div class="struct-page-hover">
-    <img id="structModalImgHover" src="" alt="Full page enlarged preview">
-  </div>
+<div class="struct-page-preview-wrap" id="structPagePreviewWrap">
+<div class="struct-page-preview-label">Full page preview, hover to enlarge</div>
+<img alt="Full page preview" class="struct-page-small" id="structModalImg" src=""/>
+<div class="struct-page-hover">
+<img alt="Full page enlarged preview" id="structModalImgHover" src=""/>
 </div>
-
+</div>
 <!-- Full page crop layer, hidden until crop mode is on -->
-<div id="structCropWrap" class="crop-wrap" style="display:none;margin:0 auto">
-  <img id="structCropImg" src="" alt="Full page crop image">
-  <div id="cropSelection" class="crop-selection"></div>
-  <div id="cropHandle" class="crop-handle"></div>
+<div class="crop-wrap" id="structCropWrap" style="display:none;margin:0 auto">
+<img alt="Full page crop image" id="structCropImg" src=""/>
+<div class="crop-selection" id="cropSelection"></div>
+<div class="crop-handle" id="cropHandle"></div>
 </div>
-
 <!-- Fallback: just the cropped struct -->
-<img id="structModalImgFallback" src="" alt="Chemical structure"
-  style="display:none;max-width:80vw;max-height:72vh;margin:0 auto;border-radius:4px">
-
+<img alt="Chemical structure" id="structModalImgFallback" src="" style="display:none;max-width:80vw;max-height:72vh;margin:0 auto;border-radius:4px"/>
 <!-- Crop hint -->
 <div class="crop-hint" id="cropHint" style="display:none;margin-top:6px">
   Click and drag on the full page image to select a crop region, then click <strong>Save crop</strong>.
 </div>
-
 <!-- Crop preview -->
 <canvas id="cropCanvas" style="display:none"></canvas>
 <div id="cropPreviewWrap" style="display:none;margin-top:10px;text-align:center">
-  <div style="font-size:11px;color:#5d6b74;margin-bottom:6px">Crop preview, click <strong>Save crop</strong> to apply</div>
-  <img id="cropPreviewImg" src="" alt="Crop preview"
-    style="display:block;margin:0 auto;max-width:360px;max-height:240px;border:2px solid var(--ipa-web-teal);border-radius:8px;background:#fff">
+<div style="font-size:11px;color:#5d6b74;margin-bottom:6px">Crop preview, click <strong>Save crop</strong> to apply</div>
+<img alt="Crop preview" id="cropPreviewImg" src="" style="display:block;margin:0 auto;max-width:360px;max-height:240px;border:2px solid var(--ipa-web-teal);border-radius:8px;background:#fff"/>
 </div>
-
-    </div><!-- end scrollable body -->
-
-    <!-- ── STICKY FOOTER ── -->
-    <div id="structModalFooter" style="
+</div><!-- end scrollable body -->
+<!-- ── STICKY FOOTER ── -->
+<div id="structModalFooter" style="
       flex:0 0 auto;
       border-top:1px solid var(--border);
       background:#f8fbfc;
@@ -647,591 +748,545 @@ tr.g5Row td{background:rgba(142,108,47,.06)}tr.g6Row td{background:rgba(21,101,1
       gap:10px;
       border-radius:0 0 12px 12px;
     ">
-
-      <!-- Indicative claim row -->
-      <div id="structFooterClaimRow" style="display:none;align-items:center;gap:10px;flex-wrap:wrap">
-        <label style="font-size:12px;font-weight:700;color:#38515f;white-space:nowrap">Indicative claim</label>
-        <input id="structFooterClaimInput" type="number" min="1" step="1"
-          placeholder="Claim no."
-          style="width:90px;padding:6px 9px;border:1px solid rgba(29,37,44,.18);border-radius:7px;font-size:12px;background:#fff"
-          onchange="structSetClaimFromFooter(this.value)">
-        <span id="structFooterClaimPill" style="font-size:11px;color:#5d6b74"></span>
-        <button style="padding:5px 12px;font-size:11px;border-radius:7px;background:var(--ipa-web-teal);color:#fff;border:none;cursor:pointer;font-weight:700"
-          onclick="structSetClaimFromFooter(document.getElementById('structFooterClaimInput').value)">
+<!-- Indicative claim row -->
+<div id="structFooterClaimRow" style="display:none;align-items:center;gap:10px;flex-wrap:wrap">
+<label style="font-size:12px;font-weight:700;color:#38515f;white-space:nowrap">Indicative claim</label>
+<input id="structFooterClaimInput" min="1" onchange="structSetClaimFromFooter(this.value)" placeholder="Claim no." step="1" style="width:90px;padding:6px 9px;border:1px solid rgba(29,37,44,.18);border-radius:7px;font-size:12px;background:#fff" type="number"/>
+<span id="structFooterClaimPill" style="font-size:11px;color:#5d6b74"></span>
+<button onclick="structSetClaimFromFooter(document.getElementById('structFooterClaimInput').value)" style="padding:5px 12px;font-size:11px;border-radius:7px;background:var(--ipa-web-teal);color:#fff;border:none;cursor:pointer;font-weight:700">
           Apply
         </button>
-      </div>
-
-      <!-- Action buttons -->
-      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-        <button id="structCropModeBtn"
-          style="padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(0,129,156,.3);background:rgba(0,129,156,.12);color:var(--ipa-web-teal);cursor:pointer"
-          onclick="structToggleCropMode()">✂ Crop mode</button>
-
-        <button id="structSaveCropBtn"
-          style="display:none;padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:none;background:var(--ipa-web-teal);color:#fff;cursor:pointer"
-          onclick="structSaveCrop()">💾 Save crop</button>
-
-        <button id="structClearCropBtn"
-          style="display:none;padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(29,37,44,.18);background:#fff;color:#26343d;cursor:pointer"
-          onclick="structClearCrop()">✕ Clear</button>
-
-        <label style="padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(29,37,44,.18);background:#fff;color:#26343d;cursor:pointer;display:inline-flex;align-items:center;gap:5px">
-          ↑ Replace file
-          <input type="file" accept="image/*" style="display:none"
-            onchange="structReplaceFromFile(this)">
-        </label>
-
-        <button
-          style="padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(0,129,156,.3);background:rgba(0,129,156,.10);color:var(--ipa-web-teal);cursor:pointer"
-          title="Paste image from clipboard (Ctrl+V)"
-          onclick="structPasteFromClipboard()">📋 Paste</button>
-
-        <button id="structDelinkBtn"
-          style="padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(198,64,64,.3);background:rgba(198,64,64,.08);color:#7a2727;cursor:pointer"
-          onclick="structDelinkFromFooter()">✕ Delink</button>
-
-        <button
-          style="padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(29,37,44,.18);background:#fff;color:#26343d;cursor:pointer;margin-left:auto"
-          onclick="structModalClose()">Close</button>
-      </div>
-
-    </div><!-- end sticky footer -->
-
-  </div>
 </div>
-
+<!-- Action buttons -->
+<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+<button id="structCropModeBtn" onclick="structToggleCropMode()" style="padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(0,129,156,.3);background:rgba(0,129,156,.12);color:var(--ipa-web-teal);cursor:pointer">✂ Crop mode</button>
+<button id="structSaveCropBtn" onclick="structSaveCrop()" style="display:none;padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:none;background:var(--ipa-web-teal);color:#fff;cursor:pointer">💾 Save crop</button>
+<button id="structClearCropBtn" onclick="structClearCrop()" style="display:none;padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(29,37,44,.18);background:#fff;color:#26343d;cursor:pointer">✕ Clear</button>
+<label style="padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(29,37,44,.18);background:#fff;color:#26343d;cursor:pointer;display:inline-flex;align-items:center;gap:5px">
+          ↑ Replace file
+          <input accept="image/*" onchange="structReplaceFromFile(this)" style="display:none" type="file"/>
+</label>
+<button onclick="structPasteFromClipboard()" style="padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(0,129,156,.3);background:rgba(0,129,156,.10);color:var(--ipa-web-teal);cursor:pointer" title="Paste image from clipboard (Ctrl+V)">📋 Paste</button>
+<button id="structDelinkBtn" onclick="structDelinkFromFooter()" style="padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(198,64,64,.3);background:rgba(198,64,64,.08);color:#7a2727;cursor:pointer">✕ Delink</button>
+<button onclick="structModalClose()" style="padding:8px 14px;font-size:12px;border-radius:7px;font-weight:700;border:1px solid rgba(29,37,44,.18);background:#fff;color:#26343d;cursor:pointer;margin-left:auto">Close</button>
+</div>
+</div><!-- end sticky footer -->
+</div>
+</div>
 <!-- ── BANNER ── -->
 <div class="top-banner">
-  <div class="banner-inner">
-    <div class="banner-title">
-      <h1>Patent Examiner Virtual Assistant</h1>
-      <div class="sub">PowerOCR + claim extraction + chemical structure layer, CPC 2026.05, unity assessment, claim mapping, claims tree, figure labeller, LLM chat, Copilot prompt sidecar, PERP builder</div>
-    </div>
-    <div style="display:flex;align-items:center;gap:14px;flex:0 0 auto">
-      <div id="bannerPdfWrap" style="display:none;align-items:center">
-        <a id="bannerPdfLink" class="banner-pdf-link" href="#" target="_blank" rel="noopener"
-           title="Open uploaded claims PDF in new tab">
-          <span class="pdf-ico">📄</span>
-          <span class="banner-pdf-name" id="bannerPdfName">Claims PDF</span>
-        </a>
-      </div>
-      <div class="banner-right">
-        <img src="./IP Aust_inline_white_95pxhigh.png" alt="IP Australia"/>
-      </div>
-    </div>
-  </div>
+<div class="banner-inner">
+<div class="banner-title"><div class="header-tool-badge"><div class="header-ipa-brand"><img alt="IP Australia" class="header-ipa-logo" src="./IP Aust_inline_white_95pxhigh.png"/></div><span aria-hidden="true" class="header-divider"></span><div aria-hidden="true" class="header-picon"><svg focusable="false" height="32" viewbox="0 0 32 32" width="32" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" fill="none" r="14" stroke="#87CFDE" stroke-width="2.4"></circle><text fill="#87CFDE" font-family="Public Sans, Arial, sans-serif" font-size="15" font-weight="800" text-anchor="middle" x="16" y="21">P</text></svg></div><div class="header-tool-text"><span class="tool-line1">Patent Examiner</span><span class="tool-line2">Virtual Assistant</span></div></div></div>
+<div style="display:flex;align-items:center;gap:14px;flex:0 0 auto">
+<div id="bannerPdfWrap" style="display:none;align-items:center">
+<a class="banner-pdf-link" href="#" id="bannerPdfLink" rel="noopener" target="_blank" title="Open uploaded claims PDF in new tab">
+<span class="pdf-ico">📄</span>
+<span class="banner-pdf-name" id="bannerPdfName">Claims PDF</span>
+</a>
 </div>
-
+</div>
+</div>
+</div>
 <!-- ── SHELL ── -->
-<div id="shell" class="shell">
-  <aside class="sidebar" aria-label="Workspace navigation">
-    <div class="nav-scroll">
-      <div class="nav-group">
-        <div class="nav-spacer" aria-hidden="true"></div>
-        <button type="button" class="nav-link active" data-tab-target="tab-home"><span class="nav-ico">⌂</span><span class="nav-label">Main Workspace</span></button>
-        <button type="button" class="nav-link" data-tab-target="tab-edit"><span class="nav-ico">✎</span><span class="nav-label">Edit concepts</span><span id="navCountEdit" class="nav-count" hidden></span></button>
-      </div>
-      <div class="nav-group">
-        <button type="button" class="nav-link" data-tab-target="tab-highlight"><span class="nav-ico">▣</span><span class="nav-label">Highlighted text</span><span id="navCountHighlight" class="nav-count" hidden></span></button>
-        <button type="button" class="nav-link" data-tab-target="tab-reasoning"><span class="nav-ico">◎</span><span class="nav-label">Concept reasoning</span><span id="navCountReasoning" class="nav-count" hidden></span></button>
-        <button type="button" class="nav-link" data-tab-target="tab-cpc"><span class="nav-ico">≣</span><span class="nav-label">CPC tables</span><span id="navCountCpc" class="nav-count" hidden></span></button>
-        <button type="button" class="nav-link" data-tab-target="tab-exam-analysis"><span class="nav-ico">✦</span><span class="nav-label">Virtual Exam Analysis</span></button>
-        <button type="button" class="nav-link" data-tab-target="tab-unity"><span class="nav-ico">⚯</span><span class="nav-label">Unity assessment</span><span id="navCountUnity" class="nav-count" hidden></span></button>
-        <button type="button" class="nav-link" data-tab-target="tab-mapping"><span class="nav-ico">☰</span><span class="nav-label">Claim mapping</span><span id="navCountMapping" class="nav-count" hidden></span></button>
-        <button type="button" class="nav-link" data-tab-target="tab-tree"><span class="nav-ico">⎇</span><span class="nav-label">Claims tree</span><span id="navCountTree" class="nav-count" hidden></span></button>
-        <button type="button" class="nav-link" data-tab-target="tab-figure"><span class="nav-ico">▧</span><span class="nav-label">Figure Labeller</span><span id="navCountFigure" class="nav-count" hidden></span></button>
-        <button type="button" class="nav-link" data-tab-target="tab-llm-chat"><span class="nav-ico">◉</span><span class="nav-label">LLM chat</span></button>
-        <button type="button" class="nav-link" data-tab-target="tab-perp"><span class="nav-ico">¶</span><span class="nav-label">PERP builder</span></button>
-      </div>
-    </div>
-    <div class="sidebar-footer"><button id="navCollapseBtn" type="button" class="nav-collapse-btn" aria-expanded="true"><span class="collapse-icon">«</span><span class="collapse-text">Collapse navigation</span></button></div>
-  </aside>
-
-  <main id="mainArea" class="main-area">
-    <div class="workspace-head">
-      <div class="workspace-title" id="workspaceTitle">Main Workspace</div>
-      <div class="workspace-tools">
-        <span class="workspace-chip">PowerOCR v55.0.5 LLM examiner ++ CPC 2026.05</span>
-        <button type="button" class="refresh-btn" onclick="refreshMainWorkspace()">↻ Reset</button>
-      </div>
-    </div>
-
-    <!-- ══════════════════════════════════════════════════════════════
+<div class="shell" id="shell">
+<aside aria-label="Workspace navigation" class="sidebar">
+<div class="nav-scroll">
+<div class="nav-group">
+<div aria-hidden="true" class="nav-spacer"></div>
+<button class="nav-link active" data-tab-target="tab-home" type="button"><span class="nav-ico">⌂</span><span class="nav-label">Main Workspace</span></button>
+<button class="nav-link" data-tab-target="tab-edit" type="button"><span class="nav-ico">✎</span><span class="nav-label">Edit concepts</span><span class="nav-count" hidden="" id="navCountEdit"></span></button>
+</div>
+<div class="nav-group">
+<button class="nav-link" data-tab-target="tab-highlight" type="button"><span class="nav-ico">▣</span><span class="nav-label">Highlighted text</span><span class="nav-count" hidden="" id="navCountHighlight"></span></button>
+<button class="nav-link" data-tab-target="tab-reasoning" type="button"><span class="nav-ico">◎</span><span class="nav-label">Concept reasoning</span><span class="nav-count" hidden="" id="navCountReasoning"></span></button>
+<button class="nav-link" data-tab-target="tab-cpc" type="button"><span class="nav-ico">≣</span><span class="nav-label">CPC tables</span><span class="nav-count" hidden="" id="navCountCpc"></span></button>
+<button class="nav-link" data-tab-target="tab-exam-analysis" type="button"><span class="nav-ico">✦</span><span class="nav-label">Virtual Exam Analysis</span></button>
+<button class="nav-link" data-tab-target="tab-unity" type="button"><span class="nav-ico">⚯</span><span class="nav-label">Unity assessment</span><span class="nav-count" hidden="" id="navCountUnity"></span></button>
+<button class="nav-link" data-tab-target="tab-mapping" type="button"><span class="nav-ico">☰</span><span class="nav-label">Claim mapping</span><span class="nav-count" hidden="" id="navCountMapping"></span></button>
+<button class="nav-link" data-tab-target="tab-tree" type="button"><span class="nav-ico">⎇</span><span class="nav-label">Claims tree</span><span class="nav-count" hidden="" id="navCountTree"></span></button>
+<button class="nav-link" data-tab-target="tab-figure" type="button"><span class="nav-ico">▧</span><span class="nav-label">Figure Labeller</span><span class="nav-count" hidden="" id="navCountFigure"></span></button>
+<button class="nav-link" data-tab-target="tab-llm-chat" type="button"><span class="nav-ico">◉</span><span class="nav-label">LLM chat</span></button>
+<button class="nav-link" data-tab-target="tab-perp" type="button"><span class="nav-ico">¶</span><span class="nav-label">PERP builder</span></button>
+</div>
+</div>
+<div class="sidebar-footer"><button aria-expanded="true" class="nav-collapse-btn" id="navCollapseBtn" type="button"><span class="collapse-icon">«</span><span class="collapse-text">Collapse navigation</span></button></div>
+</aside>
+<main class="main-area" id="mainArea">
+<div class="workspace-head">
+<div class="workspace-title" id="workspaceTitle">Main Workspace</div>
+<div class="workspace-tools">
+<span class="workspace-chip">PowerOCR v59.1.0 LLM examiner ++ CPC 2026.05</span>
+<button class="refresh-btn" onclick="refreshMainWorkspace()" type="button">↻ Reset</button>
+</div>
+</div>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: MAIN WORKSPACE
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-home" class="tab-panel active">
-      <div class="board-card">
-        <div class="board-head">
-          <div class="board-title">Patent claims text analysis</div>
-          <div class="board-meta">PowerOCR extraction → claims editor → CPC analysis</div>
-        </div>
-        <div class="board-body">
-          <!-- SUBTAB BAR (icons match left nav style) -->
-          <div class="subtab-bar">
-            <button class="subtab-btn active" data-subtab="st-extract">
-              <span class="st-ico">⌂</span>Extract Claims
-            </button>
-            <button class="subtab-btn" data-subtab="st-fulltext">
-              <span class="st-ico">▣</span>Full Extracted Text
-            </button>
-            <button class="subtab-btn" data-subtab="st-editor">
-              <span class="st-ico">✎</span>Claims Editor
-            </button>
-            <button class="subtab-btn" data-subtab="st-cpc">
-              <span class="st-ico">≣</span>CPC Analysis
-            </button>
-          </div>
-
-          <!-- ── SUBTAB: EXTRACT CLAIMS ── -->
-          <div class="subtab-panel active" id="st-extract">
-            <div class="claims-pdf-bar">
-              <label for="pocFileInput" class="claims-pdf-label">Upload claims PDF</label>
-              <input type="file" id="pocFileInput" accept=".pdf" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none"/>
-              <span class="claims-pdf-file" id="pocFileName">No file selected</span>
-              <span class="poc-pill f" id="pocParseBadge" style="display:none"></span>
-              <span class="poc-pill f" id="pocConfBadge" style="display:none"></span>
-              <span class="poc-chem-badge" id="pocChemBadge" style="display:none">🧪 Chemical PDF detected — structure extraction active</span>
-            </div>
-            <div class="poc-work" id="pocWorkArea">
-              <div class="poc-lp">
-                <div class="poc-ltxt" id="pocLeftText">
-                  <span style="color:#7a8792;font-style:italic">Upload a PDF to extract and preview claims…</span>
-                </div>
-              </div>
-              <div class="poc-div" id="pocDivider"></div>
-              <div class="poc-rp">
-                <div class="poc-rbox">
-                  <div class="poc-rhead">
-                    <div class="poc-rht">Claims extraction preview</div>
-                    <button class="poc-cbtn" id="pocTogglePreview">Close</button>
-                  </div>
-                  <div class="poc-rbody" id="pocPreviewBody">
-                    <span style="color:#7a8792;font-style:italic;display:block;text-align:center;padding:24px">Upload a PDF to see claims with any detected inline chemical structures.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="poc-acts">
-  <button class="poc-pbtn" id="pocSendToCpcBtn" style="background:#5D2067">≣ Send to CPC Analysis</button>
-  <span class="poc-sline"><span class="poc-spin" id="pocSpin"></span><span id="pocStat"></span></span>
+<section class="tab-panel active" id="tab-home">
+<div class="board-card">
+<div class="board-head">
+<div class="board-title">Patent claims text analysis</div>
+<div class="board-meta">PowerOCR extraction → claims editor → CPC analysis</div>
 </div>
-            <div class="poc-note"><strong>Note:</strong> Structure image extraction uses the refined PowerOCR-fusion crop detector when the PDF content is chemistry-related. Noise lines (recurring headers, footers, application numbers) are automatically removed. No data leaves your browser.</div>
-          </div>
+<div class="board-body">
+<!-- SUBTAB BAR (icons match left nav style) -->
+<div class="subtab-bar">
+<button class="subtab-btn active" data-subtab="st-extract">
+<span class="st-ico">⌂</span>Extract Claims
+            </button>
+<button class="subtab-btn" data-subtab="st-paste"><span class="st-ico">⌨</span>Paste Claims</button>
+<button class="subtab-btn" data-subtab="st-fulltext">
+<span class="st-ico">▣</span>Full Extracted Text
+            </button>
+<button class="subtab-btn" data-subtab="st-editor">
+<span class="st-ico">✎</span>Claims Editor
+            </button>
+<button class="subtab-btn" data-subtab="st-cpc">
+<span class="st-ico">≣</span>CPC Analysis
+            </button>
+</div>
+<!-- ── SUBTAB: EXTRACT CLAIMS ── -->
+<div class="subtab-panel active" id="st-extract">
+<div class="claims-pdf-bar">
+<label class="claims-pdf-label" for="pocFileInput">Upload claims PDF</label>
+<input accept=".pdf" id="pocFileInput" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" type="file"/>
+<span class="claims-pdf-file" id="pocFileName">No file selected</span>
+<span class="poc-pill f" id="pocParseBadge" style="display:none"></span>
+<span class="poc-pill f" id="pocConfBadge" style="display:none"></span>
+<span class="poc-chem-badge" id="pocChemBadge" style="display:none">🧪 Chemical PDF detected — structure extraction active</span>
+</div>
+<div class="poc-work" id="pocWorkArea">
+<div class="poc-lp">
+<div class="poc-ltxt" id="pocLeftText">
+<span style="color:#7a8792;font-style:italic">Upload a PDF to extract and preview claims…</span>
+</div>
+</div>
+<div class="poc-div" id="pocDivider"></div>
+<div class="poc-rp">
+<div class="poc-rbox">
+<div class="poc-rhead">
+<div class="poc-rht">Claims extraction preview</div>
+<button class="poc-cbtn" id="pocTogglePreview">Close</button>
+</div>
+<div class="poc-rbody" id="pocPreviewBody">
+<span style="color:#7a8792;font-style:italic;display:block;text-align:center;padding:24px">Upload a PDF to see claims with any detected inline chemical structures.</span>
+</div>
+</div>
+</div>
+</div>
+<div class="poc-acts">
+<button class="poc-pbtn" id="pocSendToCpcBtn" style="background:#5D2067">≣ Send to CPC Analysis</button>
+<span class="poc-sline"><span class="poc-spin" id="pocSpin"></span><span id="pocStat"></span></span>
+</div>
+<div class="poc-note"><strong>Note:</strong> Structure image extraction uses the refined PowerOCR-fusion crop detector when the PDF content is chemistry-related. Noise lines (recurring headers, footers, application numbers) are automatically removed. No data leaves your browser.</div>
+</div>
+<div class="subtab-panel" id="st-paste">
+<div class="v56-paste-wrap">
+<div class="board-title" style="font-size:16px">Paste plain-text claims</div>
+<div class="v56-paste-help" id="v56PasteHelp">Paste a complete numbered claim set. Long claims may continue over any number of lines. Standalone AMENDED SHEET labels and page furniture are ignored, while the complete amended wording is retained.</div>
+<label for="v56PasteInput" style="font-weight:700">Plain-text patent claims</label>
+<textarea aria-describedby="v56PasteHelp v56PasteStatus" class="v56-paste-text" id="v56PasteInput" placeholder="1. First claim text…
 
-          <!-- ── SUBTAB: FULL EXTRACTED TEXT ── -->
-          <div class="subtab-panel" id="st-fulltext">
-            <div class="poc-fulltext-header">
-              <div style="font-weight:700;font-size:13px;color:#355062">Full Extracted Claims Text</div>
-              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-                <button class="poc-pbtn" id="pocCopyTextBtn">Copy all text</button>
-                <button class="poc-pbtn" style="background:#5D2067" id="pocSendToCpcBtn2">≣ Send to CPC Analysis</button>
-              </div>
-            </div>
-            <div class="poc-fulltext" id="pocFullText">No text extracted yet. Upload a PDF in the Extract Claims tab.</div>
+2. The method of claim 1…" spellcheck="false"></textarea>
+<div class="v56-paste-actions"><button class="poc-pbtn" id="v56ImportBtn" type="button">Import claims</button><button class="poc-cbtn" id="v56ClearBtn" type="button">Clear</button><span aria-live="polite" class="v56-status" id="v56PasteStatus" role="status">No plain text imported.</span></div>
+</div>
+</div>
+<!-- ── SUBTAB: FULL EXTRACTED TEXT ── -->
+<div class="subtab-panel" id="st-fulltext">
+<div class="poc-fulltext-header">
+<div style="font-weight:700;font-size:13px;color:#355062">Full Extracted Claims Text</div>
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+<button class="poc-pbtn" id="pocCopyTextBtn">Copy all text</button>
+<button class="poc-pbtn" id="pocSendToCpcBtn2" style="background:#5D2067">≣ Send to CPC Analysis</button>
+</div>
+</div>
+<div class="poc-fulltext" id="pocFullText">No text extracted yet. Upload a PDF in the Extract Claims tab.</div>
 <div class="poc-noise-audit" id="pocNoiseAudit">
-  <div class="poc-noise-audit-head"><span>What was removed as noise</span><span class="muted">headers, footers, page numbers, stamps and filter matches</span></div>
-  <div class="poc-noise-audit-body" id="pocNoiseAuditList"><div class="poc-noise-row">Run extraction to see removed noise lines.</div></div>
+<div class="poc-noise-audit-head"><span>What was removed as noise</span><span class="muted">headers, footers, page numbers, stamps and filter matches</span></div>
+<div class="poc-noise-audit-body" id="pocNoiseAuditList"><div class="poc-noise-row">Run extraction to see removed noise lines.</div></div>
 </div>
-
-          </div>
-
+</div>
 <!-- ── SUBTAB: CLAIMS EDITOR ── -->
-          <div class="subtab-panel" id="st-editor">
-            <div class="poc-note" style="margin-bottom:10px"><strong>Editor:</strong> Each claim is an editable block. Detected chemical images are not inserted inline. They are listed in the right panel with an indicative claim link that can be edited by the user. Edits autosave. Click "Send to CPC Analysis" when ready.</div>
-            <div class="poc-editor-wrap">
-              <div class="poc-editor-toolbar">
-  <button onclick="document.execCommand('bold')"><b>B</b></button>
-  <button onclick="document.execCommand('italic')"><i>I</i></button>
-  <button onclick="document.execCommand('underline')"><u>U</u></button>
-  <button onclick="document.execCommand('insertUnorderedList')">• List</button>
-  <button onclick="document.execCommand('removeFormat')">Clear</button>
-  <button onclick="pocAddNewClaim()" title="Add a new blank claim at the end" style="background:rgba(0,129,156,.12);border-color:rgba(0,129,156,.3);color:var(--ipa-web-teal)">+ Add claim</button>
-  <button onclick="pocAddClaimAfterCurrent()" title="Insert a new blank claim after the currently focused claim" style="background:rgba(0,129,156,.12);border-color:rgba(0,129,156,.3);color:var(--ipa-web-teal)">+ Insert after</button>
-  <button onclick="pocDeleteFocusedClaim()" title="Delete the currently focused claim block" style="background:rgba(198,64,64,.08);border-color:rgba(198,64,64,.22);color:#7a2727">✕ Delete claim</button>
-  <button onclick="pocRenumberClaims()" title="Renumber all claims 1,2,3… sequentially">⟳ Renumber all</button>
-  <button onclick="pocRefreshEditor()" title="Reload from extraction">↺ Reload</button>
+<div class="subtab-panel" id="st-editor">
+<div class="poc-note" style="margin-bottom:10px"><strong>Editor:</strong> Each claim is an editable block. Detected chemical images are not inserted inline. They are listed in the right panel with an indicative claim link that can be edited by the user. Edits autosave. Click "Send to CPC Analysis" when ready.</div>
+<div class="poc-editor-wrap">
+<div class="poc-editor-toolbar">
+<button onclick="document.execCommand('bold')"><b>B</b></button>
+<button onclick="document.execCommand('italic')"><i>I</i></button>
+<button onclick="document.execCommand('underline')"><u>U</u></button>
+<button onclick="document.execCommand('insertUnorderedList')">• List</button>
+<button onclick="document.execCommand('removeFormat')">Clear</button>
+<button onclick="pocAddNewClaim()" style="background:rgba(0,129,156,.12);border-color:rgba(0,129,156,.3);color:var(--ipa-web-teal)" title="Add a new blank claim at the end">+ Add claim</button>
+<button onclick="pocAddClaimAfterCurrent()" style="background:rgba(0,129,156,.12);border-color:rgba(0,129,156,.3);color:var(--ipa-web-teal)" title="Insert a new blank claim after the currently focused claim">+ Insert after</button>
+<button onclick="pocDeleteFocusedClaim()" style="background:rgba(198,64,64,.08);border-color:rgba(198,64,64,.22);color:#7a2727" title="Delete the currently focused claim block">✕ Delete claim</button>
+<button onclick="pocRenumberClaims()" title="Renumber all claims 1,2,3… sequentially">⟳ Renumber all</button>
+<button onclick="pocRefreshEditor()" title="Reload from extraction">↺ Reload</button>
 </div>
-              <div class="poc-editor-collapse-row">
-                <button id="pocChemCollapseBtn" class="poc-cbtn" type="button">Hide detected images panel</button>
-              </div>
-              <div class="poc-editor-split" id="pocEditorSplit">
-                <div class="poc-editor-left">
-                  <div class="poc-editor-content" id="pocEditorContent" spellcheck="true">
-                    <p style="color:#7a8792;font-style:italic">Extract claims first (Extract Claims tab).</p>
-                  </div>
-                </div>
-                <div class="poc-editor-divider" id="pocEditorDivider" title="Drag to resize. Double-click to reset."></div>
-                <aside class="poc-chem-side" id="pocChemSide">
-                  <div class="poc-chem-head">
-                    <div>
-                      <div class="poc-chem-title">Detected images</div>
-                      <div class="poc-chem-note">Indicative claim links can be edited below.</div>
-                    </div>
-                    <div class="poc-chem-tools">
-                      <button type="button" class="poc-cbtn" id="pocChemDeleteAllBtn">Delete all</button>
-                      <button type="button" class="poc-cbtn" id="pocChemRestoreAllBtn">Restore all</button>
-                    </div>
-                  </div>
-                  <div class="poc-chem-headerbar"><span class="poc-chem-count" id="pocChemCount">No detected images</span></div>
-                  <div class="poc-chem-body" id="pocChemPanelBody">
-                    <div class="poc-chem-empty">Detected images will appear here after extraction.</div>
-                  </div>
-                </aside>
-              </div>
-              <div class="poc-editor-footer">
-                <button class="poc-pbtn" id="pocEditorSendBtn" style="background:#5D2067">Save &amp; Send to CPC Analysis →</button>
-                <button class="poc-pbtn" style="background:#fff;color:var(--ipa-web-teal);border:1px solid #9fd1de" onclick="pocSaveEditor()">Save edits</button>
-                <span class="poc-autosave" id="pocAutoSave"></span>
-              </div>
-            </div>
-          </div>
-
-          <!-- ── SUBTAB: CPC ANALYSIS ── -->
-          <div class="subtab-panel" id="st-cpc">
-            <div class="main-input-col">
-              <textarea id="patentText" placeholder="Claims text appears here after extraction, or paste directly…"></textarea>
-              <div class="actions">
-                <button id="btn" onclick="runAll()">Analyse &amp; Predict CPC</button>
-                <span id="status" class="status"><span id="spinner" class="spinner"></span><span id="statusText"></span></span>
-              </div>
-            </div>
-            <div id="filterBox" class="filter-card open" style="margin-top:12px">
-              <div class="filter-head"><div class="filter-title">Filters</div><button id="filterToggleBtn" type="button" class="toggle-btn" onclick="toggleFilters()">Close</button></div>
-              <div class="filters-body">
-                <div class="small-inputs">
-                  <label>Top phrases <input id="kwCount" type="number" min="5" max="40" value="12"/></label>
-                  <label>Tracked phrases <input id="termCount" type="number" min="1" max="25" value="12"/></label>
-                  <label>Results per phrase <input id="limitPerTerm" type="number" min="1" max="12" value="6"/></label>
-                  <label>Invention results <input id="invCount" type="number" min="1" max="15" value="6"/></label>
-                  <label>Additional results <input id="addCount" type="number" min="1" max="30" value="4"/></label>
-                  <label>Extraction mode <select id="extractMode"><option value="hybrid" selected>Hybrid CPC-aware</option><option value="legacy">Legacy TF-IDF</option></select></label>
-                  <label>Concepts to Query <input id="queryCount" type="number" min="2" max="12" value="4"/></label>
-                  <label>Auto synonyms <input id="autoSyn" type="checkbox" checked/></label>
-                </div>
-              </div>
-            </div>
-            <div class="compliance-banner"><strong>Compliance Notice</strong><br>This tool uses a rules-based CPC definition reasoning layer. Outputs <u>must be reviewed and validated by the user</u> before use.</div>
-            <div class="exam-tip"><strong>Workflow:</strong> Extract claims → Send to CPC Analysis → click <strong>Analyse &amp; Predict CPC</strong>. All other tabs populate automatically.</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════════════
+<div class="poc-editor-collapse-row">
+<button class="poc-cbtn" id="pocChemCollapseBtn" type="button">Hide detected images panel</button>
+</div>
+<div class="poc-editor-split" id="pocEditorSplit">
+<div class="poc-editor-left">
+<div class="poc-editor-content" id="pocEditorContent" spellcheck="true">
+<p style="color:#7a8792;font-style:italic">Extract claims first (Extract Claims tab).</p>
+</div>
+</div>
+<div class="poc-editor-divider" id="pocEditorDivider" title="Drag to resize. Double-click to reset."></div>
+<aside class="poc-chem-side" id="pocChemSide">
+<div class="poc-chem-head">
+<div>
+<div class="poc-chem-title">Detected images</div>
+<div class="poc-chem-note">Indicative claim links can be edited below.</div>
+</div>
+<div class="poc-chem-tools">
+<button class="poc-cbtn" id="pocChemDeleteAllBtn" type="button">Delete all</button>
+<button class="poc-cbtn" id="pocChemRestoreAllBtn" type="button">Restore all</button>
+</div>
+</div>
+<div class="poc-chem-headerbar"><span class="poc-chem-count" id="pocChemCount">No detected images</span></div>
+<div class="poc-chem-body" id="pocChemPanelBody">
+<div class="poc-chem-empty">Detected images will appear here after extraction.</div>
+</div>
+</aside>
+</div>
+<div class="poc-editor-footer">
+<button class="poc-pbtn" id="pocEditorSendBtn" style="background:#5D2067">Save &amp; Send to CPC Analysis →</button>
+<button class="poc-pbtn" onclick="pocSaveEditor()" style="background:#fff;color:var(--ipa-web-teal);border:1px solid #9fd1de">Save edits</button>
+<span class="poc-autosave" id="pocAutoSave"></span>
+</div>
+</div>
+</div>
+<!-- ── SUBTAB: CPC ANALYSIS ── -->
+<div class="subtab-panel" id="st-cpc">
+<div class="main-input-col">
+<textarea id="patentText" placeholder="Claims text appears here after extraction, or paste directly…"></textarea>
+<div class="actions">
+<button id="btn" onclick="runAll()">Analyse &amp; Predict CPC</button>
+<span class="status" id="status"><span class="spinner" id="spinner"></span><span id="statusText"></span></span>
+</div>
+</div>
+<div class="filter-card open" id="filterBox" style="margin-top:12px">
+<div class="filter-head"><div class="filter-title">Filters</div><button class="toggle-btn" id="filterToggleBtn" onclick="toggleFilters()" type="button">Close</button></div>
+<div class="filters-body">
+<div class="small-inputs">
+<label>Top phrases <input id="kwCount" max="40" min="5" type="number" value="12"/></label>
+<label>Tracked phrases <input id="termCount" max="25" min="1" type="number" value="12"/></label>
+<label>Results per phrase <input id="limitPerTerm" max="12" min="1" type="number" value="6"/></label>
+<label>Invention results <input id="invCount" max="15" min="1" type="number" value="6"/></label>
+<label>Additional results <input id="addCount" max="30" min="1" type="number" value="4"/></label>
+<label>Extraction mode <select id="extractMode"><option selected="" value="hybrid">Hybrid CPC-aware</option><option value="legacy">Legacy TF-IDF</option></select></label>
+<label>Concepts to Query <input id="queryCount" max="12" min="2" type="number" value="4"/></label>
+<label>Auto synonyms <input checked="" id="autoSyn" type="checkbox"/></label>
+</div>
+</div>
+</div>
+<div class="compliance-banner"><strong>Compliance Notice</strong><br/>This tool uses a rules-based CPC definition reasoning layer. Outputs <u>must be reviewed and validated by the user</u> before use.</div>
+<div class="exam-tip"><strong>Workflow:</strong> Extract claims → Send to CPC Analysis → click <strong>Analyse &amp; Predict CPC</strong>. All other tabs populate automatically.</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: EDIT CONCEPTS
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-edit" class="tab-panel">
-      <div class="board-card">
-        <div class="board-head"><div class="board-title">&nbsp;</div><div class="board-meta">Edit extracted concepts — Pills, manual phrase add, synonym expansion and weighting</div></div>
-        <div class="edit-action-bar"><button id="rerunBtnEdit" class="secondary" onclick="runCpcOnly()" disabled>Re-run CPC with selected concepts or weighting changes</button></div>
-        <div class="board-body">
-          <div class="main-grid">
-            <div class="left-main"><div id="keywordContainer" class="results"><div id="editEmptyState" class="placeholder-box">Run <strong>Analyse &amp; Predict CPC</strong> in the Main Workspace to populate editable phrase pills.</div></div></div>
-            <div class="right-rail"><div id="synonymPanel" class="syn-panel" style="display:none"></div><div id="synonymPlaceholder" class="placeholder-box">Synonym expansion and term weighting will appear here after phrase extraction.</div></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════════════
+<section class="tab-panel" id="tab-edit">
+<div class="board-card">
+<div class="board-head"><div class="board-title"> </div><div class="board-meta">Edit extracted concepts — Pills, manual phrase add, synonym expansion and weighting</div></div>
+<div class="edit-action-bar"><button class="secondary" disabled="" id="rerunBtnEdit" onclick="runCpcOnly()">Re-run CPC with selected concepts or weighting changes</button></div>
+<div class="board-body">
+<div class="main-grid">
+<div class="left-main"><div class="results" id="keywordContainer"><div class="placeholder-box" id="editEmptyState">Run <strong>Analyse &amp; Predict CPC</strong> in the Main Workspace to populate editable phrase pills.</div></div></div>
+<div class="right-rail"><div class="syn-panel" id="synonymPanel" style="display:none"></div><div class="placeholder-box" id="synonymPlaceholder">Synonym expansion and term weighting will appear here after phrase extraction.</div></div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: HIGHLIGHTED TEXT
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-highlight" class="tab-panel">
-      <div class="board-card">
-        <div class="board-head"><div class="board-title">&nbsp;</div><div class="board-meta">Selected phrases highlighted based on analysis</div></div>
-        <div class="board-body"><div id="highlightedText" class="highlighted-text"></div></div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════════════
+<section class="tab-panel" id="tab-highlight">
+<div class="board-card">
+<div class="board-head"><div class="board-title"> </div><div class="board-meta">Selected phrases highlighted based on analysis</div></div>
+<div class="board-body"><div class="highlighted-text" id="highlightedText"></div></div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: CONCEPT REASONING
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-reasoning" class="tab-panel">
-      <div class="board-card">
-        <div class="board-head"><div class="board-title">&nbsp;</div><div class="board-meta">Concepts extracted from the analysis</div></div>
-        <div class="board-body"><div id="conceptPanel"></div></div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════════════
+<section class="tab-panel" id="tab-reasoning">
+<div class="board-card">
+<div class="board-head"><div class="board-title"> </div><div class="board-meta">Concepts extracted from the analysis</div></div>
+<div class="board-body"><div id="conceptPanel"></div></div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: CPC TABLES
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-cpc" class="tab-panel">
-      <div class="board-card">
-        <div class="board-head">
-          <div class="board-title">&nbsp;</div>
-          <div class="cpc-head-tools">
-            <button type="button" id="cpcRemovedBtn" class="refresh-btn" onclick="toggleRemovedCpcPanel()">Removed CPCs <span id="cpcRemovedCount" class="badge section" style="margin-left:6px">0</span> <span id="cpcRemovedArrow">▸</span></button>
-            <div class="board-meta">CPC results appear here after analysis</div>
-          </div>
-        </div>
-        <div class="board-body">
-          <div id="cpcRemovedPanel" class="cpc-removed-panel" style="display:none">
-            <div class="cpc-removed-head"><div class="board-title" style="font-size:13px">Removed CPCs in this session</div><div class="cpc-removed-actions"><button type="button" class="refresh-btn" onclick="restoreSelectedDismissedCpcs()">Restore selected</button><button type="button" class="refresh-btn" onclick="restoreAllDismissedCpcs()">Restore all</button></div></div>
-            <div id="cpcRemovedList" class="cpc-removed-list"><div class="muted">No removed CPCs in this session.</div></div>
-          </div>
-          <div id="cpcEditTip" class="exam-tip cpc-edit-tip"><strong>Tip:</strong> go to <strong>Edit concepts</strong> to change or select other concepts, then re-run CPC.</div>
-          <div class="compliance-banner"><strong>Compliance Notice</strong><br>Outputs are indicative only and <u>must be reviewed and validated by the user</u> prior to use.</div><br>
-          <div id="cpcResults" class="results"><div class="placeholder-box">Run the workflow to populate the CPC tables.</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════════════
+<section class="tab-panel" id="tab-cpc">
+<div class="board-card">
+<div class="board-head">
+<div class="board-title"> </div>
+<div class="cpc-head-tools">
+<button class="refresh-btn" id="cpcRemovedBtn" onclick="toggleRemovedCpcPanel()" type="button">Removed CPCs <span class="badge section" id="cpcRemovedCount" style="margin-left:6px">0</span> <span id="cpcRemovedArrow">▸</span></button>
+<div class="board-meta">CPC results appear here after analysis</div>
+</div>
+</div>
+<div class="board-body">
+<div class="cpc-removed-panel" id="cpcRemovedPanel" style="display:none">
+<div class="cpc-removed-head"><div class="board-title" style="font-size:13px">Removed CPCs in this session</div><div class="cpc-removed-actions"><button class="refresh-btn" onclick="restoreSelectedDismissedCpcs()" type="button">Restore selected</button><button class="refresh-btn" onclick="restoreAllDismissedCpcs()" type="button">Restore all</button></div></div>
+<div class="cpc-removed-list" id="cpcRemovedList"><div class="muted">No removed CPCs in this session.</div></div>
+</div>
+<div class="exam-tip cpc-edit-tip" id="cpcEditTip"><strong>Tip:</strong> go to <strong>Edit concepts</strong> to change or select other concepts, then re-run CPC.</div>
+<div class="compliance-banner"><strong>Compliance Notice</strong><br/>Outputs are indicative only and <u>must be reviewed and validated by the user</u> prior to use.</div><br/>
+<div class="results" id="cpcResults"><div class="placeholder-box">Run the workflow to populate the CPC tables.</div></div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: VIRTUAL EXAM ANALYSIS
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-exam-analysis" class="tab-panel">
-      <div class="board-card">
-        <div class="board-head"><div class="board-title">&nbsp;</div><div class="board-meta">Summary of invention, special technical features, problem and solution, detected themes</div></div>
-        <div class="board-body"><pre id="examAnalysis" class="exam-panel-pre">Run Analyse &amp; Predict CPC to populate the integrated examiner analysis.</pre></div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════════════
+<section class="tab-panel" id="tab-exam-analysis">
+<div class="board-card">
+<div class="board-head"><div class="board-title"> </div><div class="board-meta">Summary of invention, special technical features, problem and solution, detected themes</div></div>
+<div class="board-body"><pre class="exam-panel-pre" id="examAnalysis">Run Analyse &amp; Predict CPC to populate the integrated examiner analysis.</pre></div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: UNITY ASSESSMENT
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-unity" class="tab-panel">
-      <div class="board-card">
-        <div class="board-head"><div class="board-title">&nbsp;</div><div class="board-meta">Unity grouping and detected themes from the uploaded claims</div></div>
-        <div class="board-body">
-          <div class="exam-tree-split unity-assessment-layout">
-            <div class="exam-tree-left">
-              <div class="board-title">Assessment summary</div>
-              <div class="unity-split-panel"><div id="examUnity" class="exam-panel-pre">Run Analyse &amp; Predict CPC to populate the integrated unity assessment.</div></div>
-              <div class="compliance-banner"><strong>Compliance Notice</strong><br>Unity assessments are for a quick preview only. <strong>Please validate the unity grouping</strong> according to examination practices before use. Outputs are <u>indicative only</u>.</div>
-            </div>
-            <div id="unityDivider" class="exam-tree-divider" title="Drag to resize. Double-click to reset."><div id="unityDividerIndicator" class="exam-tree-divider-indicator"></div></div>
-            <div class="exam-tree-right">
-              <div class="board-title">Uploaded claims PDF viewer</div>
-              <div id="unityPdfViewer" class="exam-tree-viewer"><div class="exam-tree-viewer-placeholder">Upload a claims PDF in the Main Workspace to preview it here.</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════════════
+<section class="tab-panel" id="tab-unity">
+<div class="board-card">
+<div class="board-head"><div class="board-title"> </div><div class="board-meta">Unity grouping and detected themes from the uploaded claims</div></div>
+<div class="board-body">
+<div class="exam-tree-split unity-assessment-layout">
+<div class="exam-tree-left">
+<div class="board-title">Assessment summary</div>
+<div class="unity-split-panel"><div class="exam-panel-pre" id="examUnity">Run Analyse &amp; Predict CPC to populate the integrated unity assessment.</div></div>
+<div class="compliance-banner"><strong>Compliance Notice</strong><br/>Unity assessments are for a quick preview only. <strong>Please validate the unity grouping</strong> according to examination practices before use. Outputs are <u>indicative only</u>.</div>
+</div>
+<div class="exam-tree-divider" id="unityDivider" title="Drag to resize. Double-click to reset."><div class="exam-tree-divider-indicator" id="unityDividerIndicator"></div></div>
+<div class="exam-tree-right">
+<div class="board-title">Uploaded claims PDF viewer</div>
+<div class="exam-tree-viewer" id="unityPdfViewer"><div class="exam-tree-viewer-placeholder">Upload a claims PDF in the Main Workspace to preview it here.</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: CLAIM MAPPING
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-mapping" class="tab-panel">
-      <div class="board-card">
-        <div class="board-head"><div class="board-title">&nbsp;</div><div class="board-meta">Feature extraction and category mapping — independent claims only</div></div>
-        <div class="board-body"><div id="examMapping" class="exam-mapping-wrap"><div class="placeholder-box">Run Analyse &amp; Predict CPC to populate the integrated claim mapping.</div></div></div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════════════
+<section class="tab-panel" id="tab-mapping">
+<div class="board-card">
+<div class="board-head"><div class="board-title"> </div><div class="board-meta">Feature extraction and category mapping — independent claims only</div></div>
+<div class="board-body"><div class="exam-mapping-wrap" id="examMapping"><div class="placeholder-box">Run Analyse &amp; Predict CPC to populate the integrated claim mapping.</div></div></div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: CLAIMS TREE
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-tree" class="tab-panel">
-      <div class="board-card">
-        <div class="board-head"><div class="board-title">&nbsp;</div><div class="board-meta">Visual dependency tree on the left, uploaded PDF viewer on the right</div></div>
-        <div class="board-body">
-          <div class="exam-tree-split">
-            <div class="exam-tree-left">
-              <div class="board-title">Interactive claim dependency tree</div>
-              <div class="exam-tree-box">
-                <svg id="examTree"></svg>
-                <div class="compliance-banner"><strong>Compliance Notice</strong><br>Outputs are <u>indicative only</u> and must be reviewed before use.</div>
-              </div><br>
-              <div id="examTreePlaceholder" class="placeholder-box">Provide claims in <strong>Main Workspace</strong> to populate the claims tree.</div>
-            </div>
-            <div id="examTreeDivider" class="exam-tree-divider" title="Drag to resize."><div id="examTreeDividerIndicator" class="exam-tree-divider-indicator"></div></div>
-            <div class="exam-tree-right">
-              <div class="board-title">Uploaded claims PDF Viewer</div>
-              <div id="examPdfViewer" class="exam-tree-viewer"><div class="exam-tree-viewer-placeholder">No claim set available yet.</div></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ══════════════════════════════════════════════════════════════
+<section class="tab-panel" id="tab-tree">
+<div class="board-card">
+<div class="board-head"><div class="board-title"> </div><div class="board-meta">Visual dependency tree on the left, uploaded PDF viewer on the right</div></div>
+<div class="board-body">
+<div class="exam-tree-split">
+<div class="exam-tree-left">
+<div class="board-title">Interactive claim dependency tree</div>
+<div class="exam-tree-box">
+<svg id="examTree"></svg>
+<div class="compliance-banner"><strong>Compliance Notice</strong><br/>Outputs are <u>indicative only</u> and must be reviewed before use.</div>
+</div><br/>
+<div class="placeholder-box" id="examTreePlaceholder">Provide claims in <strong>Main Workspace</strong> to populate the claims tree.</div>
+</div>
+<div class="exam-tree-divider" id="examTreeDivider" title="Drag to resize."><div class="exam-tree-divider-indicator" id="examTreeDividerIndicator"></div></div>
+<div class="exam-tree-right">
+<div class="board-title">Uploaded claims PDF Viewer</div>
+<div class="exam-tree-viewer" id="examPdfViewer"><div class="exam-tree-viewer-placeholder">No claim set available yet.</div></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: FIGURE LABELLER (full v33 implementation)
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-figure" class="tab-panel">
-      <div class="board-card">
-        <div class="board-body">
-          <div class="exam-tip"><strong>Prompt:</strong> Upload both PDFs. Rotate the drawing image 90° clockwise as needed, reposition labels on the rotated image, and every download captures the labels exactly as currently positioned on the rotated page.</div>
-          <div class="figure-upload-grid">
-            <div class="figure-upload-card">
-              <div class="figure-upload-title">1. Description PDF</div>
-              <div class="figure-upload-help">Used to identify labels from the first useful occurrence in the description.</div>
-              <label for="figureDescPdfInput" class="claims-pdf-label">Upload description PDF</label>
-              <input id="figureDescPdfInput" type="file" accept="application/pdf,.pdf" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none"/>
-              <div id="figureDescFileName" class="figure-file-name">No description PDF selected</div>
-              <div class="figure-quality-row"><span id="figureDescQuality" class="figure-quality-pill">Description OCR quality: not checked</span></div>
-            </div>
-            <div class="figure-upload-card">
-              <div class="figure-upload-title">2. Drawings / Figures PDF</div>
-              <div class="figure-upload-help">Drawing text is extracted twice for stronger coverage. If text quality is poor, add labels manually.</div>
-              <label for="figureDrawingsPdfInput" class="claims-pdf-label">Upload drawings PDF</label>
-              <input id="figureDrawingsPdfInput" type="file" accept="application/pdf,.pdf" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none"/>
-              <div id="figureDrawingsFileName" class="figure-file-name">No drawings PDF selected</div>
-              <div class="figure-quality-row"><span id="figureDrawingsQuality" class="figure-quality-pill">Drawing OCR quality: not checked</span></div>
-            </div>
-          </div>
-          <div class="figure-toolbar">
-            <button type="button" id="figureProcessBtn">Extract and label figures</button>
-            <label class="muted">Drawing page <select id="figurePageSelect" disabled><option value="">No pages yet</option></select></label>
-            <button type="button" class="refresh-btn" id="figureRotatePageBtn">Rotate image 90° clockwise</button>
-            <button type="button" class="refresh-btn" id="figureAddLabelBtn">Add new label</button>
-            <button type="button" class="refresh-btn" id="figureSaveBtn">Save edits in session</button>
-            <button type="button" class="refresh-btn" id="figureDownloadCurrentBtn">Download current PNG</button>
-            <button type="button" class="refresh-btn" id="figureDownloadAllBtn">Download all PNGs</button>
-            <button type="button" class="refresh-btn" id="figureDownloadHtmlBtn">Download labelled HTML</button>
-            <button type="button" class="refresh-btn" id="figureResetBtn">Clear session</button>
-            <span id="figureStatus" class="figure-status-line"><span class="figure-pill">Both PDFs required</span></span>
-          </div>
-          <div id="figureLayout" class="figure-layout">
-            <div class="figure-view-panel">
-              <div class="figure-view-head"><div class="board-title" id="figurePageTitle">Drawing preview</div><div class="muted" id="figurePageMeta">No drawing page selected</div></div>
-              <div id="figureStageWrap" class="figure-stage-wrap"><div class="figure-placeholder">Upload both PDFs, then select <strong>"Extract and label figures"</strong>.</div></div>
-              <div class="figure-legend-note">Single-click selects. Double-click edits. Drag or resize labels before export if needed.</div>
-            </div>
-            <div id="figureDivider" class="figure-divider" title="Drag to resize. Double-click to reset."></div>
-            <div class="figure-right-panel">
-              <div class="board-title">Editable labels for selected page</div>
-              <div class="figure-label-note">This table only lists item numbers, matched snippets and actions. Select <strong>Edit</strong> to open the rich-text label editor.</div>
-              <div class="figure-overlay-legend"><span class="figure-swatch"></span><span>All downloads use the current rotated-page label positions</span></div>
-              <div id="figureReferenceTableWrap" class="figure-ref-table-wrap">
-                <table class="figure-ref-table">
-                  <thead><tr><th class="figure-num-col">Item no.</th><th class="figure-snippet-col">Matched snippet</th><th class="figure-row-action">Actions</th></tr></thead>
-                  <tbody id="figureReferenceTableBody"><tr><td colspan="3" class="muted">No drawing page selected.</td></tr></tbody>
-                </table>
-              </div>
-              <div class="board-title">Session notes</div>
-              <textarea id="figureSessionNotes" class="figure-notes" placeholder="Optional notes. Saved in this browser session only."></textarea>
-              <div class="compliance-banner"><strong>Compliance Notice</strong><br>Figure labels are extracted with browser-side PDF text matching and page rendering. OCR quality indicators estimate extractable text quality only. Outputs are indicative only and must be reviewed and validated by the user before use.</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="figureEditorBackdrop" class="figure-editor-backdrop" aria-hidden="true">
-        <div class="figure-editor-modal" role="dialog" aria-modal="true" aria-labelledby="figureEditorTitle">
-          <div class="figure-editor-head"><div id="figureEditorTitle" class="figure-editor-title">Edit label</div><button type="button" class="figure-mini-btn" id="figureEditorCloseBtn">Close</button></div>
-          <div class="figure-editor-toolbar">
-            <button type="button" data-cmd="bold"><strong>B</strong></button>
-            <button type="button" data-cmd="italic"><em>I</em></button>
-            <button type="button" data-cmd="underline"><u>U</u></button>
-            <button type="button" data-cmd="insertUnorderedList">Bullets</button>
-            <button type="button" data-cmd="removeFormat">Clear format</button>
-            <select id="figureEditorBlock"><option value="P">Paragraph</option><option value="H3">Heading</option><option value="PRE">Preformatted</option></select>
-          </div>
-          <div class="figure-editor-body">
-            <div class="figure-editor-number"><label for="figureEditorNumber">Item number</label><input id="figureEditorNumber" type="text" placeholder="Item no."></div>
-            <div id="figureRichEditor" class="figure-rich-editor" contenteditable="true"></div>
-          </div>
-          <div class="figure-editor-actions"><button type="button" class="refresh-btn" id="figureEditorCancelBtn">Cancel</button><button type="button" id="figureEditorApplyBtn">Apply label</button></div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ══════════════════════════════════════════════════════════════
+<section class="tab-panel" id="tab-figure">
+<div class="board-card">
+<div class="board-body">
+<div class="exam-tip"><strong>Prompt:</strong> Upload both PDFs. Rotate the drawing image 90° clockwise as needed, reposition labels on the rotated image, and every download captures the labels exactly as currently positioned on the rotated page.</div>
+<div class="figure-upload-grid">
+<div class="figure-upload-card">
+<div class="figure-upload-title">1. Description PDF</div>
+<div class="figure-upload-help">Used to identify labels from the first useful occurrence in the description.</div>
+<label class="claims-pdf-label" for="figureDescPdfInput">Upload description PDF</label>
+<input accept="application/pdf,.pdf" id="figureDescPdfInput" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" type="file"/>
+<div class="figure-file-name" id="figureDescFileName">No description PDF selected</div>
+<div class="figure-quality-row"><span class="figure-quality-pill" id="figureDescQuality">Description OCR quality: not checked</span></div>
+</div>
+<div class="figure-upload-card">
+<div class="figure-upload-title">2. Drawings / Figures PDF</div>
+<div class="figure-upload-help">Drawing text is extracted twice for stronger coverage. If text quality is poor, add labels manually.</div>
+<label class="claims-pdf-label" for="figureDrawingsPdfInput">Upload drawings PDF</label>
+<input accept="application/pdf,.pdf" id="figureDrawingsPdfInput" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" type="file"/>
+<div class="figure-file-name" id="figureDrawingsFileName">No drawings PDF selected</div>
+<div class="figure-quality-row"><span class="figure-quality-pill" id="figureDrawingsQuality">Drawing OCR quality: not checked</span></div>
+</div>
+</div>
+<div class="figure-toolbar">
+<button id="figureProcessBtn" type="button">Extract and label figures</button>
+<label class="muted">Drawing page <select disabled="" id="figurePageSelect"><option value="">No pages yet</option></select></label>
+<button class="refresh-btn" id="figureRotatePageBtn" type="button">Rotate image 90° clockwise</button>
+<button class="refresh-btn" id="figureAddLabelBtn" type="button">Add new label</button>
+<button class="refresh-btn" id="figureSaveBtn" type="button">Save edits in session</button>
+<button class="refresh-btn" id="figureDownloadCurrentBtn" type="button">Download current PNG</button>
+<button class="refresh-btn" id="figureDownloadAllBtn" type="button">Download all PNGs</button>
+<button class="refresh-btn" id="figureDownloadHtmlBtn" type="button">Download labelled HTML</button>
+<button class="refresh-btn" id="figureResetBtn" type="button">Clear session</button>
+<span class="figure-status-line" id="figureStatus"><span class="figure-pill">Both PDFs required</span></span>
+</div>
+<div class="figure-layout" id="figureLayout">
+<div class="figure-view-panel">
+<div class="figure-view-head"><div class="board-title" id="figurePageTitle">Drawing preview</div><div class="muted" id="figurePageMeta">No drawing page selected</div></div>
+<div class="figure-stage-wrap" id="figureStageWrap"><div class="figure-placeholder">Upload both PDFs, then select <strong>"Extract and label figures"</strong>.</div></div>
+<div class="figure-legend-note">Single-click selects. Double-click edits. Drag or resize labels before export if needed.</div>
+</div>
+<div class="figure-divider" id="figureDivider" title="Drag to resize. Double-click to reset."></div>
+<div class="figure-right-panel">
+<div class="board-title">Editable labels for selected page</div>
+<div class="figure-label-note">This table only lists item numbers, matched snippets and actions. Select <strong>Edit</strong> to open the rich-text label editor.</div>
+<div class="figure-overlay-legend"><span class="figure-swatch"></span><span>All downloads use the current rotated-page label positions</span></div>
+<div class="figure-ref-table-wrap" id="figureReferenceTableWrap">
+<table class="figure-ref-table">
+<thead><tr><th class="figure-num-col">Item no.</th><th class="figure-snippet-col">Matched snippet</th><th class="figure-row-action">Actions</th></tr></thead>
+<tbody id="figureReferenceTableBody"><tr><td class="muted" colspan="3">No drawing page selected.</td></tr></tbody>
+</table>
+</div>
+<div class="board-title">Session notes</div>
+<textarea class="figure-notes" id="figureSessionNotes" placeholder="Optional notes. Saved in this browser session only."></textarea>
+<div class="compliance-banner"><strong>Compliance Notice</strong><br/>Figure labels are extracted with browser-side PDF text matching and page rendering. OCR quality indicators estimate extractable text quality only. Outputs are indicative only and must be reviewed and validated by the user before use.</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="figure-editor-backdrop" id="figureEditorBackdrop">
+<div aria-labelledby="figureEditorTitle" aria-modal="true" class="figure-editor-modal" role="dialog">
+<div class="figure-editor-head"><div class="figure-editor-title" id="figureEditorTitle">Edit label</div><button class="figure-mini-btn" id="figureEditorCloseBtn" type="button">Close</button></div>
+<div class="figure-editor-toolbar">
+<button data-cmd="bold" type="button"><strong>B</strong></button>
+<button data-cmd="italic" type="button"><em>I</em></button>
+<button data-cmd="underline" type="button"><u>U</u></button>
+<button data-cmd="insertUnorderedList" type="button">Bullets</button>
+<button data-cmd="removeFormat" type="button">Clear format</button>
+<select id="figureEditorBlock"><option value="P">Paragraph</option><option value="H3">Heading</option><option value="PRE">Preformatted</option></select>
+</div>
+<div class="figure-editor-body">
+<div class="figure-editor-number"><label for="figureEditorNumber">Item number</label><input id="figureEditorNumber" placeholder="Item no." type="text"/></div>
+<div class="figure-rich-editor" contenteditable="true" id="figureRichEditor"></div>
+</div>
+<div class="figure-editor-actions"><button class="refresh-btn" id="figureEditorCancelBtn" type="button">Cancel</button><button id="figureEditorApplyBtn" type="button">Apply label</button></div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: LLM CHAT
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-llm-chat" class="tab-panel">
-      <div class="board-card llm-v5464-card">
-        <div class="board-head">
-          <div class="board-title">Patent Examiner LLM chat</div>
-          <div class="board-meta">Stable Unity-aligned assistant with pdf.js description extraction and transformer-ready context</div>
-        </div>
-        <div class="board-body llm-v5464-body">
-          <div class="llm-v5464-main">
-            <div class="llm-v5464-head">
-              <div>
-                <div class="llm-chat-title">Patent Examiner Assistant</div>
-                <div class="llm-chat-sub">Uses Unity assessment for independent claims. Extracts the Description PDF with pdf.js. Builds compact context for Transformers.js or Copilot. ONNX is not used by this chat.</div>
-              </div>
-              <div class="llm-v5464-tools">
-                <span id="llmV5464Status" class="llm-v5464-pill">Ready</span>
-                <button type="button" id="llmV5464RefreshBtn" class="llm-v5464-mini">Refresh context</button>
-              </div>
-            </div>
-            <div id="llmV5464Context" class="llm-v5464-context">Context will appear here.</div>
-            <textarea id="llmV5464ContextPack" style="display:none"></textarea>
-            <div id="llmChatStream" class="llm-chat-stream llm-v5464-stream">
-              <div class="llm-msg assistant">
-                <span class="role">Assistant</span>
-                <div class="llm-answer">
-                  <h3>Ready for patent examination questions</h3>
-                  <ul>
-                    <li>Independent claims are read from the Unity assessment.</li>
-                    <li>Description context is extracted from the uploaded Description PDF using pdf.js.</li>
-                    <li>Figure Labeller helper text is filtered out and does not enter the summary context.</li>
-                    <li>The chat interface is compact to leave more room for answers.</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="llm-v5464-bottom">
-              <div class="llm-v5464-promptbar">
-                <button type="button" data-run-prompt="Give me a plain English summary of the claims using the Unity assessment claim logic">Claims summary</button>
-                <button type="button" data-run-prompt="Give me a plain English summary of the invention using Unity claims and the extracted description PDF">Invention summary</button>
-                <button type="button" data-run-prompt="Summarise the background of the invention from the extracted description PDF">Background</button>
-                <button type="button" data-run-prompt="Identify the technical problem and claimed solution using Unity claims and description context">Problem/solution</button>
-                <button type="button" data-run-prompt="Identify likely special technical features from the Unity assessment independent claims only">STF</button>
-                <button type="button" data-run-prompt="Check the Unity assessment independent claims for practical antecedent basis issues">Antecedents</button>
-                <button type="button" data-run-prompt="Check the Unity assessment independent claims for practical clarity issues only">Clarity</button>
-                <button type="button" data-run-prompt="Show the unity groupings and explain the separation briefly">Unity</button>
-                <button type="button" data-run-prompt="Summarise the best 2 or 3 CPC candidates only with code and title">Best CPCs</button>
-                <button type="button" data-run-prompt="Search the Patent Manual for this question">Manual</button>
-              </div>
-              <div class="llm-v5464-modelbar">
-                <button type="button" id="llmV5464CheckContextBtn">Check context</button>
-                <button type="button" id="llmV5464ExplainBtn">Explain engine</button>
-                <button type="button" id="llmV5464OpenSidecarBtn">Sidecar</button>
-                <span class="llm-v5464-pill">Transformers context</span>
-              </div>
-              <div class="llm-chat-input llm-v5464-input">
-                <textarea id="llmChatPrompt" placeholder="Ask about the current patent workspace."></textarea>
-                <div class="llm-send-col llm-v5464-send-col">
-                  <button type="button" id="llmChatSendBtn">Ask</button>
-                  <button type="button" id="llmRunCopilotBtn">Copilot</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="llmV5464Overlay" class="llm-v5464-overlay" aria-hidden="true">
-        <div class="llm-v5464-sidecar-modal" role="dialog" aria-modal="true">
-          <div class="llm-v5464-sidecar-head">
-            <div>
-              <div class="llm-chat-title">Copilot sidecar</div>
-              <div class="llm-chat-sub">Unity-aligned prompt package</div>
-            </div>
-            <button type="button" id="llmV5464CloseSidecarBtn" class="llm-v5464-mini">Close</button>
-          </div>
-          <div class="llm-v5464-sidecar-actions">
-            <button type="button" id="sidecarRunBtn" class="sidecar-btn primary">Open Copilot</button>
-            <button type="button" id="sidecarCopyBtn" class="sidecar-btn">Copy</button>
-            <button type="button" id="sidecarRefreshPreviewBtn" class="sidecar-btn">Refresh</button>
-          </div>
-          <div id="sidecarPromptPreview" class="sidecar-prompt-preview llm-v5464-preview">Prompt preview will appear here.</div>
-        </div>
-      </div>
-    </section>
-    <!-- ══════════════════════════════════════════════════════════════
+<section class="tab-panel" id="tab-llm-chat">
+<div class="board-card llm-v5464-card">
+<div class="board-head">
+<div class="board-title">Patent Examiner LLM chat</div>
+<div class="board-meta">Stable Unity-aligned assistant with pdf.js description extraction and transformer-ready context</div>
+</div>
+<div class="board-body llm-v5464-body">
+<div class="llm-v5464-main">
+<div class="llm-v5464-head">
+<div>
+<div class="llm-chat-title">Patent Examiner Assistant</div>
+<div class="llm-chat-sub">Uses Unity assessment for independent claims. Extracts the Description PDF with pdf.js. Builds compact context for Transformers.js or Copilot. ONNX is not used by this chat.</div>
+</div>
+<div class="llm-v5464-tools">
+<span class="llm-v5464-pill" id="llmV5464Status">Ready</span>
+<button class="llm-v5464-mini" id="llmV5464RefreshBtn" type="button">Refresh context</button>
+</div>
+</div>
+<div class="llm-v5464-context" id="llmV5464Context">Context will appear here.</div>
+<textarea id="llmV5464ContextPack" style="display:none"></textarea>
+<div class="llm-chat-stream llm-v5464-stream" id="llmChatStream">
+<div class="llm-msg assistant">
+<span class="role">Assistant</span>
+<div class="llm-answer">
+<h3>Ready for patent examination questions</h3>
+<ul>
+<li>Independent claims are read from the Unity assessment.</li>
+<li>Description context is extracted from the uploaded Description PDF using pdf.js.</li>
+<li>Figure Labeller helper text is filtered out and does not enter the summary context.</li>
+<li>The chat interface is compact to leave more room for answers.</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="llm-v5464-bottom">
+<div class="llm-v5464-promptbar">
+<button data-run-prompt="Give me a plain English summary of the claims and their dependencies" type="button">Claims summary</button>
+<button data-run-prompt="Give me a plain English summary of the invention using the claims and extracted description PDF" type="button">Invention summary</button>
+<button data-run-prompt="Summarise the background of the invention from the extracted description PDF" type="button">Background</button>
+<button data-run-prompt="Identify the technical problem and claimed solution using the claims and description context" type="button">Problem/solution</button>
+<button data-run-prompt="Identify likely special technical features from the relevant claim text" type="button">STF</button>
+<button data-run-prompt="Check every claim for antecedent basis and flag any explicit self-reference, including a claim that refers to its own number" type="button">Antecedents</button>
+<button data-run-prompt="Check every claim for practical clarity issues and internal inconsistencies. Do not flag approximate values or numerical ranges" type="button">Clarity</button>
+<button data-run-prompt="Show the unity groupings and explain the separation briefly" title="Show the current groupings from the Unity assessment tab" type="button">Unity</button>
+<button data-run-prompt="Summarise the best 2 or 3 CPC candidates only with code and title" type="button">Best CPCs</button>
+<button data-run-prompt="Search the Patent Manual for this question" type="button">Manual</button>
+</div>
+<div class="llm-v5464-modelbar">
+<button id="llmV5464CheckContextBtn" type="button">Check context</button>
+<button id="llmV5464ExplainBtn" type="button">Explain engine</button>
+<button id="llmV5464OpenSidecarBtn" type="button">Sidecar</button>
+<span class="llm-v5464-pill">Transformers context</span>
+</div>
+<div class="llm-chat-input llm-v5464-input">
+<textarea id="llmChatPrompt" placeholder="Ask about the current patent workspace."></textarea>
+<div class="llm-send-col llm-v5464-send-col">
+<button id="llmChatSendBtn" type="button">Ask</button>
+<button id="llmRunCopilotBtn" type="button">Copilot</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="llm-v5464-overlay" id="llmV5464Overlay">
+<div aria-modal="true" class="llm-v5464-sidecar-modal" role="dialog">
+<div class="llm-v5464-sidecar-head">
+<div>
+<div class="llm-chat-title">Copilot sidecar</div>
+<div class="llm-chat-sub">Unity-aligned prompt package</div>
+</div>
+<button class="llm-v5464-mini" id="llmV5464CloseSidecarBtn" type="button">Close</button>
+</div>
+<div class="llm-v5464-sidecar-actions">
+<button class="sidecar-btn primary" id="sidecarRunBtn" type="button">Open Copilot</button>
+<button class="sidecar-btn" id="sidecarCopyBtn" type="button">Copy</button>
+<button class="sidecar-btn" id="sidecarRefreshPreviewBtn" type="button">Refresh</button>
+</div>
+<div class="sidecar-prompt-preview llm-v5464-preview" id="sidecarPromptPreview">Prompt preview will appear here.</div>
+</div>
+</div>
+</section>
+<!-- ══════════════════════════════════════════════════════════════
          TAB: PERP BUILDER
          ══════════════════════════════════════════════════════════════ -->
-    <section id="tab-perp" class="tab-panel">
-      <div class="perp-embed-wrap">
-        <div class="perp-embed-card">
-          <iframe id="perpFrame" class="perp-embed-frame" src="./index-v5.6.html" title="PERP Objection Builder" loading="eager"></iframe>
-        </div>
-      </div>
-    </section>
-
-  </main>
+<section class="tab-panel" id="tab-perp">
+<div class="perp-embed-wrap">
+<div class="perp-embed-card">
+<iframe class="perp-embed-frame" id="perpFrame" loading="eager" src="./index-v5.6.html" title="PERP Objection Builder"></iframe>
 </div>
-
+</div>
+</section>
+</main>
+</div>
 <!-- Hidden canvases -->
 <canvas id="pocCanvas" style="display:none"></canvas>
 <canvas id="pocCropCanvas" style="display:none"></canvas>
-
 <!-- External scripts -->
 <script id="v5505-preflight-guards">
 (function(){
@@ -1261,7 +1316,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 <script src="./cpcScheme-2026.js"></script>
 <script src="./cpcDefinitions-2026.js"></script>
 <script src="lib/tesseract.min.js"></script>
-
 <script>
 const $=id=>document.getElementById(id);
 let uploadedClaimsPdfUrl=null,uploadedClaimsPdfName='';
@@ -1560,8 +1614,14 @@ function buildNoiseSignatures(allPageLines, numPages) {
   return sigs;
 }
 function isNoiseSignature(text,sigs){
-  const key=String(text||'').trim().toLowerCase().slice(0,80);
-  return sigs.some(s=>key===s.text||key.startsWith(s.text.slice(0,40)));
+  const raw=String(text||'').trim();
+  if(!raw||raw.length>100)return false;
+  if(/\b(?:comprising|wherein|selected from|amino acid sequence|antigen binding|according to claim|any preceding claim)\b/i.test(raw))return false;
+  const key=raw.toLowerCase().replace(/\s+/g,' ');
+  return (sigs||[]).some(function(sig){
+    const candidate=String(sig&&sig.text||'').trim().toLowerCase().replace(/\s+/g,' ');
+    return candidate&&candidate.length<=100&&key===candidate;
+  });
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -2416,8 +2476,7 @@ function pocBuildClaims(){
     for(let j=s.lineIdx+1;j<endLineIdx;j++){
       const lt=processedLines[j].text.trim();
       if(!lt)continue;
-      // Stop if next line looks like start of next numbered item
-      if(CLAIM_START_RE.test(lt)&&!bodyParts.join(' ').endsWith(','))break;
+      // v56: endLineIdx already identifies the next validated sequential claim.
       bodyParts.push(lt);
     }
     let body=bodyParts.join(' ').replace(/\s+/g,' ').trim();
@@ -4065,7 +4124,7 @@ function exmDetectDependencies(claims){
 
   function normText(text){return String(text||'').toLowerCase().replace(/\s+/g,' ').trim();}
   function uniqueSorted(nums,currentNo){
-    return Array.from(new Set((nums||[]).map(Number).filter(function(d){return Number.isFinite(d)&&d>0&&d<Number(currentNo);}))).sort(function(a,b){return a-b;});
+    return Array.from(new Set((nums||[]).map(Number).filter(function(d){return Number.isFinite(d)&&d>0&&d<=Number(currentNo);}))).sort(function(a,b){return a-b;});
   }
   function addListOrRange(fragment,addDep,addRange){
     var s=String(fragment||'').toLowerCase().replace(/\s+/g,' ').trim();
@@ -4089,7 +4148,7 @@ function exmDetectDependencies(claims){
 
   claims.forEach(function(c,idx){
     var t=normText(c.text||'');
-    var addDep=function(n){n=Number(n);if(Number.isFinite(n)&&n>0&&n<Number(c.no)&&c.deps.indexOf(n)<0)c.deps.push(n);};
+    var addDep=function(n){n=Number(n);if(Number.isFinite(n)&&n>0&&n<=Number(c.no)&&c.deps.indexOf(n)<0)c.deps.push(n);};
     var addRange=function(a,b){
       a=Number(a);b=Number(b);
       if(!Number.isFinite(a)||!Number.isFinite(b))return;
@@ -5418,7 +5477,9 @@ function findFigureTopic(d,fig){
   async function downloadHtml(){
     syncDomLabelPositions();save(true);let panels='';
     for(const p of state.pages){const c=await compose(p);panels+='<section class="panel"><h2>Drawing page '+p.page+'</h2><img src="'+c.toDataURL('image/png')+'" alt="Drawing page '+p.page+'"></section>';}
-    const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Labelled figures</title><style>body{font-family:Segoe UI,Arial,sans-serif;margin:24px}.panel{border:1px solid #dfe4ea;border-radius:10px;padding:12px;margin-bottom:16px}img{max-width:100%;height:auto;display:block}</style></head><body><h1>Labelled figures</h1>${panels}</body></html>`;
+    const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Labelled figures</title><style>body{font-family:Segoe UI,Arial,sans-serif;margin:24px}.panel{border:1px solid #dfe4ea;border-radius:10px;padding:12px;margin-bottom:16px}img{max-width:100%;height:auto;display:block}</style></head><body><h1>Labelled figures</h1>${panels}
+
+</body></html>`;
     const blob=new Blob([html],{type:'text/html'});
     const a=document.createElement('a');const dlUrl=URL.createObjectURL(blob);a.href=dlUrl;a.download='labelled-figures.html';
     document.body.appendChild(a);a.click();
@@ -6377,9 +6438,6 @@ pocProcessFile=async function(file){
 
 })();
 </script>
-
-
-
 <script>
 /* v51.1.1 Cleaned-Up patch: inline structures + restored dependency logic + console syntax hardening */
 (function(){
@@ -6544,43 +6602,40 @@ pocProcessFile=async function(file){
 .page-gallery-crop-wrap img{display:block;max-width:100%;max-height:60vh;border-radius:4px}
 .page-gallery-crop-selection{position:absolute;border:2px dashed var(--ipa-web-teal);background:rgba(0,129,156,.1);box-sizing:border-box;pointer-events:none;display:none}
 </style>
-
-<div id="pageGalleryModal" class="page-gallery-modal">
-  <div class="page-gallery-card">
-    <div class="page-gallery-head">
-      <div class="page-gallery-title">📄 Select image from PDF pages</div>
-      <div style="display:flex;gap:8px;align-items:center">
-        <span id="pageGalleryClaimLabel" style="font-size:12px;color:#5d6b74">For Claim: —</span>
-        <button type="button" class="poc-cbtn" onclick="pageGalleryClose()">✕ Close</button>
-      </div>
-    </div>
-    <div id="pageGalleryBody" class="page-gallery-body">
-      <div class="muted">No pages available. Upload a PDF first.</div>
-    </div>
-    <div class="page-gallery-footer">
-      <div id="pageGalleryCropArea" style="display:none;width:100%">
-        <div style="font-size:12px;font-weight:700;color:#38515f;margin-bottom:8px">Click and drag on the page to select a region, then click "Use this crop"</div>
-        <div id="pageGalleryCropWrap" class="page-gallery-crop-wrap">
-          <img id="pageGalleryCropImg" src="" alt="Page for cropping">
-          <div id="pageGalleryCropSel" class="page-gallery-crop-selection"></div>
-        </div>
-        <div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          <img id="pageGalleryCropPreview" class="page-gallery-preview" src="" alt="Crop preview" style="display:none">
-          <button type="button" id="pageGalleryUseCropBtn" style="padding:8px 14px;border-radius:7px;font-weight:700;background:var(--ipa-web-teal);color:#fff;border:none;cursor:pointer;display:none" onclick="pageGalleryUseCrop()">✓ Use this crop</button>
-          <button type="button" style="padding:8px 14px;border-radius:7px;font-weight:700;background:#fff;color:#26343d;border:1px solid rgba(29,37,44,.18);cursor:pointer" onclick="pageGalleryUseFullPage()">Use full page</button>
-          <button type="button" style="padding:8px 14px;border-radius:7px;font-weight:700;background:#fff;color:#26343d;border:1px solid rgba(29,37,44,.18);cursor:pointer" onclick="pageGalleryBackToGrid()">← Back to pages</button>
-          <span class="page-gallery-crop-hint">Tip: drag a rectangle on the image to select a structure or region</span>
-        </div>
-      </div>
-      <div id="pageGalleryGridFooter" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        <span style="font-size:12px;color:#5d6b74">Click a page thumbnail to select it for cropping</span>
-      </div>
-    </div>
-  </div>
+<div class="page-gallery-modal" id="pageGalleryModal">
+<div class="page-gallery-card">
+<div class="page-gallery-head">
+<div class="page-gallery-title">📄 Select image from PDF pages</div>
+<div style="display:flex;gap:8px;align-items:center">
+<span id="pageGalleryClaimLabel" style="font-size:12px;color:#5d6b74">For Claim: —</span>
+<button class="poc-cbtn" onclick="pageGalleryClose()" type="button">✕ Close</button>
 </div>
-
+</div>
+<div class="page-gallery-body" id="pageGalleryBody">
+<div class="muted">No pages available. Upload a PDF first.</div>
+</div>
+<div class="page-gallery-footer">
+<div id="pageGalleryCropArea" style="display:none;width:100%">
+<div style="font-size:12px;font-weight:700;color:#38515f;margin-bottom:8px">Click and drag on the page to select a region, then click "Use this crop"</div>
+<div class="page-gallery-crop-wrap" id="pageGalleryCropWrap">
+<img alt="Page for cropping" id="pageGalleryCropImg" src=""/>
+<div class="page-gallery-crop-selection" id="pageGalleryCropSel"></div>
+</div>
+<div style="margin-top:8px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+<img alt="Crop preview" class="page-gallery-preview" id="pageGalleryCropPreview" src="" style="display:none"/>
+<button id="pageGalleryUseCropBtn" onclick="pageGalleryUseCrop()" style="padding:8px 14px;border-radius:7px;font-weight:700;background:var(--ipa-web-teal);color:#fff;border:none;cursor:pointer;display:none" type="button">✓ Use this crop</button>
+<button onclick="pageGalleryUseFullPage()" style="padding:8px 14px;border-radius:7px;font-weight:700;background:#fff;color:#26343d;border:1px solid rgba(29,37,44,.18);cursor:pointer" type="button">Use full page</button>
+<button onclick="pageGalleryBackToGrid()" style="padding:8px 14px;border-radius:7px;font-weight:700;background:#fff;color:#26343d;border:1px solid rgba(29,37,44,.18);cursor:pointer" type="button">← Back to pages</button>
+<span class="page-gallery-crop-hint">Tip: drag a rectangle on the image to select a structure or region</span>
+</div>
+</div>
+<div id="pageGalleryGridFooter" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+<span style="font-size:12px;color:#5d6b74">Click a page thumbnail to select it for cropping</span>
+</div>
+</div>
+</div>
+</div>
 <canvas id="pageGalleryCropCanvas" style="display:none"></canvas>
-
 <script>
 /* ═══════════════════════════════════════════════════════════════
    PATCH v51.1.5: COMPREHENSIVE IMAGE LINKING IMPROVEMENTS
@@ -8925,13 +8980,14 @@ console.log('[PATCH] "Add from pages" button added to structure modal.');
    This patch ports the exact working function and overrides every call path. */
 
 /* ── Exact dependency extractor copied verbatim from index.html ── */
+/* v56.0.4: explicit self-references are retained as the final dependency; visual parent remains an earlier claim. */
 function robustDetectDeps(claims){
   claims=(claims||[]);
   claims.forEach(function(c){c.deps=[];c.visualParent=null;c._v5122Preceding=false;});
 
   function normText(text){return String(text||'').toLowerCase().replace(/\s+/g,' ').trim();}
   function uniqueSorted(nums,currentNo){
-    return Array.from(new Set((nums||[]).map(Number).filter(function(d){return Number.isFinite(d)&&d>0&&d<Number(currentNo);}))).sort(function(a,b){return a-b;});
+    return Array.from(new Set((nums||[]).map(Number).filter(function(d){return Number.isFinite(d)&&d>0&&d<=Number(currentNo);}))).sort(function(a,b){return a-b;});
   }
   function addListOrRange(fragment,addDep,addRange){
     var s=String(fragment||'').toLowerCase().replace(/\s+/g,' ').trim();
@@ -8955,7 +9011,7 @@ function robustDetectDeps(claims){
 
   claims.forEach(function(c,idx){
     var t=normText(c.text||'');
-    var addDep=function(n){n=Number(n);if(Number.isFinite(n)&&n>0&&n<Number(c.no)&&c.deps.indexOf(n)<0)c.deps.push(n);};
+    var addDep=function(n){n=Number(n);if(Number.isFinite(n)&&n>0&&n<=Number(c.no)&&c.deps.indexOf(n)<0)c.deps.push(n);};
     var addRange=function(a,b){
       a=Number(a);b=Number(b);
       if(!Number.isFinite(a)||!Number.isFinite(b))return;
@@ -9363,7 +9419,6 @@ window.runExaminerAssistant=function(){
 };
 })();
 </script>
-
 <script id="training-claims-data" type="application/json">
 {
   "name": "training claims data",
@@ -9475,7 +9530,6 @@ window.runExaminerAssistant=function(){
   ]
 }
 </script>
-
 <script id="v5201-sequence-extraction-hardening">
 (function(){
 'use strict';
@@ -9674,7 +9728,6 @@ else v5201RebindSendButtons();
 window.v5201SendToCpcAndRun=v5201SendToCpcAndRun;
 })();
 </script>
-
 <!-- v52.0.2 NON-AGGRESSIVE OCR FILTER PATCH -->
 <script id="v5202-non-aggressive-ocr-filter">
 (function(){
@@ -9906,7 +9959,6 @@ window.v5202SendToCpcAndRun=v5202SendToCpcAndRun;
 })();
 </script>
 <!-- end v52.0.2 NON-AGGRESSIVE OCR FILTER PATCH -->
-
 <script src="./perpData.js"></script>
 <script id="llm-v5464-examiner-engine-script">
 (function(){
@@ -9938,24 +9990,57 @@ function context(){const unity=unityModel(),claims=claimModel(),independent=clai
 function independentClaims(c){const nums=c.unity.independent.length?c.unity.independent:c.independent.map(x=>x.no);return nums.map(n=>c.claims.find(x=>x.no===n)).filter(Boolean)}
 function comps(t){const m=clean(t).match(/(?:comprising|comprises|including|includes)\s*:?\s*([\s\S]{20,1000})/i);const body=clean((m?m[1]:t).split(/\.\s/)[0]);return[...new Set(body.split(/;|,| and | wherein | to form | comprising | includes | including /i).map(clean).filter(x=>x.length>3).slice(0,12))]}
 function plain(cl){const kind=/\bmethod\b/i.test(cl.text)?'method':/\bcomposition\b/i.test(cl.text)?'composition':/\b(system|apparatus|device)\b/i.test(cl.text)?'system/apparatus':'claimed subject matter';const e=comps(cl.text).slice(0,7);return`Claim ${cl.no} is mainly about a ${kind} involving ${e.length?e.join(', '):clip(cl.text,260)}.`}
-function claimSummary(c){const ind=independentClaims(c);return'<h3>Claims summary</h3><ul><li>Total claims: '+esc(c.unity.total||c.claims.length)+'</li><li>Independent claims from Unity assessment: '+esc((c.unity.independent.length?c.unity.independent:ind.map(x=>x.no)).join(', ')||'not detected')+'</li></ul><h3>Plain English view</h3><ul>'+ind.map(x=>'<li>'+esc(plain(x))+'</li>').join('')+'</ul>'}
+function claimSummary(c){const ind=independentClaims(c);return'<h3>Claims summary</h3><ul><li>Total claims: '+esc(c.unity.total||c.claims.length)+'</li><li>Independent claims: '+esc((c.unity.independent.length?c.unity.independent:ind.map(x=>x.no)).join(', ')||'not detected')+'</li></ul><h3>Plain English view</h3><ul>'+ind.map(x=>'<li>'+esc(plain(x))+'</li>').join('')+'</ul>'}
 function invention(c){const bits=independentClaims(c).map(plain);if(c.desc.summary)bits.push('Description context: '+clip(c.desc.summary,420));return'<h3>Invention summary</h3><ul>'+bits.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>'}
 function background(c){return c.desc.raw?'<h3>Background of the invention</h3><ul><li>'+esc(c.desc.background||c.desc.summary||'Description extracted, but no clear background section was detected.')+'</li>'+(c.desc.problem?'<li><strong>Problem cues:</strong> '+esc(c.desc.problem)+'</li>':'')+'</ul>':'<h3>Background of the invention</h3><p>No Description PDF text has been extracted yet. Upload the Description PDF, then select this prompt again.</p>'}
-function problem(c){const ind=independentClaims(c),e=comps(ind.map(x=>x.text).join(' ')).slice(0,7);return'<h3>Problem and solution</h3><ul><li><strong>Problem:</strong> '+esc(clip(c.desc.problem||c.desc.background||'The extracted description does not expose a clear problem statement yet.',520))+'</li><li><strong>Solution:</strong> '+esc(e.length?'The claimed solution appears to use '+e.join('; ')+'.':'The solution is mainly defined by the Unity assessment independent claims.')+'</li></ul>'}
-function stf(c){const ind=independentClaims(c);function tail(t){let p=clean(t).split(/;|\.\s+|,\s+wherein\s+|\bwherein\b/i).map(clean).filter(Boolean);let out=p.slice(-3).filter(x=>x.length>20);if(!out.length)out=comps(t).slice(-3);return out.map(x=>clip(x,260))}return'<h3>Likely special technical features</h3><p>Focused only on Unity assessment independent claims:</p><ul>'+ind.map(cl=>'<li><strong>Claim '+cl.no+':</strong><ul>'+tail(cl.text).map(f=>'<li>'+esc(f)+'</li>').join('')+'</ul></li>').join('')+'</ul>'}
-function antecedent(c){const issues=[];for(const cl of independentClaims(c)){let m,re=/\bsaid\s+([a-z][a-z0-9\- ]{2,40})/ig;while((m=re.exec(' '+cl.text)))issues.push({claim:cl.no,term:m[0]})}return issues.length?'<h3>Practical antecedent basis issues</h3><ul>'+issues.slice(0,8).map(i=>'<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' may need a clear earlier introduction.</li>').join('')+'</ul>':'<h3>Antecedent basis check</h3><p>No practical high-confidence antecedent issue was detected in the Unity assessment independent claims.</p>'}
-function clarity(c){const issues=[];const pats=[[/\babout\s+[^,;.]+/ig,'approximate value or range'],[/\bsubstantially\s+[^,;.]+/ig,'substantially qualifier'],[/\bapproximately\s+[^,;.]+/ig,'approximate value or range'],[/\beffective amount\b/ig,'result-defined amount']];for(const cl of independentClaims(c)){for(const [re,label] of pats){let m;while((m=re.exec(cl.text)))issues.push({claim:cl.no,term:m[0],label})}}return issues.length?'<h3>Clarity issues</h3><ul>'+issues.slice(0,10).map(i=>'<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' — '+esc(i.label)+'.</li>').join('')+'</ul>':'<h3>Clarity issues</h3><p>No practical clarity issue was detected in the Unity assessment independent claims.</p>'}
+function problem(c){const ind=independentClaims(c),e=comps(ind.map(x=>x.text).join(' ')).slice(0,7);return'<h3>Problem and solution</h3><ul><li><strong>Problem:</strong> '+esc(clip(c.desc.problem||c.desc.background||'The extracted description does not expose a clear problem statement yet.',520))+'</li><li><strong>Solution:</strong> '+esc(e.length?'The claimed solution appears to use '+e.join('; ')+'.':'The solution is mainly defined by the relevant claim text.')+'</li></ul>'}
+function stf(c){const ind=independentClaims(c);function tail(t){let p=clean(t).split(/;|\.\s+|,\s+wherein\s+|\bwherein\b/i).map(clean).filter(Boolean);let out=p.slice(-3).filter(x=>x.length>20);if(!out.length)out=comps(t).slice(-3);return out.map(x=>clip(x,260))}return'<h3>Likely special technical features</h3><p>Focused on the relevant claim text:</p><ul>'+ind.map(cl=>'<li><strong>Claim '+cl.no+':</strong><ul>'+tail(cl.text).map(f=>'<li>'+esc(f)+'</li>').join('')+'</ul></li>').join('')+'</ul>'}
+function antecedent(c){
+  var issues=[],claims=(c&&Array.isArray(c.claims)?c.claims:[]);
+  function norm(v){return String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();}
+  function hasEarlierDefinition(prefix,phrase){
+    var p=norm(prefix),words=norm(phrase).split(' ').filter(Boolean).filter(function(w){return !/^(?:said|the|a|an|first|second|third|one|another|respective)$/.test(w);});
+    if(!p||!words.length)return false;
+    var candidates=[];
+    for(var n=Math.min(5,words.length);n>=1;n--){candidates.push(words.slice(0,n).join(' '));candidates.push(words.slice(-n).join(' '));}
+    return candidates.some(function(x){return x.length>2&&new RegExp('(?:^|\\s)'+x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?:\\s|$)','i').test(p);});
+  }
+  claims.forEach(function(cl){
+    var text=String(cl&&cl.text||''),no=Number(cl&&cl.no);if(!no)return;
+    var selfRe=new RegExp('\\b(?:claim|claims)\\s+'+no+'\\b','i'),selfMatch=text.match(selfRe);
+    if(selfMatch)issues.push({claim:no,term:selfMatch[0],label:'self-reference: claim '+no+' refers to itself'});
+    var m,re=/\bsaid\s+([a-z][a-z0-9\- ]{1,60}?)(?=\s*(?:,|;|\.|\bwherein\b|\bwhich\b|\bthat\b|\bcomprising\b|\bcomprises\b|\bincluding\b|\bincludes\b|\bis\b|\bare\b|\bhas\b|\bhave\b|$))/ig;
+    while((m=re.exec(text))){if(!hasEarlierDefinition(text.slice(0,m.index),m[1]))issues.push({claim:no,term:m[0],label:'possible missing antecedent basis'});}
+  });
+  return issues.length?'<h3>Practical antecedent basis issues</h3><ul>'+issues.slice(0,16).map(function(i){return '<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' — '+esc(i.label)+'.</li>';}).join('')+'</ul>':'<h3>Antecedent basis check</h3><p>No practical high-confidence antecedent issue was detected across all claims.</p>';
+}
+
+function clarity(c){
+  var issues=[],claims=(c&&Array.isArray(c.claims)?c.claims:[]);
+  function norm(v){return String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();}
+  function hasEarlierDefinition(prefix,phrase){var p=norm(prefix),words=norm(phrase).split(' ').filter(Boolean).filter(function(w){return !/^(?:said|the|a|an|first|second|third|one|another|respective)$/.test(w);});if(!p||!words.length)return false;var candidates=[];for(var n=Math.min(5,words.length);n>=1;n--){candidates.push(words.slice(0,n).join(' '));candidates.push(words.slice(-n).join(' '));}return candidates.some(function(x){return x.length>2&&new RegExp('(?:^|\\s)'+x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?:\\s|$)','i').test(p);});}
+  claims.forEach(function(cl){
+    var text=String(cl&&cl.text||''),no=Number(cl&&cl.no);if(!no)return;
+    var selfRe=new RegExp('\\b(?:claim|claims)\\s+'+no+'\\b','i'),selfMatch=text.match(selfRe);
+    if(selfMatch)issues.push({claim:no,term:selfMatch[0],label:'internal inconsistency because the claim refers to itself'});
+    var m,re=/\bsaid\s+([a-z][a-z0-9\- ]{1,60}?)(?=\s*(?:,|;|\.|\bwherein\b|\bwhich\b|\bthat\b|\bcomprising\b|\bcomprises\b|\bincluding\b|\bincludes\b|\bis\b|\bare\b|\bhas\b|\bhave\b|$))/ig;
+    while((m=re.exec(text))){if(!hasEarlierDefinition(text.slice(0,m.index),m[1]))issues.push({claim:no,term:m[0],label:'possible missing antecedent basis'});}
+    re=/\b(?:former|latter)\b/ig;while((m=re.exec(text)))issues.push({claim:no,term:m[0],label:'potentially unclear relative reference'});
+  });
+  return issues.length?'<h3>Clarity issues</h3><ul>'+issues.slice(0,16).map(function(i){return '<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' — '+esc(i.label)+'.</li>';}).join('')+'</ul>':'<h3>Clarity issues</h3><p>No practical high-confidence clarity issue was detected across all claims. Approximate values, numerical ranges and and/or wording were intentionally excluded.</p>';
+}
+
 function unity(c){return c.groups.length?'<h3>Unity groupings</h3><ul>'+c.groups.map(g=>'<li><strong>Group '+g.no+':</strong> '+esc(g.text)+'</li>').join('')+'</ul>':'<h3>Unity groupings</h3><p>No populated unity groupings were found. Run the unity assessment first.</p>'}
 function cpcs(){const rows=[];for(const row of [...document.querySelectorAll('#cpcResults .rank-item')]){const t=read(row);if(!t||/No results|Run the workflow/i.test(t))continue;let code=clean(row.querySelector('.cpc-code')?.textContent||'')||(t.match(/\b([A-HY]\d{2}[A-Z](?:\s*\d+\/\d+)?|[A-HY]\d{2}[A-Z]?\d+\/\d+)\b/)||[])[1];if(!code||rows.some(x=>x[0]===code))continue;rows.push([code,clip(read(row.querySelector('.title'))||read(row.querySelector('.cpc-h-desc'))||'Title not available in current CPC data',260)]);if(rows.length>=3)break}return rows.length?'<h3>Best CPC candidates</h3>'+table(['CPC code','Title / fit'],rows):'<h3>Best CPC candidates</h3><p>CPC cards were not available. Open the CPC tables tab once, then return here and select Refresh context.</p>'}
 function manual(){const q=clean(byId('llmChatPrompt')?.value)||lastQuestion||'patent examination';return'<h3>Patent Manual search</h3><p>Using: <strong>'+esc(q)+'</strong></p><p><a class="sidecar-btn primary" target="_blank" rel="noopener" href="https://ipagov.sharepoint.com/sites/PatentsManual/_layouts/15/search.aspx/siteall?q='+encodeURIComponent(q)+'">Open SharePoint manual search</a></p>'}
 function answer(q,c){if(/manual|patents manual|guidance/i.test(q))return manual();if(/background|description/i.test(q))return background(c);if(/claim.*summary|summary.*claim/i.test(q))return claimSummary(c);if(/summary|invention|inventive concept/i.test(q))return invention(c);if(/problem|solution/i.test(q))return problem(c);if(/special technical feature|common inventive concept|technical feature|\bstf\b/i.test(q))return stf(c);if(/antecedent/i.test(q))return antecedent(c);if(/clarity|clear/i.test(q))return clarity(c);if(/unity|lou|grouping/i.test(q))return unity(c);if(/cpc|classification/i.test(q))return cpcs();return'<h3>What I can help with</h3><p>Try claims summary, invention summary, background, problem and solution, special technical features, antecedents, clarity, unity, Best CPCs or manual search.</p>'}
 function pack(c,q){return{request:q||'',unity:c.unity,claims:c.claims.map(x=>({no:x.no,independent:x.independent,text:x.text})),description:c.desc,cpc:c.cpc}}
-function buildPrompt(c,q){const p=pack(c,q);window.__llmTransformerContext=p;const ta=byId('llmV5464ContextPack');if(ta)ta.value=JSON.stringify(p,null,2);return'# Patent examination Copilot prompt\n\n## User request\n'+(q||'Analyse the current patent workspace context.')+'\n\n## Instructions\n- Use Australian English.\n- Use concise bullets.\n- Use Unity assessment as authoritative for independent claims and groupings.\n- Use pdf.js extracted description context.\n- Do not use ONNX.\n\n```json\n'+JSON.stringify(p,null,2).slice(0,16000)+'\n```'}
+function buildPrompt(c,q){const p=pack(c,q);window.__llmTransformerContext=p;const ta=byId('llmV5464ContextPack');if(ta)ta.value=JSON.stringify(p,null,2);return'# Patent examination Copilot prompt\n\n## User request\n'+(q||'Analyse the current patent workspace context.')+'\n\n## Instructions\n- Use Australian English.\n- Use concise bullets.\n- Use the current claim text and dependency mapping as the source for claim relationships and groupings.\n- Use pdf.js extracted description context.\n- Do not use ONNX.\n\n```json\n'+JSON.stringify(p,null,2).slice(0,16000)+'\n```'}
 function preview(q){const c=context();lastPrompt=buildPrompt(c,q||clean(byId('llmChatPrompt')?.value));const el=byId('sidecarPromptPreview');if(el)el.textContent=lastPrompt.slice(0,5000)+(lastPrompt.length>5000?'\n\n[Preview truncated]':'');return lastPrompt}
 async function ask(q0){const input=byId('llmChatPrompt'),q=clean(q0||input?.value);if(!q)return;lastQuestion=q;add('user',q);if(input&&!q0)input.value='';byId('llmV5464Status').textContent='Extracting context...';if(/description|background|invention|problem|solution|summary|technical/i.test(q))await ensureDesc();const c=context();add('assistant',answer(q,c));preview(q);byId('llmV5464Status').textContent='Ready'}
 async function copyText(t){try{await navigator.clipboard.writeText(t);return true}catch(e){const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();let ok=document.execCommand('copy');ta.remove();return ok}}
 async function runCopilot(){const p=preview();await copyText(p);const w=window.open(COPILOT_URL,'CopilotPatentPrompt_'+Date.now(),'popup=yes,width=980,height=900,resizable=yes,scrollbars=yes');if(w)w.focus();add('assistant','<p>Prompt copied and Copilot opened.</p>')}
-function check(){const c=context();add('assistant','<h3>Context check</h3>'+table(['Source','Detected'],[['Unity independent claims',esc(c.unity.independent.join(', ')||'not detected')],['Parsed claims',esc(c.claims.length)],['pdf.js description text',esc(c.desc.raw?'Available':'Not extracted')],['CPC candidates',esc(document.querySelectorAll('#cpcResults .rank-item').length)],['ONNX in LLM chat','No']]))}
+function check(){const c=context();add('assistant','<h3>Context check</h3>'+table(['Source','Detected'],[['Independent claims',esc(c.unity.independent.join(', ')||'not detected')],['Parsed claims',esc(c.claims.length)],['pdf.js description text',esc(c.desc.raw?'Available':'Not extracted')],['CPC candidates',esc(document.querySelectorAll('#cpcResults .rank-item').length)],['ONNX in LLM chat','No']]))}
 function explain(){add('assistant','<h3>Engine explanation</h3><ul><li>Description context comes from pdf.js extraction of the uploaded Description PDF.</li><li>Figure Labeller UI helper text is filtered out.</li><li>ONNX is not loaded or used by this chat.</li><li>The UI has narrower action buttons and a smaller input area to provide more chat space.</li><li>A console guard removes stray literal template placeholders such as <code>${...}</code> from broken image placeholders.</li></ul>')}
 function openSidecar(){preview();byId('llmV5464Overlay')?.classList.add('open')}
 function closeSidecar(){byId('llmV5464Overlay')?.classList.remove('open')}
@@ -9976,7 +10061,6 @@ document.addEventListener('click',function(e){var t=e.target;if(!t||!t.closest)r
 setTimeout(apply,300);
 })();
 </script>
-
 <script id="llm-v5505-runtime-patch">
 (function(){
 'use strict';
@@ -9993,10 +10077,10 @@ function clip(s,n){s=clean(s).replace(/\s+/g,' ');return s.length>n?s.slice(0,n-
 function add(role,html){var s=$('llmChatStream');if(!s)return;var d=document.createElement('div');d.className='llm-msg '+(role==='user'?'user':'assistant');d.innerHTML='<span class="role">'+(role==='user'?'You':'Assistant')+'</span>'+(role==='user'?esc(html):'<div class="llm-answer">'+html+'</div>');s.appendChild(d);s.scrollTop=s.scrollHeight;}
 function table(h,rows){return '<table><thead><tr>'+h.map(function(x){return '<th>'+esc(x)+'</th>';}).join('')+'</tr></thead><tbody>'+rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table>';}
 function rebuild(){var tab=$('tab-llm-chat');if(!tab)return;tab.innerHTML=''
-+'<div class="board-card llm-v5505-card"><div class="board-head"><div class="board-title">Patent Examiner LLM chat</div><div class="board-meta">Unity-derived claims and groups, pdf.js description extraction and transformer-ready context</div></div>'
-+'<div class="board-body llm-v5505-body"><div class="llm-v5505-main"><div class="llm-v5505-head"><div><div class="llm-chat-title">Patent Examiner Assistant</div><div class="llm-chat-sub">Uses the Unity assessment summary as the source of truth for independent claims, and Unity state for all groups. Header text is removed to maximise workspace.</div></div><div class="llm-v5505-tools"><span id="llmV5505Status" class="llm-v5505-pill">Ready</span><span id="llmV5505TabAbout" class="llm-v5505-aboutpill"></span><div class="llm-v5505-actionrow"><button type="button" id="llmV5505RefreshBtn" class="llm-v5505-mini">Refresh context</button><button type="button" id="llmV5505OpenSidecarBtn" class="llm-v5505-mini">Sidecar</button></div></div></div>'
-+'<div id="llmV5505Context" class="llm-v5505-context">Context will appear here.</div><textarea id="llmV5505ContextPack" style="display:none"></textarea><div id="llmChatStream" class="llm-chat-stream llm-v5505-stream"><div class="llm-msg assistant"><span class="role">Assistant</span><div class="llm-answer"><h3>Ready for patent examination questions</h3><ul><li>Independent claims are read from the exact Unity assessment summary line.</li><li>Description text is extracted with a double pdf.js text layer.</li><li>Repeated headers, footers, application numbers, dates and page noise are removed.</li><li>Sidecar is directly under Refresh context with matching padding.</li></ul></div></div></div>'
-+'<div class="llm-v5505-bottom"><div class="llm-v5505-promptbar"><button type="button" data-run-prompt="Give me a plain English summary of the claims using the Unity assessment claim logic">Claims summary</button><button type="button" data-run-prompt="Summarise the invention as a whole using the Unity independent claims and cleaned description PDF">Summarise invention as a whole</button><button type="button" data-run-prompt="Give me a distinct background summary from the cleaned description PDF only">Background</button><button type="button" data-run-prompt="Give me a distinct problem and solution summary using cleaned description context and Unity claims">Problem/solution</button><button type="button" data-run-prompt="Identify likely special technical features from the Unity assessment independent claims only">STF</button><button type="button" data-run-prompt="Check the Unity assessment independent claims for practical antecedent basis issues">Antecedents</button><button type="button" data-run-prompt="Check the Unity assessment independent claims for practical clarity issues only">Clarity</button><button type="button" data-run-prompt="Show the unity groupings and explain the separation briefly">Unity</button><button type="button" data-run-prompt="Summarise the best 2 or 3 CPC candidates only with code and title">Best CPCs</button><button type="button" data-run-prompt="Search the Patent Manual for this question">Manual</button></div>'
++'<div class="board-card llm-v5505-card"><div class="board-head"><div class="board-title">Patent Examiner LLM chat</div><div class="board-meta">Claims, dependency groups, pdf.js description extraction and transformer-ready context</div></div>'
++'<div class="board-body llm-v5505-body"><div class="llm-v5505-main"><div class="llm-v5505-head"><div><div class="llm-chat-title">Patent Examiner Assistant</div><div class="llm-chat-sub">Uses the current analysed claims and dependency groups. Header text is removed to maximise workspace.</div></div><div class="llm-v5505-tools"><span id="llmV5505Status" class="llm-v5505-pill">Ready</span><span id="llmV5505TabAbout" class="llm-v5505-aboutpill"></span><div class="llm-v5505-actionrow"><button type="button" id="llmV5505RefreshBtn" class="llm-v5505-mini">Refresh context</button><button type="button" id="llmV5505OpenSidecarBtn" class="llm-v5505-mini">Sidecar</button></div></div></div>'
++'<div id="llmV5505Context" class="llm-v5505-context">Context will appear here.</div><textarea id="llmV5505ContextPack" style="display:none"></textarea><div id="llmChatStream" class="llm-chat-stream llm-v5505-stream"><div class="llm-msg assistant"><span class="role">Assistant</span><div class="llm-answer"><h3>Ready for patent examination questions</h3><ul><li>Independent claims are read from the Unity assessment.</li><li>Description text is extracted with a double pdf.js text layer.</li><li>Repeated headers, footers, application numbers, dates and page noise are removed.</li><li>Sidecar is directly under Refresh context with matching padding.</li></ul></div></div></div>'
++'<div class="llm-v5505-bottom"><div class="llm-v5505-promptbar"><button type="button" data-run-prompt="Give me a plain English summary of the claims and their dependencies">Claims summary</button><button type="button" data-run-prompt="Summarise the invention as a whole using the relevant claims and cleaned description PDF">Summarise invention as a whole</button><button type="button" data-run-prompt="Give me a distinct background summary from the cleaned description PDF only">Background</button><button type="button" data-run-prompt="Give me a distinct problem and solution summary using the cleaned description context and relevant claims">Problem/solution</button><button type="button" data-run-prompt="Identify likely special technical features from the relevant claim text">STF</button><button type="button" data-run-prompt="Check every claim for antecedent basis and flag any explicit self-reference, including a claim that refers to its own number">Antecedents</button><button type="button" data-run-prompt="Check every claim for practical clarity issues and internal inconsistencies. Do not flag approximate values or numerical ranges">Clarity</button><button type="button" data-run-prompt="Show the unity groupings and explain the separation briefly">Unity</button><button type="button" data-run-prompt="Summarise the best 2 or 3 CPC candidates only with code and title">Best CPCs</button><button type="button" data-run-prompt="Search the Patent Manual for this question">Manual</button></div>'
 +'<div class="llm-v5505-modelbar"><button type="button" id="llmV5505CheckContextBtn">Check context</button><button type="button" id="llmV5505ExplainBtn">Explain engine</button><span class="llm-v5505-pill">Transformers context</span></div><div class="llm-chat-input llm-v5505-input"><textarea id="llmChatPrompt" placeholder="Ask about the current patent workspace."></textarea><div class="llm-send-col llm-v5505-send-col"><button type="button" id="llmChatSendBtn">Ask</button><button type="button" id="llmRunCopilotBtn">Copilot</button></div></div></div></div></div></div>'
 +'<div id="llmV5505Overlay" class="llm-v5505-overlay" aria-hidden="true"><div class="llm-v5505-sidecar-modal" role="dialog" aria-modal="true"><div class="llm-v5505-sidecar-head"><div><div class="llm-chat-title">Copilot sidecar</div><div class="llm-chat-sub">Unity-aligned prompt package</div></div><button type="button" id="llmV5505CloseSidecarBtn" class="llm-v5505-mini">Close</button></div><div class="llm-v5505-sidecar-actions"><button type="button" id="sidecarRunBtn" class="sidecar-btn primary">Open Copilot</button><button type="button" id="sidecarCopyBtn" class="sidecar-btn">Copy</button><button type="button" id="sidecarRefreshPreviewBtn" class="sidecar-btn">Refresh</button></div><div id="sidecarPromptPreview" class="sidecar-prompt-preview llm-v5505-preview">Prompt preview will appear here.</div></div></div>';}
 function parseNums(s){var m=String(s||'').match(/\b\d{1,3}\b/g)||[];return Array.from(new Set(m.map(Number))).sort(function(a,b){return a-b;});}
@@ -10110,15 +10194,34 @@ function dependencyNumbersFromText(text,no,maxClaim){
 }
 function claimModel(){
   var claims=parseClaims(sourceClaims()),u=unityModel(),uSet=new Set(u.independent),all=new Set(claims.map(function(c){return c.no;})),maxClaim=claims.reduce(function(m,c){return Math.max(m,c.no);},0);
+  /* v56.0.5: use the same dependency normaliser as the Claims Tree.
+     This avoids scraping SVG tooltip text and preserves ranges such as claims 9 to 11. */
+  var normalised=claims.map(function(c){return {no:Number(c.no),text:c.text,deps:[],visualParent:null};});
+  try{
+    if(typeof window.exmNormaliseVisualParents==='function')window.exmNormaliseVisualParents(normalised);
+    else if(typeof window.exmDetectDependencies==='function')window.exmDetectDependencies(normalised);
+  }catch(_){ }
+  var shared={};normalised.forEach(function(c){shared[Number(c.no)]=Array.isArray(c.deps)?c.deps.map(Number):[];});
   return claims.map(function(c){
-    var deps=dependencyNumbersFromText(c.text,c.no,maxClaim).filter(function(n){return all.has(n);});
+    var deps=(shared[c.no]||[]).filter(function(n){return all.has(n);});
+    if(!deps.length)deps=dependencyNumbersFromText(c.text,c.no,maxClaim).filter(function(n){return all.has(n);});
     var independent=u.independent.length?uSet.has(c.no):!deps.length;
     if(independent)deps=[];
     return Object.assign({},c,{deps:Array.from(new Set(deps)).sort(function(a,b){return a-b;}),independent:independent});
   });
 }
 function findDescriptionInput(){var inputs=Array.from(document.querySelectorAll('input[type="file"]'));return inputs.find(function(inp){var f=inp.files&&inp.files[0];var label=[inp.id,inp.name,inp.getAttribute('aria-label'),inp.closest('label')&&inp.closest('label').textContent,inp.parentElement&&inp.parentElement.textContent].filter(Boolean).join(' ');return /desc|description|specification/i.test(label)||(f&&/desc|description|specification/i.test(f.name||''));})||null;}
-function normaliseLine(line){return clean(line).replace(/^\s*\d{1,4}\s+/,'').replace(/\b20\d{6,}\b/g,'').replace(/\b\d{1,2}\s+[A-Za-z]{3,9}\s+20\d{2}\b/g,'').replace(/\s+/g,' ').trim();}
+function normaliseLine(line){
+  var s=clean(line).replace(/^\s*(?:\[?\d{1,4}\]?\s*){1,3}(?=[A-Za-z(])/,'').replace(/^\s*\d{1,4}\s+/,'');
+  s=s.replace(/\b(?:WO|EP|US|AU|PCT)\s*[\/\-]?[A-Z]{0,2}\s*\d{4}[\/\-]?\d{3,}\s*[A-Z]\d?\b/gi,' ')
+     .replace(/\bPCT\/[A-Z]{2}\d{4}\/\d+\b/gi,' ')
+     .replace(/\b20\d{6,}\b/g,' ')
+     .replace(/\b\d{1,2}\s+[A-Za-z]{3,9}\s+20\d{2}\b/g,' ')
+     .replace(/\b(?:page|sheet)\s+\d+(?:\s+of\s+\d+)?\b/gi,' ')
+     .replace(/^\s*(?:description|patent specification|field of the invention|background of the invention)\s*\d*\s*$/i,' ')
+     .replace(/\s+/g,' ').trim();
+  return s;
+}
 function pageRowsFromItems(items){var rows=new Map();(items||[]).forEach(function(it){var y=Math.round((it.transform&&it.transform[5])||0),x=Math.round((it.transform&&it.transform[4])||0),key=String(y);if(!rows.has(key))rows.set(key,[]);rows.get(key).push({x:x,s:it.str||''});});return Array.from(rows.entries()).sort(function(a,b){return Number(b[0])-Number(a[0]);}).map(function(pair){return pair[1].sort(function(a,b){return a.x-b.x;}).map(function(v){return v.s;}).join(' ');});}
 function stripRepeatedPageNoise(pageLines){var freq=new Map();pageLines.forEach(function(lines){Array.from(new Set(lines.map(function(l){return normaliseLine(l).toLowerCase();}).filter(Boolean))).forEach(function(l){freq.set(l,(freq.get(l)||0)+1);});});return pageLines.map(function(lines){return lines.filter(function(line){var n=normaliseLine(line),key=n.toLowerCase();if(!n||junk.test(n)||headerFooter.test(n))return false;if(/^\d{1,4}$/.test(n))return false;if((freq.get(key)||0)>1&&n.length<110)return false;if(/^(communication deviation detection|patent specification|description)$/i.test(n))return false;return true;});});}
 function cleanDescLines(raw){return clean(raw).split(/\n+/).map(normaliseLine).filter(function(l){return l.length>25&&!junk.test(l)&&!headerFooter.test(l);});}
@@ -10154,41 +10257,54 @@ function rankedDescriptionSentences(c,mode){
   return Array.from(new Set(primary.concat(fallback))).slice(0,12);
 }
 function independentPlainText(c){return independentClaims(c).map(function(cl){return 'Claim '+cl.no+': '+clean(cl.text);}).join(' ');}
+function cleanBackgroundSource(value){
+  var t=String(value||'').replace(/\u00ad/g,'').replace(/\r/g,'\n');
+  /* Remove publication/application running headers, including a following all-caps title. */
+  t=t.replace(/\bWO\s*\d{4}\s*[\/]\s*\d{4,6}\s+(?:[A-Z0-9][A-Z0-9\-(), ]{4,100})(?=\s+(?:Field|Background|The present))/gi,' ')
+     .replace(/\b(?:WO|EP|US|AU)\s*\d{4}\s*[\/]\s*\d{4,8}\s*[A-Z]\d?\b/gi,' ')
+     .replace(/\bPCT\s*[\/]\s*[A-Z]{2}\s*\d{4}\s*[\/]\s*\d+\b/gi,' ')
+     .replace(/\b(?:page|sheet)\s+\d+(?:\s+of\s+\d+)?\b/gi,' ');
+  /* Remove patent section labels and the inline margin number immediately after them. */
+  t=t.replace(/\b(?:Field|Background)\s+(?:of|to)\s+the\s+invention\s*\d{1,3}\b/gi,' ')
+     .replace(/\b(?:Field|Background)\s+(?:of|to)\s+the\s+invention\b/gi,' ')
+     .replace(/(?:^|[.!?]\s+)\d{1,3}\s+(?=[A-Z][a-z])/g,'$1')
+     .replace(/\s+/g,' ').trim();
+  /* Keep the actual background passage, not later examples, assays or definitions. */
+  var start=t.search(/\b(?:it is|however|currently|known|conventional|existing|immune system|there remains|a need)\b/i);
+  if(start>0)t=t.slice(start);
+  var stop=t.search(/\b(?:Summary of (?:the )?invention|Detailed description|Brief description of the drawings|Examples?|Materials and methods|Positive controls?|Total RNA|As used herein|Definitions?)\b/i);
+  if(stop>80)t=t.slice(0,stop);
+  var sent=t.split(/(?<=[.!?])\s+/).map(clean).filter(function(x){return x.length>35&&!/\b(?:positive control|total RNA|qRT|PCR|triplicate|Miltenyi|cat\.?\s*no\.?|example\s+\d+)\b/i.test(x);});
+  var seen=new Set(),out=[];sent.forEach(function(x){var k=x.toLowerCase();if(!seen.has(k)){seen.add(k);out.push(x);}});
+  return out.slice(0,8).join(' ');
+}
 async function transformerPlainEnglish(kind,c){
-  var promptText=conciseText([independentPlainText(c),rankedDescriptionSentences(c,kind).join(' ')].filter(Boolean).join(' '),5000);
+  var ranked=rankedDescriptionSentences(c,kind).join(' ');
+  var descOnly=(kind==='background')?cleanBackgroundSource((c&&c.desc&&c.desc.raw)||ranked):ranked;
+  var source=(kind==='background'||kind==='problem')?descOnly:[independentPlainText(c),descOnly].filter(Boolean).join(' ');
+  var promptText=conciseText(examinerNoiseCleanText(source),4200);
   try{
     var fn=window.__peaTransformerSummariser||window.__peaLocalSummariser||null;
-    if(typeof fn==='function'){
-      var r=await fn(promptText,{task:kind,maxLength:300,minLength:80});
+    if(typeof fn==='function'&&promptText){
+      var r=await fn(promptText,{task:kind,maxLength:210,minLength:55});
       if(Array.isArray(r))r=r[0]&&(r[0].summary_text||r[0].generated_text||r[0].text);
       if(r&&typeof r==='object')r=r.summary_text||r.generated_text||r.text;
-      if(clean(r))return conciseText(examinerNoiseCleanText(r),2200);
+      r=examinerNoiseCleanText(r);
+      if(kind==='background')r=cleanBackgroundSource(r);
+      if(clean(r))return conciseText(r,1100);
     }
   }catch(_){}
-  var s=rankedDescriptionSentences(c,kind).join(' '),claims=comps(independentPlainText(c)).slice(0,10).join('; ');
-  if(kind==='background')return conciseText(s||'No clear background section was detected in the cleaned description.',2200);
-  if(kind==='problem')return conciseText(s||'No clear problem cue was detected in the cleaned description.',3600);
-  return conciseText('The invention is directed to '+(claims||'the subject matter of the Unity independent claims')+'. '+s,2200);
+  var s=examinerNoiseCleanText(descOnly),claims=comps(independentPlainText(c)).slice(0,10).join('; ');
+  if(kind==='background')return conciseText(cleanBackgroundSource(s)||'No clear background section was detected in the cleaned description.',1100);
+  if(kind==='problem')return conciseText(s||'No clear problem cue was detected in the cleaned description.',1800);
+  return conciseText('The invention is directed to '+(claims||'the subject matter of the relevant claims')+'. '+s,1600);
 }
 
 function context(){var unity=unityModel(),claims=claimModel(),independent=claims.filter(function(c){return c.independent;}),desc=descModel(),cpc=raw('cpcResults'),ctx={unity:unity,claims:claims,independent:independent,groups:unity.groups,desc:desc,cpc:cpc};window.__llmTransformerContext=ctx;window.__llmDescriptionText=desc.raw;var ta=$('llmV5505ContextPack');if(ta)ta.value=JSON.stringify(ctx,null,2);var summary=(unity.total||claims.length)+' claims, independent '+(unity.independent.join(', ')||independent.map(function(x){return x.no;}).join(', ')||'not detected')+', '+unity.groups.length+' unity grouping(s)';var about=$('llmV5505TabAbout');if(about)about.textContent=summary;var el=$('llmV5505Context');if(el)el.textContent=summary+', '+(cpc&&!/Run Analyse/i.test(cpc)?'CPC available':'CPC not populated')+', '+(desc.raw?'cleaned pdf.js description context available':'no pdf.js description context')+'.';return ctx;}
 function independentClaims(c){var nums=c.unity.independent.length?c.unity.independent:c.independent.map(function(x){return x.no;});return nums.map(function(n){return c.claims.find(function(x){return x.no===n;});}).filter(Boolean);}
 function comps(t){var m=clean(t).match(/(?:comprising|comprises|including|includes)\s*:?\s*([\s\S]{20,1000})/i),body=clean((m?m[1]:t).split(/\.\s/)[0]);return Array.from(new Set(body.split(/;|,| and | wherein | to form | comprising | includes | including /i).map(clean).filter(function(x){return x.length>3;}).slice(0,12)));}
 function plainClaim(cl){var kind=/\bmethod\b/i.test(cl.text)?'method':/\bcomposition\b/i.test(cl.text)?'composition':/\b(system|apparatus|device)\b/i.test(cl.text)?'system/apparatus':'claimed subject matter',e=comps(cl.text).slice(0,7);return 'Claim '+cl.no+' is mainly about a '+kind+' involving '+(e.length?e.join(', '):clip(cl.text,260))+'.';}
-function claimsTreeDependencyMap(){
-  var root=$('examTree')||$('tab-claims-tree')||document.querySelector('#tab-claims-tree,#examTree');
-  var map={};
-  if(!root)return map;
-  var chunks=[];
-  root.querySelectorAll('*').forEach(function(el){var t=read(el);if(/claim\s*\d+/i.test(t)&&/depend/i.test(t))chunks.push(t);});
-  if(!chunks.length)chunks=[read(root)];
-  chunks.forEach(function(t){
-    t.replace(/Claim\s*(\d{1,3})[\s\S]{0,260}?(?:Depends?\s*on|Depend\s*on|Depend\s*on:)\s*:?\s*([^\n;]+)/ig,function(_,n,dep){
-      n=Number(n);var d=clean(dep).replace(/independent/i,'').replace(/none/i,'').replace(/not detected/i,'');map[n]=d?parseNums(d):[];return _;
-    });
-  });
-  return map;
-}
+function claimsTreeDependencyMap(){return {}; /* v56.0.5: dependency data comes from shared Claims Tree model */}
 function claimTreeMarkdown(c){
   var treeDeps=claimsTreeDependencyMap(),byNo={},children={},edgeNotes={};
   c.claims.forEach(function(cl){byNo[cl.no]=cl;children[cl.no]=[];});
@@ -10222,21 +10338,53 @@ function dependencyTableMarkdown(c){
 function claimSummary(c){
   var nums=(c.unity.independent||[]).join(', ')||c.independent.map(function(x){return x.no;}).join(', ')||'not detected';
   var tree=claimTreeMarkdown(c)||'No claims tree available. Run the claims analysis first.';
-  return '<h3>Claims summary</h3><ul><li><strong>Total claims:</strong> '+esc(c.unity.total||c.claims.length)+'</li><li><strong>Independent claims from Unity assessment:</strong> '+esc(nums)+'</li><li><strong>Dependent claims:</strong> '+esc(c.unity.dependentCount==null?'not detected':c.unity.dependentCount)+'</li></ul><h3>Claims tree with dependency mapping</h3><pre>'+esc(tree)+'</pre>';}
+  return '<h3>Claims summary</h3><ul><li><strong>Total claims:</strong> '+esc(c.unity.total||c.claims.length)+'</li><li><strong>Independent claims:</strong> '+esc(nums)+'</li><li><strong>Dependent claims:</strong> '+esc(c.unity.dependentCount==null?'not detected':c.unity.dependentCount)+'</li></ul><h3>Claims tree with dependency mapping</h3><pre>'+esc(tree)+'</pre>';}
 async function invention(c){
   var ind=independentClaims(c),nums=(c.unity.independent||[]).join(', ')||ind.map(function(x){return x.no;}).join(', '),summary=await transformerPlainEnglish('invention',c);
-  return '<h3>Summary of the invention as a whole</h3><ul><li><strong>Unity independent claims used:</strong> '+esc(nums||'not detected')+'</li><li><strong>Plain English summary:</strong> '+esc(summary)+'</li><li><strong>Scope note:</strong> this uses the cleaned description and Unity independent claims. OCR noise, headers, footers, provisional metadata and repeated page artefacts are filtered before summary generation.</li></ul>';}
+  return '<h3>Summary of the invention as a whole</h3><ul><li><strong>Claims used:</strong> '+esc(nums||'not detected')+'</li><li><strong>Plain English summary:</strong> '+esc(summary)+'</li><li><strong>Scope note:</strong> this uses the cleaned description and relevant claim text. OCR noise, headers, footers, provisional metadata and repeated page artefacts are filtered before summary generation.</li></ul>';}
 async function background(c){
   if(!c.desc.raw)return descriptionMissingHtml();
   var summary=await transformerPlainEnglish('background',c);
   return '<h3>Background of the invention</h3><ul><li>'+esc(summary)+'</li><li><strong>Source:</strong> cleaned Description PDF text only.</li></ul>';}
 async function problem(c){
   var ind=independentClaims(c),solution=comps(ind.map(function(x){return x.text;}).join(' ')).slice(0,10).join('; '),prob=await transformerPlainEnglish('problem',c);
-  return '<h3>Problem and solution</h3><ul><li><strong>Problem indicated by the description:</strong> '+esc(prob)+'</li><li><strong>Claimed solution:</strong> '+esc(solution?'The Unity independent claims appear to address this using '+solution+'.':'The solution is mainly defined by the Unity assessment independent claims.')+'</li><li><strong>Practical framing:</strong> use this for problem-solution reasoning, separate from the invention summary.</li></ul>';}
-function stf(c){var ind=independentClaims(c);function tail(t){var p=clean(t).split(/;|\.\s+|,\s+wherein\s+|\bwherein\b/i).map(clean).filter(Boolean),out=p.slice(-3).filter(function(x){return x.length>20;});if(!out.length)out=comps(t).slice(-3);return out.map(function(x){return clip(x,260);});}return '<h3>Likely special technical features</h3><p>Focused only on Unity assessment independent claims:</p><ul>'+ind.map(function(cl){return '<li><strong>Claim '+cl.no+':</strong><ul>'+tail(cl.text).map(function(f){return '<li>'+esc(f)+'</li>';}).join('')+'</ul></li>';}).join('')+'</ul>';}
-function antecedent(c){var issues=[];independentClaims(c).forEach(function(cl){var m,re=/\bsaid\s+([a-z][a-z0-9\- ]{2,40})/ig;while((m=re.exec(' '+cl.text)))issues.push({claim:cl.no,term:m[0]});});return issues.length?'<h3>Practical antecedent basis issues</h3><ul>'+issues.slice(0,8).map(function(i){return '<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' may need a clear earlier introduction.</li>';}).join('')+'</ul>':'<h3>Antecedent basis check</h3><p>No practical high-confidence antecedent issue was detected in the Unity assessment independent claims.</p>';}
-function clarity(c){var issues=[],pats=[[/\babout\s+[^,;.]+/ig,'approximate value or range'],[/\bsubstantially\s+[^,;.]+/ig,'substantially qualifier'],[/\bapproximately\s+[^,;.]+/ig,'approximate value or range'],[/\beffective amount\b/ig,'result-defined amount']];independentClaims(c).forEach(function(cl){pats.forEach(function(pair){var re=pair[0],label=pair[1],m;while((m=re.exec(cl.text)))issues.push({claim:cl.no,term:m[0],label:label});});});return issues.length?'<h3>Clarity issues</h3><ul>'+issues.slice(0,10).map(function(i){return '<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' — '+esc(i.label)+'.</li>';}).join('')+'</ul>':'<h3>Clarity issues</h3><p>No practical clarity issue was detected in the Unity assessment independent claims.</p>';}
-function unityPlainText(c){return (c.groups||[]).map(function(g){return 'Group '+g.no+': '+g.text;}).join('\n');}
+  return '<h3>Problem and solution</h3><ul><li><strong>Problem indicated by the description:</strong> '+esc(prob)+'</li><li><strong>Claimed solution:</strong> '+esc(solution?'The claims appear to address this using '+solution+'.':'The solution is mainly defined by the relevant claim text.')+'</li><li><strong>Practical framing:</strong> use this for problem-solution reasoning, separate from the invention summary.</li></ul>';}
+function stf(c){var ind=independentClaims(c);function tail(t){var p=clean(t).split(/;|\.\s+|,\s+wherein\s+|\bwherein\b/i).map(clean).filter(Boolean),out=p.slice(-3).filter(function(x){return x.length>20;});if(!out.length)out=comps(t).slice(-3);return out.map(function(x){return clip(x,260);});}return '<h3>Likely special technical features</h3><p>Focused on the relevant claim text:</p><ul>'+ind.map(function(cl){return '<li><strong>Claim '+cl.no+':</strong><ul>'+tail(cl.text).map(function(f){return '<li>'+esc(f)+'</li>';}).join('')+'</ul></li>';}).join('')+'</ul>';}
+function antecedent(c){
+  var issues=[],claims=(c&&Array.isArray(c.claims)?c.claims:[]);
+  function norm(v){return String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();}
+  function hasEarlierDefinition(prefix,phrase){
+    var p=norm(prefix),words=norm(phrase).split(' ').filter(Boolean).filter(function(w){return !/^(?:said|the|a|an|first|second|third|one|another|respective)$/.test(w);});
+    if(!p||!words.length)return false;
+    var candidates=[];
+    for(var n=Math.min(5,words.length);n>=1;n--){candidates.push(words.slice(0,n).join(' '));candidates.push(words.slice(-n).join(' '));}
+    return candidates.some(function(x){return x.length>2&&new RegExp('(?:^|\\s)'+x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?:\\s|$)','i').test(p);});
+  }
+  claims.forEach(function(cl){
+    var text=String(cl&&cl.text||''),no=Number(cl&&cl.no);if(!no)return;
+    var selfRe=new RegExp('\\b(?:claim|claims)\\s+'+no+'\\b','i'),selfMatch=text.match(selfRe);
+    if(selfMatch)issues.push({claim:no,term:selfMatch[0],label:'self-reference: claim '+no+' refers to itself'});
+    var m,re=/\bsaid\s+([a-z][a-z0-9\- ]{1,60}?)(?=\s*(?:,|;|\.|\bwherein\b|\bwhich\b|\bthat\b|\bcomprising\b|\bcomprises\b|\bincluding\b|\bincludes\b|\bis\b|\bare\b|\bhas\b|\bhave\b|$))/ig;
+    while((m=re.exec(text))){if(!hasEarlierDefinition(text.slice(0,m.index),m[1]))issues.push({claim:no,term:m[0],label:'possible missing antecedent basis'});}
+  });
+  return issues.length?'<h3>Practical antecedent basis issues</h3><ul>'+issues.slice(0,16).map(function(i){return '<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' — '+esc(i.label)+'.</li>';}).join('')+'</ul>':'<h3>Antecedent basis check</h3><p>No practical high-confidence antecedent issue was detected across all claims.</p>';
+}
+
+function clarity(c){
+  var issues=[],claims=(c&&Array.isArray(c.claims)?c.claims:[]);
+  function norm(v){return String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').replace(/\s+/g,' ').trim();}
+  function hasEarlierDefinition(prefix,phrase){var p=norm(prefix),words=norm(phrase).split(' ').filter(Boolean).filter(function(w){return !/^(?:said|the|a|an|first|second|third|one|another|respective)$/.test(w);});if(!p||!words.length)return false;var candidates=[];for(var n=Math.min(5,words.length);n>=1;n--){candidates.push(words.slice(0,n).join(' '));candidates.push(words.slice(-n).join(' '));}return candidates.some(function(x){return x.length>2&&new RegExp('(?:^|\\s)'+x.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'(?:\\s|$)','i').test(p);});}
+  claims.forEach(function(cl){
+    var text=String(cl&&cl.text||''),no=Number(cl&&cl.no);if(!no)return;
+    var selfRe=new RegExp('\\b(?:claim|claims)\\s+'+no+'\\b','i'),selfMatch=text.match(selfRe);
+    if(selfMatch)issues.push({claim:no,term:selfMatch[0],label:'internal inconsistency because the claim refers to itself'});
+    var m,re=/\bsaid\s+([a-z][a-z0-9\- ]{1,60}?)(?=\s*(?:,|;|\.|\bwherein\b|\bwhich\b|\bthat\b|\bcomprising\b|\bcomprises\b|\bincluding\b|\bincludes\b|\bis\b|\bare\b|\bhas\b|\bhave\b|$))/ig;
+    while((m=re.exec(text))){if(!hasEarlierDefinition(text.slice(0,m.index),m[1]))issues.push({claim:no,term:m[0],label:'possible missing antecedent basis'});}
+    re=/\b(?:former|latter)\b/ig;while((m=re.exec(text)))issues.push({claim:no,term:m[0],label:'potentially unclear relative reference'});
+  });
+  return issues.length?'<h3>Clarity issues</h3><ul>'+issues.slice(0,16).map(function(i){return '<li><strong>Claim '+i.claim+':</strong> '+esc(i.term)+' — '+esc(i.label)+'.</li>';}).join('')+'</ul>':'<h3>Clarity issues</h3><p>No practical high-confidence clarity issue was detected across all claims. Approximate values, numerical ranges and and/or wording were intentionally excluded.</p>';
+}
+
 function unity(c){if(!c.groups.length)return '<h3>Unity groupings</h3><p>No populated unity groupings were found. Run the unity assessment first.</p>';window.__lastUnityGroupingsText=unityPlainText(c);return '<h3>Unity groupings</h3><p><button type="button" class="sidecar-btn" data-copy-unity-groupings="1">Copy groupings</button></p><ul>'+c.groups.map(function(g){return '<li><strong>Group '+g.no+':</strong> '+esc(g.text)+'</li>';}).join('')+'</ul>'; }
 function cpcs(){var rows=[];Array.from(document.querySelectorAll('#cpcResults .rank-item')).forEach(function(row){var t=read(row);if(!t||/No results|Run the workflow/i.test(t))return;var code=clean((row.querySelector('.cpc-code')||{}).textContent||'')||((t.match(/\b([A-HY]\d{2}[A-Z](?:\s*\d+\/\d+)?|[A-HY]\d{2}[A-Z]?\d+\/\d+)\b/)||[])[1]);if(!code||rows.some(function(x){return x[0]===code;}))return;rows.push([code,clip(read(row.querySelector('.title'))||read(row.querySelector('.cpc-h-desc'))||'Title not available in current CPC data',260)]);});rows=rows.slice(0,3);return rows.length?'<h3>Best CPC candidates</h3>'+table(['CPC code','Title / fit'],rows):'<h3>Best CPC candidates</h3><p>CPC cards were not available. Open the CPC tables tab once, then return here and select Refresh context.</p>';}
 function manual(){var q=clean(($('llmChatPrompt')||{}).value)||lastQuestion||'patent examination';return '<h3>Patent Manual search</h3><p>Using: <strong>'+esc(q)+'</strong></p><p><a class="sidecar-btn primary" target="_blank" rel="noopener" href="https://ipagov.sharepoint.com/sites/PatentsManual/_layouts/15/search.aspx/siteall?q='+encodeURIComponent(q)+'">Open SharePoint manual search</a></p>';}
@@ -10255,14 +10403,14 @@ async function answer(q,c){
   if(/unity|lou|grouping/i.test(q))return unity(c);
   if(/cpc|classification/i.test(q))return cpcs();
   return '<h3>What I can help with</h3><p>Try claims summary, invention summary, background, problem/solution, STF, antecedents, clarity, unity, Best CPCs or manual search.</p>';}
-function pack(c,q){return{request:q||'',unity:c.unity,claims:c.claims.map(function(x){return{no:x.no,independent:x.independent,text:x.text};}),description:c.desc,cpc:c.cpc};}
-function buildPrompt(c,q){var p=pack(c,q);window.__llmTransformerContext=p;var ta=$('llmV5505ContextPack');if(ta)ta.value=JSON.stringify(p,null,2);return '# Patent examination Copilot prompt\n\n## User request\n'+(q||'Analyse the current patent workspace context.')+'\n\n## Instructions\n- Use Australian English.\n- Use concise bullets.\n- Use Unity assessment as authoritative for independent claims and groupings.\n- Use cleaned pdf.js double-layer description context.\n- Do not use ONNX.\n\n```json\n'+JSON.stringify(p,null,2).slice(0,16000)+'\n```';}
+function pack(c,q){return{request:q||'',unity:c.unity,claims:c.claims.map(function(x){return{no:x.no,independent:x.independent,deps:(x.deps||[]).slice(),text:x.text};}),description:c.desc,cpc:c.cpc};}
+function buildPrompt(c,q){var p=pack(c,q);window.__llmTransformerContext=p;var ta=$('llmV5505ContextPack');if(ta)ta.value=JSON.stringify(p,null,2);return '# Patent examination Copilot prompt\n\n## User request\n'+(q||'Analyse the current patent workspace context.')+'\n\n## Instructions\n- Use Australian English.\n- Use concise bullets.\n- Use the Unity assessment as the source for independent claims and unity groupings.\n- Use the current claim text only for claim wording and dependency detail.\n- Respect any group merges currently applied in the Unity assessment tab.\n- Use cleaned pdf.js double-layer description context.\n- Do not use ONNX.\n\n```json\n'+JSON.stringify(p,null,2).slice(0,16000)+'\n```';}
 function preview(q){var c=context();lastPrompt=buildPrompt(c,q||clean(($('llmChatPrompt')||{}).value));var el=$('sidecarPromptPreview');if(el)el.textContent=lastPrompt.slice(0,5000)+(lastPrompt.length>5000?'\n\n[Preview truncated]':'');return lastPrompt;}
 async function ask(q0){var input=$('llmChatPrompt'),q=clean(q0||(input&&input.value));if(!q)return;lastQuestion=q;add('user',q);if(input&&!q0)input.value='';$('llmV5505Status').textContent='Extracting context...';if(/description|background|invention|problem|solution|summary|technical/i.test(q))await ensureDesc();var c=context();add('assistant',await answer(q,c));preview(q);$('llmV5505Status').textContent='Ready';}
 async function copyText(t){try{await navigator.clipboard.writeText(t);return true;}catch(e){var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();var ok=document.execCommand('copy');ta.remove();return ok;}}
 async function runCopilot(){var p=preview();await copyText(p);var w=window.open(COPILOT_URL,'CopilotPatentPrompt_'+Date.now(),'popup=yes,width=980,height=900,resizable=yes,scrollbars=yes');if(w)w.focus();add('assistant','<p>Prompt copied and Copilot opened.</p>');}
-function check(){var c=context();add('assistant','<h3>Context check</h3>'+table(['Source','Detected'],[['Unity independent claims',esc(c.unity.independent.join(', ')||'not detected')],['Parsed claims',esc(c.claims.length)],['Cleaned pdf.js description text',esc(c.desc.raw?'Available':'Not extracted')],['Description features',esc((c.desc.features||[]).length)],['CPC candidates',esc(document.querySelectorAll('#cpcResults .rank-item').length)],['ONNX in LLM chat','No']]))}
-function explain(){add('assistant','<h3>Engine explanation</h3><ul><li>The sidecar control is stacked under Refresh context.</li><li>Independent claims are read from the exact Unity summary line, so wrapped or hidden group text cannot contaminate the claim list.</li><li>Claims summary and Invention summary now use separate output logic.</li><li>The Description PDF is extracted using two pdf.js text passes: normal text content and row-position reconstruction.</li><li>Repeated headers, footers, application numbers, dates, page numbers and line noise are removed before summary generation.</li><li>Unity merge changes are persisted and only cleared by Reset grouping. Context refresh is also triggered automatically after workspace edits, file uploads, merge/reset and tab navigation.</li></ul>');}
+function check(){var c=context();add('assistant','<h3>Context check</h3>'+table(['Source','Detected'],[['Independent claims',esc(c.unity.independent.join(', ')||'not detected')],['Parsed claims',esc(c.claims.length)],['Cleaned pdf.js description text',esc(c.desc.raw?'Available':'Not extracted')],['Description features',esc((c.desc.features||[]).length)],['CPC candidates',esc(document.querySelectorAll('#cpcResults .rank-item').length)],['ONNX in LLM chat','No']]))}
+function explain(){add('assistant','<h3>Engine explanation</h3><ul><li>The sidecar control is stacked under Refresh context.</li><li>Claims and dependencies are read from the current analysed claim set, so wrapped or hidden display text cannot contaminate the claim list.</li><li>Claims summary and Invention summary now use separate output logic.</li><li>The Description PDF is extracted using two pdf.js text passes: normal text content and row-position reconstruction.</li><li>Repeated headers, footers, application numbers, dates, page numbers and line noise are removed before summary generation.</li><li>Unity merge changes are persisted and only cleared by Reset grouping. Context refresh is also triggered automatically after workspace edits, file uploads, merge/reset and tab navigation.</li></ul>');}
 function openSidecar(){preview();var o=$('llmV5505Overlay');if(o)o.classList.add('open');}
 function closeSidecar(){var o=$('llmV5505Overlay');if(o)o.classList.remove('open');}
 function bind(){document.addEventListener('click',function(e){var t=e.target;if(t&&t.getAttribute&&t.getAttribute('data-copy-unity-groupings')){copyText(window.__lastUnityGroupingsText||'');add('assistant','<p>Unity groupings copied.</p>');}if(t&&t.getAttribute&&t.getAttribute('data-go-figure-labeller')){var b=document.querySelector('.nav-link[data-tab-target="tab-figure-labeller"],.nav-link[data-tab-target="tab-figures"],button[data-tab-target="tab-figure-labeller"]');if(b)b.click();else location.hash='tab-figure-labeller';}});document.querySelectorAll('[data-run-prompt]').forEach(function(b){b.addEventListener('click',function(){ask(b.getAttribute('data-run-prompt'));});});$('llmChatSendBtn')&&$('llmChatSendBtn').addEventListener('click',function(){ask();});$('llmChatPrompt')&&$('llmChatPrompt').addEventListener('keydown',function(e){if(e.key==='Enter'&&(e.ctrlKey||e.metaKey)){e.preventDefault();ask();}});$('llmRunCopilotBtn')&&$('llmRunCopilotBtn').addEventListener('click',runCopilot);$('llmV5505RefreshBtn')&&$('llmV5505RefreshBtn').addEventListener('click',function(){ensureDesc().then(function(){preview();add('assistant','<p>Context refreshed.</p>');});});$('llmV5505CheckContextBtn')&&$('llmV5505CheckContextBtn').addEventListener('click',check);$('llmV5505ExplainBtn')&&$('llmV5505ExplainBtn').addEventListener('click',explain);$('llmV5505OpenSidecarBtn')&&$('llmV5505OpenSidecarBtn').addEventListener('click',openSidecar);$('llmV5505CloseSidecarBtn')&&$('llmV5505CloseSidecarBtn').addEventListener('click',closeSidecar);$('llmV5505Overlay')&&$('llmV5505Overlay').addEventListener('click',function(e){if(e.target.id==='llmV5505Overlay')closeSidecar();});$('sidecarRunBtn')&&$('sidecarRunBtn').addEventListener('click',runCopilot);$('sidecarCopyBtn')&&$('sidecarCopyBtn').addEventListener('click',function(){copyText(preview()).then(function(){add('assistant','<p>Sidecar prompt copied.</p>');});});$('sidecarRefreshPreviewBtn')&&$('sidecarRefreshPreviewBtn').addEventListener('click',function(){preview();add('assistant','<p>Sidecar refreshed.</p>');});var autoRefreshTimer=null;function autoRefreshContext(reason){clearTimeout(autoRefreshTimer);autoRefreshTimer=setTimeout(function(){try{if($('llmV5505Status'))$('llmV5505Status').textContent='Refreshing context...';ensureDesc().then(function(){context();preview(lastQuestion||clean(($('llmChatPrompt')||{}).value));if($('llmV5505Status'))$('llmV5505Status').textContent='Ready';});}catch(_){if($('llmV5505Status'))$('llmV5505Status').textContent='Ready';}},300);}document.addEventListener('input',function(e){var t=e.target;if(!t)return;if(t.id==='llmChatPrompt')return;if(t.matches&&t.matches('textarea,input,[contenteditable="true"]'))autoRefreshContext('input');},true);document.addEventListener('change',function(e){var t=e.target;if(t&&t.type==='file'&&/desc|description|specification/i.test((t.id||'')+' '+(t.name||''))){descStatus='idle';descText='';ensureDesc().then(function(){context();preview(lastQuestion);});return;}autoRefreshContext('change');},true);document.addEventListener('click',function(e){var t=e.target;if(t&&t.closest&&t.closest('[data-merge-groups-btn],[data-reset-groups-btn],[data-merge-group-id],.nav-link,[data-tab-target]'))autoRefreshContext('click');},true);ensureDesc().then(preview);preview();}
@@ -10293,5 +10441,282 @@ function boot(){injectStyle();renameNav();updateNavPills();updateTopBannerButton
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
 })();
 </script>
-</body>
+<script id="v56-plain-claims">
+(function(){
+function cleanPages(text){return String(text||'').replace(/\r/g,'').split('\n').filter(function(line){var t=line.trim();return !(/^(?:\d+\s*)?AMENDED\s+SHEET$/i.test(t)||/^PCT\/[A-Z]{2}\s*\d{4}\s*\/\s*\d+/i.test(t)||/^\d{1,4}$/.test(t));}).join('\n');}
+function parse(text){var src=cleanPages(text).replace(/[\u00A0\u2000-\u200B\u202F\u205F\u3000]/g,' '),out=[],re=/(?:^|\n)\s*(\d{1,3})\s*[.)]\s+([\s\S]*?)(?=\n\s*\d{1,3}\s*[.)]\s+|$)/g,m;while((m=re.exec(src))){var body=String(m[2]||'').replace(/\n[ \t]*/g,' ').replace(/\s{2,}/g,' ').trim();if(body)out.push({no:parseInt(m[1],10),text:body,structures:[],_page:1});}return out;}
+function init(){var b=document.getElementById('v56ImportBtn'),c=document.getElementById('v56ClearBtn'),i=document.getElementById('v56PasteInput'),st=document.getElementById('v56PasteStatus');if(b)b.addEventListener('click',function(){var claims=parse(i.value);if(!claims.length){st.textContent='No numbered claims found. Start each claim on a new line.';return;}pocState.claims=claims;pocState.rawText=claims.map(function(x){return x.no+'. '+x.text;}).join('\n\n');pocState.pageStructures={};pocState.isChemical=pocIsChemicalDoc(pocState.rawText);pocRenderAll();pocUpdateBadges();var ta=document.getElementById('patentText');if(ta){ta.value=pocState.rawText;lastText=pocState.rawText;ta.dispatchEvent(new Event('input',{bubbles:true}));}if(typeof renderHighlight==='function')renderHighlight();if(typeof runExaminerAssistant==='function')runExaminerAssistant();st.textContent='Imported '+claims.length+' claim'+(claims.length===1?'':'s')+'.';});if(c)c.addEventListener('click',function(){i.value='';st.textContent='Plain text cleared.';i.focus();});}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<script id="v5601-local-file-guard">
+(function(){
+  'use strict';
+  function guardLocalFrames(){
+    if(location.protocol!=='file:')return;
+    document.querySelectorAll('iframe[src]').forEach(function(frame){
+      var raw=frame.getAttribute('src')||'';
+      if(!/^(?:https?:|blob:|data:)/i.test(raw)){
+        frame.removeAttribute('src');
+        frame.setAttribute('data-local-src',raw);
+        frame.setAttribute('title',(frame.getAttribute('title')||'Embedded tool')+' unavailable when opened as a standalone local file');
+        var host=frame.parentElement;
+        if(host&&!host.querySelector('.v5601-frame-note')){
+          var note=document.createElement('div');note.className='placeholder-box v5601-frame-note';
+          note.textContent='This embedded component needs the complete tool folder or a web-hosted deployment. The main agent remains available.';
+          host.insertBefore(note,frame);frame.style.display='none';
+        }
+      }
+    });
+  }
+  guardLocalFrames();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',guardLocalFrames);
+})();
+</script>
+<script id="v5602-claims-integrity-patch">
+(function(){
+'use strict';
+/* v56.0.3: source-faithful page-spanning assembly. Fixes access to global lexical pocState and broadens ordinary claim leads. */
+function nrm(s){return String(s||'').replace(/[\u00A0\u2000-\u200B\u202F\u205F\u3000]/g,' ').replace(/\s+/g,' ').trim();}
+function isPageFurniture(s){
+  s=nrm(s);
+  return !s ||
+    /^(?:\d{2,4}\s*)?AMENDED\s+SHEET$/i.test(s) ||
+    /^PCT\s*\/\s*[A-Z]{2}\s*\d{4}\s*\/\s*\d+(?:\s*-\s*\d{2}\.\d{2}\.\d{4})?$/i.test(s) ||
+    /^(?:CLAIMS|AMENDED CLAIMS)$/i.test(s) ||
+    /^(?:Page|Sheet)\s+\d+$/i.test(s) ||
+    /^-\s*\d{1,4}\s*-$/.test(s) ||
+    /^\d{3}$/.test(s);
+}
+function cleanFurnitureInline(s){
+  s=nrm(s);
+  s=s.replace(/PCT\s*\/\s*[A-Z]{2}\s*\d{4}\s*\/\s*\d+(?:\s*-\s*\d{2}\.\d{2}\.\d{4})?/gi,' ');
+  s=s.replace(/\b\d{2,4}\s+AMENDED\s+SHEET\b/gi,' ');
+  s=s.replace(/\bAMENDED\s+SHEET\b/gi,' ');
+  return nrm(s);
+}
+function joinSplitSequences(s){
+  /* Join only uppercase amino-acid fragments immediately before a SEQ ID marker.
+     No residue letters are guessed, replaced or reordered. */
+  return String(s||'').replace(/\b([A-Z]{2,}(?:\s+[A-Z]{2,})+)\s*(?=\(\s*SEQ\s+ID\s+NO\s*:)/g,function(_,seq){return seq.replace(/\s+/g,'');});
+}
+function plausibleLead(s){
+  return /^(?:A|An|The|Use|Method|Composition|Device|System|Kit|Process|Antibody|Molecule|Pharmaceutical|Apparatus|Article|Product|Compound|Formulation|Nucleic|Polypeptide|Protein|Cell|Vector|Host|Vaccine|Diagnostic|Controller|Computer|Non-transitory|One|Any)\b/i.test(nrm(s));
+}
+function parseContinuousClaims(){
+  var pages=Object.keys((typeof pocState!=='undefined'&&pocState.pageRawLines)||{}).map(Number).sort(function(a,b){return a-b;});
+  var chunks=[];
+  pages.forEach(function(pn){
+    ((pocState.pageRawLines||{})[pn]||[]).forEach(function(line){
+      var t=nrm(line&&line.text);
+      if(!t||isPageFurniture(t))return;
+      t=cleanFurnitureInline(t);
+      if(t)chunks.push({text:t,page:pn});
+    });
+  });
+  if(!chunks.length)return [];
+  var source=chunks.map(function(x){return x.text;}).join(' ');
+  /* Claim boundaries must have a numbered full stop and a genuine patent-claim lead.
+     This excludes SEQ ID numbers, percentages, page numbers and lettered alternatives. */
+  var re=/(?:^|\s)(\d{1,3})\.\s+((?:A|An|The|Use|Method|Composition|Device|System|Kit|Process|Antibody|Molecule|Pharmaceutical|Apparatus|Article|Product|Compound|Formulation|Nucleic|Polypeptide|Protein|Cell|Vector|Host|Vaccine|Diagnostic|Controller|Computer|Non-transitory|One|Any)\b)/gi;
+  var starts=[],m;
+  while((m=re.exec(source))!==null){starts.push({no:Number(m[1]),start:m.index+(m[0].charAt(0)===' '?1:0),bodyStart:re.lastIndex-m[2].length});}
+  if(!starts.length)return [];
+  /* Keep the best forward sequence. A later duplicate page header cannot truncate a claim. */
+  var selected=[];
+  starts.forEach(function(st){
+    if(!plausibleLead(source.slice(st.bodyStart,st.bodyStart+80)))return;
+    if(!selected.length){selected.push(st);return;}
+    var last=selected[selected.length-1];
+    if(st.no===last.no+1)selected.push(st);
+    else if(st.no===last.no){} /* duplicate start ignored */
+    else if(st.no>last.no+1&&st.no-last.no<=8)selected.push(st);
+  });
+  var out=[];
+  selected.forEach(function(st,i){
+    var end=i+1<selected.length?selected[i+1].start:source.length;
+    var raw=source.slice(st.start,end);
+    raw=raw.replace(/^\d{1,3}\.\s+/,'');
+    raw=joinSplitSequences(cleanFurnitureInline(raw));
+    if(raw)out.push({no:st.no,text:raw,structures:[],_page:1});
+  });
+  return out;
+}
+var originalChemicalTest=window.pocIsChemicalDoc;
+window.pocIsChemicalDoc=function(text){
+  var t=String(text||'').toLowerCase();
+  var biological=/\b(?:amino acid sequence|seq id no|antibody|antigen binding|vhcdr|vlcdr)\b/i.test(t);
+  var graphical=/\b(?:structural formula|formula [ivxlcdm0-9]+|represented by formula|markush|chemical structure|wherein r[1-9]|r[1-9] is selected|ring system|heteroaryl|cycloalkyl|alkoxy|stereoisomer|enantiomer)\b/i.test(t);
+  if(biological&&!graphical)return false;
+  return typeof originalChemicalTest==='function'?originalChemicalTest(text):graphical;
+};
+window.pocBuildClaims=function(){
+  var claims=parseContinuousClaims();
+  if(!claims.length)return;
+  pocState.claims=claims;
+  pocState.rawText=claims.map(function(c){return c.no+'. '+c.text;}).join('\n\n');
+};
+var originalProcess=window.pocProcessFile;
+if(typeof originalProcess==='function')window.pocProcessFile=async function(file){
+  var result=await originalProcess.apply(this,arguments);
+  /* Rebuild once more from the complete page stream after every legacy patch has run. */
+  var claims=parseContinuousClaims();
+  if(claims.length){
+    pocState.claims=claims;
+    pocState.rawText=claims.map(function(c){return c.no+'. '+c.text;}).join('\n\n');
+    if(!window.pocIsChemicalDoc(pocState.rawText)){
+      pocState.isChemical=false;pocState.pageStructures={};
+      claims.forEach(function(c){c.structures=[];});
+      pocState._chemDetectedBackup=[];pocState._chemDeletedAll=false;
+    }
+    if(typeof window.pocRenderAll==='function')window.pocRenderAll();
+    if(typeof window.pocUpdateBadges==='function')window.pocUpdateBadges();
+    var ta=document.getElementById('patentText');if(ta){ta.value=pocState.rawText;ta.dispatchEvent(new Event('input',{bubbles:true}));}
+  }
+  return result;
+};
+})();
+</script>
+<script id="v5608-unity-perp-compatibility">
+(function(){
+  'use strict';
+  function clean(v){return String(v||'').replace(/\s+/g,' ').trim();}
+  function syncUnityLlmLabels(){
+    var meta=document.querySelector('#tab-llm-chat .board-meta');
+    if(meta)meta.textContent='Stable Unity-aligned assistant with pdf.js description extraction and transformer-ready context';
+    var sub=document.querySelector('#tab-llm-chat .llm-chat-sub');
+    if(sub&&/current claims|dependency mapping/i.test(sub.textContent||''))sub.textContent='Uses Unity assessment for independent claims. Extracts the Description PDF with pdf.js. Builds compact context for Transformers.js or Copilot. ONNX is not used by this chat.';
+    document.querySelectorAll('#tab-llm-chat .llm-chat-sub').forEach(function(el){if(/Claims and description prompt package/i.test(el.textContent||''))el.textContent='Unity-aligned prompt package';});
+  }
+  function refreshUnityContext(){
+    try{
+      if(typeof window.llmV5505RefreshContext==='function')window.llmV5505RefreshContext();
+      var b=document.getElementById('llmV5464RefreshBtn')||document.getElementById('llmV5505RefreshBtn');
+      if(b)b.click();
+    }catch(_){ }
+  }
+  document.addEventListener('click',function(e){
+    var t=e.target&&e.target.closest?e.target.closest('button,[role="button"]'):null;
+    if(!t)return;
+    var label=clean(t.textContent);
+    if(/merge selected|merge all|reset grouping|apply merge|reset groups/i.test(label))setTimeout(refreshUnityContext,0);
+  },true);
+  function preservePerpBuilder(){
+    var f=document.getElementById('perpFrame');
+    if(!f)return;
+    f.setAttribute('title','PERP Objection Builder');
+    f.setAttribute('loading','eager');
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){syncUnityLlmLabels();preservePerpBuilder();});
+  else{syncUnityLlmLabels();preservePerpBuilder();}
+})();
+</script>
+<script id="v5910-unity-chat-fix">
+(function(){
+'use strict';
+var UNITY_PROMPT=/show\s+the\s+unity\s+groupings|unity\s+groupings|explain\s+the\s+separation/i;
+function clean(v){return String(v||'').replace(/\u00a0/g,' ').replace(/[ \t]+/g,' ').replace(/\s*\n\s*/g,'\n').trim();}
+function escapeHtml(v){return String(v||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');}
+function placeholder(v){return !v||/Run Analyse\s*&?\s*Predict CPC|populate the integrated unity assessment/i.test(v);}
+function getUnityAssessment(){
+  var root=document.getElementById('examUnity');
+  if(!root)return {raw:'',groups:[]};
+  var raw=clean(root.innerText||root.textContent||'');
+  if(placeholder(raw))return {raw:'',groups:[]};
+  var groups=[];
+  root.querySelectorAll('.groupLine,.group-summary-line').forEach(function(el){var t=clean(el.innerText||el.textContent);if(/^Group\s*\d+\s*:/i.test(t)&&!groups.includes(t))groups.push(t);});
+  if(!groups.length){
+    var blocks=raw.match(/Group\s*\d+\s*:[\s\S]*?(?=Group\s*\d+\s*:|⚠|Adjust detected grouping|$)/gi)||[];
+    groups=blocks.map(clean).filter(function(t){return /^Group\s*\d+\s*:/i.test(t);});
+  }
+  if(!groups.length)groups=[raw];
+  return {raw:raw,groups:groups};
+}
+function displayLines(u){var out=[],raw=String(u.raw||'');['Total claims','Independent claims','Dependent claims'].forEach(function(label){var re=new RegExp(label+'\\s*:\\s*([^\\n]+?)(?=Total claims|Independent claims|Dependent claims|Group\\s*\\d+\\s*:|$)','i'),m=raw.match(re);if(m)out.push(label+': '+clean(m[1]));});return out.concat(u.groups||[]);}function stream(){return document.getElementById('llmChatStream');}
+function setReady(){['llmV5464Status','llmV5505Status'].forEach(function(id){var e=document.getElementById(id);if(e)e.textContent='Ready';});}
+function add(role,content,isHtml){var s=stream();if(!s)return;var d=document.createElement('div');d.className='llm-msg '+role;d.innerHTML='<span class="role">'+(role==='user'?'You':'Assistant')+'</span>'+(isHtml?'<div class="llm-answer">'+content+'</div>':escapeHtml(content));s.appendChild(d);s.scrollTop=s.scrollHeight;}
+function respond(){
+  var u=getUnityAssessment();add('user','Show the unity groupings and explain the separation briefly',false);
+  if(!u.raw){add('assistant','<h3>Unity groupings</h3><p>No populated unity assessment was found. Run <strong>Analyse &amp; Predict CPC</strong> first.</p><div class="llm-unity-source-note">Source checked: Unity assessment tab.</div>',true);setReady();return;}
+  var list=displayLines(u).map(function(g){return '<li>'+escapeHtml(g)+'</li>';}).join('');
+  add('assistant','<h3>Unity groupings</h3><ul>'+list+'</ul><button type="button" class="llm-copy-groupings" data-copy-unity-groupings="true">Copy groupings</button><div class="llm-unity-source-note">Source: current Unity assessment tab.</div>',true);setReady();
+}
+function isUnityButton(t){var b=t&&t.closest&&t.closest('#tab-llm-chat button');if(!b)return false;var p=clean(b.getAttribute('data-run-prompt')||'');return clean(b.textContent).toLowerCase()==='unity'||UNITY_PROMPT.test(p);}
+function isUnityAsk(t){var b=t&&t.closest&&t.closest('#llmChatSendBtn');if(!b)return false;var q=clean((document.getElementById('llmChatPrompt')||{}).value);return UNITY_PROMPT.test(q);}
+document.addEventListener('click',function(e){
+  if(isUnityButton(e.target)||isUnityAsk(e.target)){e.preventDefault();e.stopImmediatePropagation();var q=document.getElementById('llmChatPrompt');if(q&&isUnityAsk(e.target))q.value='';respond();return;}
+  var copy=e.target&&e.target.closest&&e.target.closest('[data-copy-unity-groupings]');if(copy){e.preventDefault();e.stopImmediatePropagation();var text=getUnityAssessment().groups.map(function(g){return '\u2022 '+clean(g);}).join('\n');var done=function(){var old=copy.textContent;copy.textContent='Copied';setTimeout(function(){copy.textContent=old;},1200);};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(done).catch(function(){fallback(text);done();});else{fallback(text);done();}}
+},true);
+document.addEventListener('keydown',function(e){var q=document.getElementById('llmChatPrompt');if(e.key==='Enter'&&!e.shiftKey&&e.target===q&&UNITY_PROMPT.test(clean(q.value))){e.preventDefault();e.stopImmediatePropagation();q.value='';respond();}},true);
+function fallback(text){var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');}catch(_){}ta.remove();}
+})();
+</script><script id="v5910-copy-isolation">(function(){document.addEventListener('click',function(e){var b=e.target&&e.target.closest&&e.target.closest('#llmChatStream [data-copy-unity-groupings]');if(!b)return;e.preventDefault();e.stopImmediatePropagation();var items=Array.from(b.closest('.llm-answer').querySelectorAll('li')).map(function(x){return String(x.innerText||x.textContent||'').trim();}).filter(function(x){return /^Group\s*\d+\s*:/i.test(x);});var text=items.map(function(x){return '• '+x;}).join('\n');var done=function(){var old=b.textContent;b.textContent='Copied';setTimeout(function(){b.textContent=old;},1200);};function fallback(){var t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');}catch(_){}t.remove();done();}if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(done).catch(fallback);else fallback();},true);})();</script><script id="v5910-transformer-background" type="module">
+let peaPipePromise=null;
+function finalOcrClean(value){
+  let s=String(value||'').replace(/\u00ad/g,'').replace(/\r/g,'\n');
+  s=s.replace(/\bWO\s*\d{4}\s*[\/]\s*\d{4,6}\s+(?:[A-Z0-9][A-Z0-9\-(), ]{4,100})(?=\s+(?:Field|Background|The present))/gi,' ')
+     .replace(/\b(?:WO|EP|US|AU)\s*\d{4}[\/\-]\d+\s*[A-Z]\d?\b/gi,' ')
+     .replace(/\bPCT\/[A-Z]{2}\d{4}\/\d+\b/gi,' ')
+     .replace(/\b(?:page|sheet)\s+\d+(?:\s+of\s+\d+)?\b/gi,' ')
+     .replace(/(?:^|\n)\s*\d{1,4}\s+(?=[A-Za-z(])/g,'\n')
+     .replace(/\b(?:field|background)\s+(?:of|to)\s+the\s+invention\s*\d{0,3}\b/gi,' ')
+     .replace(/\s+/g,' ').trim();
+  return s;
+}
+window.__peaTransformerSummariser=async function(text,options){
+  const cleaned=finalOcrClean(text).slice(0,4200);
+  if(!cleaned)return '';
+  if(!peaPipePromise){
+    peaPipePromise=import('https://cdn.jsdelivr.net/npm/@xenova/transformers@2.17.2').then(async m=>{
+      if(m.env){m.env.allowLocalModels=false;m.env.useBrowserCache=true;}
+      return m.pipeline('summarization','Xenova/distilbart-cnn-6-6',{quantized:true});
+    });
+  }
+  const pipe=await peaPipePromise;
+  const maxLen=Math.max(100,Math.min(220,Number(options&&options.maxLength)||210));
+  const minLen=Math.max(35,Math.min(maxLen-20,Number(options&&options.minLength)||55));
+  const result=await pipe(cleaned,{max_length:maxLen,min_length:minLen,do_sample:false,no_repeat_ngram_size:3});
+  const summary=Array.isArray(result)&&result[0]?(result[0].summary_text||result[0].generated_text||''):'';
+  return finalOcrClean(summary);
+};
+</script><script id="v5910-perp-host-fix">(function(){
+'use strict';
+function frame(){return document.getElementById('perpFrame');}
+function patch(){
+  var f=frame();if(!f)return;
+  if(!f.getAttribute('src')||!/index-v5\.6\.html(?:$|[?#])/i.test(f.getAttribute('src')))f.setAttribute('src','./index-v5.6.html');
+  f.style.display='block';f.style.width='100%';f.style.height='100%';f.style.minHeight='620px';
+  try{var d=f.contentDocument||f.contentWindow.document;if(!d)return;var st=d.getElementById('perpHostPatch');if(!st){st=d.createElement('style');st.id='perpHostPatch';st.textContent='#sharepoint-overlay{display:none!important}html,body{height:100%!important;min-height:100%!important;overflow:auto!important}';(d.head||d.documentElement).appendChild(st);}var o=d.getElementById('sharepoint-overlay');if(o){o.style.setProperty('display','none','important');o.hidden=true;}}catch(_){}
+}
+function init(){var f=frame();if(f&&!f.dataset.v5908Bound){f.dataset.v5908Bound='1';f.addEventListener('load',function(){patch();setTimeout(patch,150);});}patch();}
+document.addEventListener('click',function(e){var b=e.target&&e.target.closest&&e.target.closest('.nav-link[data-tab-target="tab-perp"]');if(b){setTimeout(init,0);setTimeout(patch,180);}},true);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();window.addEventListener('load',function(){init();setTimeout(patch,300);});
+})();</script><script id="v5910-perp-compact-fix">(function(){
+'use strict';
+function patch(){
+ var f=document.getElementById('perpFrame');if(!f)return;
+ var tab=document.getElementById('tab-perp');if(tab){tab.querySelectorAll('.v5601-frame-note,.placeholder-box').forEach(function(n){if(/embedded component needs|complete tool folder|web-hosted deployment/i.test(n.textContent||''))n.remove();});}
+ f.style.display='block';f.style.height='100%';f.style.minHeight='520px';
+ try{
+  var d=f.contentDocument||f.contentWindow.document;if(!d)return;
+  var css=d.getElementById('v5909PerpCompact');if(!css){css=d.createElement('style');css.id='v5909PerpCompact';css.textContent='html,body{height:100%!important;min-height:100%!important;overflow:hidden!important}.info-banner{display:none!important}.work-area{padding:8px 10px!important;gap:6px!important}.sidebar-header-wrapper{padding-top:8px!important;padding-bottom:6px!important}.sidebar-content{padding-top:6px!important}.toolbar{padding:5px!important}.action-buttons{margin-top:0!important;padding-bottom:4px!important}#editor{min-height:220px!important}.main-content{height:100vh!important}.placeholder-panel{padding-top:8px!important}';(d.head||d.documentElement).appendChild(css);}
+  var overlay=d.getElementById('sharepoint-overlay');if(overlay){overlay.style.setProperty('display','none','important');overlay.hidden=true;}
+ }catch(_){}
+}
+function bind(){var f=document.getElementById('perpFrame');if(f&&!f.dataset.v5909Bound){f.dataset.v5909Bound='1';f.addEventListener('load',function(){patch();setTimeout(patch,160);});}patch();}
+document.addEventListener('click',function(e){if(e.target&&e.target.closest&&e.target.closest('.nav-link[data-tab-target="tab-perp"]')){setTimeout(bind,0);setTimeout(patch,180);}},true);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();window.addEventListener('load',function(){bind();setTimeout(patch,280);});
+})();</script><script id="v5910-perp-button-fix">(function(){
+'use strict';
+function patch(){
+ var f=document.getElementById('perpFrame');if(!f)return;
+ try{
+  var d=f.contentDocument||f.contentWindow.document;if(!d)return;
+  var st=d.getElementById('v5910PerpStyle');if(!st){st=d.createElement('style');st.id='v5910PerpStyle';st.textContent='html,body{height:100%!important;min-height:100%!important;margin:0!important;overflow:hidden!important}.info-banner{display:none!important}.work-area{height:100vh!important;min-height:0!important;padding:0 8px 6px!important;gap:6px!important}.main-content{height:100vh!important;min-height:0!important;padding-top:0!important}.sidebar-header-wrapper{padding-top:6px!important;padding-bottom:4px!important}.sidebar-content{padding-top:4px!important}.toolbar{padding:5px!important}.placeholder-panel{padding-top:6px!important}.action-buttons{margin-top:0!important;padding:4px 0!important}button,input[type="button"],input[type="submit"],input[type="reset"]{font-family:inherit!important;font-size:14px!important;font-weight:600!important;line-height:1.2!important;border-radius:10px!important;letter-spacing:0!important}';(d.head||d.documentElement).appendChild(st);}
+ }catch(_){}
+}
+function bind(){var f=document.getElementById('perpFrame');if(f&&!f.dataset.v5910Bound){f.dataset.v5910Bound='1';f.addEventListener('load',function(){patch();setTimeout(patch,140);});}patch();}
+document.addEventListener('click',function(e){if(e.target&&e.target.closest&&e.target.closest('.nav-link[data-tab-target="tab-perp"]')){setTimeout(bind,0);setTimeout(patch,160);}},true);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind);else bind();window.addEventListener('load',function(){bind();setTimeout(patch,240);});
+})();</script></body>
 </html>
